@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="renderer" content="webkit">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -57,60 +59,84 @@
 	}
 </script>
 
-<title>考试信息数字化平台</title>
-<link rel="SHORTCUT ICON" href="./img/wdh2.jpg"/>
-</head>
+<title>Insert title here</title>
 
+</head>
 <body>
 	<div class="login-wrap">
 		<div class="bg-pic">
-			<img class="img-bg" src="./img/login-bg-small.jpg">
+			<img class="img-bg" src="./login_files/login-bg-small.jpg">
 		</div>
 		<div class="login-content-wrap">
 			<div class="login-content">
-				<form action="Login"
+				<form action="https://www.kaoshixing.com/account/login"
 					name="form_wm" class="login-form" id="loginForm">
-					<img src="./img/wdh1.jpg" alt="logo" style="max-width:100%;">
+					<img src="./login_files/logo.png" alt="logo" class="logo">
 					<div class="main-error-tips" id="errormsg"></div>
 
-					<div class="username" style="border-bottom:0px ; padding-bottom:0px">
-						<em class="glyphicon glyphicon-certificate" aria-hidden="true"></em><span>|</span>
-						<label class="radio-inline"> <input type="radio"
-							name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-							学生
-						</label> <label class="radio-inline"> <input type="radio"
-							name="inlineRadioOptions" id="inlineRadio2" value="option2">
-							教师
-						</label> <label class="radio-inline"> <input type="radio"
-							name="inlineRadioOptions" id="inlineRadio3" value="option3">
-							管理员
-						</label>
-					</div>
+					<input type="hidden" name="userName" id="username_tran">
 					<div class="username">
-						<em class="glyphicon glyphicon-user" aria-hidden="true"></em><span>|</span>
-						<input type="text" name="userNameInput" id="username"
-							placeholder="账号" class="userNameInput">
+						<em class="icon icon-ksx-username"></em> <span>|</span> <input
+							type="text" name="userNameInput" id="username" placeholder="账号"
+							class="userNameInput">
 					</div>
 					<div class="password">
-						<em class="glyphicon glyphicon-pencil" aria-hidden="true"></em><span>|</span>
-						<input type="password" name="password" id="userTypePwd"
-							placeholder="密码" class="passwordInput">
+						<em class="icon icon-ksx-password"></em> <span>|</span> <input
+							type="password" name="password" id="userTypePwd" placeholder="密码"
+							class="passwordInput">
 					</div>
-
 					<div class="remember">
 						<label for="saveUsername" class="hidden"><input
 							type="checkbox" id="saveUsername" name="autoLogin">7天自动登录</label>
 						<a href="https://www.kaoshixing.com/account/find_pwd/"
 							class="forget-password">忘记密码</a>
 					</div>
-					<a href="admin/index" class="btn btn-login btn-primary">登录</a>
+					<a href="javascript:void(0);" class="btn btn-login btn-primary">登录</a>
 
 					<a
 						href="https://open.weixin.qq.com/connect/qrconnect?appid=wx3dbf3a23e8456f1a&amp;redirect_uri=https://www.kaoshixing.com/account/wechat_login_independent&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE#wechat_redirect"
 						class="btn btn-wechat btn-default"><em
-						class="glyphicon glyphicon-qrcode"></em>微信快速登录</a> <a
+						class="icon icon-ksx-wechat"></em>微信快速登录</a> <a
 						href="https://www.kaoshixing.com/account/regist"
 						class="btn-regist">注册企业账号</a>
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="login-content-footer">
+
+						<div class="mobile-register">
+							<em class="icon icon-ksx-login-up"></em><a
+								href="https://www.kaoshixing.com/account/regist"
+								class="btn btn-default mobile-btn-regist">注册企业账号</a>
+						</div>
+
+						<div class="login-on-phone">
+							<div class="qr-code-wrap">
+								<div class="qr-codes">
+									<canvas width="100" height="100"></canvas>
+								</div>
+							</div>
+							<em class="icon icon-ksx-Mobile-phone"></em><a
+								href="javascript:void(0);" class="show-qr-code">在手机上使用</a>
+						</div>
+
+
+
+
+
+						<div id="switchLang" class="switchLang">
+							<em class="icon  icon-ksx-en"></em> <span class="ch">English</span>
+						</div>
+					</div>
 				</form>
 				<div id="loginWechet" class="reg-form loginWechet weChatBind"
 					style="display: none;">
@@ -124,23 +150,5 @@
 			</div>
 		</div>
 	</div>
-
-	<button type="button" class="btn btn-primary">（首选项）Primary</button>
-
-	<a href="helloworld">hello world</a>
-	<br />
-	<a href="testPathVariable/1">testPathVariable</a>
-	<br />
-
-	<div class="progress">
-		<div class="progress-bar progress-bar-success" role="progressbar"
-			aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-			style="width: 40%">
-			<span class="sr-only">40% Complete (success)</span>
-		</div>
-	</div>
-
-	<script type="text/javascript" src="./js/jquery.min.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
 </body>
 </html>
