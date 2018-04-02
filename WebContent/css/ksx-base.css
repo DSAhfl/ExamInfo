@@ -72,7 +72,7 @@ form{margin: 0;}
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background: #F5A623;
+    background: #3A3E51;
     color: #fff;
     font-size: 20px;
     line-height: 35px;
@@ -980,36 +980,39 @@ i[class^="icons8-us-"]{
 }
 
 /*nav nav-tabs*/
-.nav-tabs{
+.a_e{
     border-bottom: none;
 }
-.nav-tabs>li>a{
+.a_e>li>a{
     margin-right: 8px;
+    margin-left: 8px;
     border: none;
     border-radius: 0;
     color: #9B9B9B;
-    padding: 10px 7px;
+    padding: 0px 7px;
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
-    color: #4a4a4a;
+.a_e>li.active>a, .a_e>li.active>a:hover, .a_e>li.active>a:focus{
+    color: #1A8CFE;
     background-color: #fff;
     border: none;
-    border-bottom: 4px solid #1A8CFE;
 }
 
 /*nav nav-pills*/
-.nav-pills>li:first-child a{
+.a_e>li:first-child a{
     padding-left: 0;
 }
-.nav-pills>li>a{
+.a_e>li>a{
     font-size: 20px;
     color: #9698A3;
 }
-.nav>li>a:hover, .nav>li>a:focus{
+
+.a_e>li>a:hover, .nav>li>a:focus{
     color: #1A8CFE;
+    background:#fff;
 }
-.nav-pills>li+li::before{
+
+.a_e>li+li::before{
     /*导航之间的分割线*/
     content: "";
     display: block;

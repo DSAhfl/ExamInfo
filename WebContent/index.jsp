@@ -15,50 +15,8 @@
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/login-reg-style.css">
 
-<script type="text/javascript" async="" src="./js/vds.js"></script>
-<script type="text/javascript">
-	var _pattern = "android|blackberry|googlebot-mobile|iemobile|ipad|iphone|ipod|opera mobile|palmos|webos|ucweb|rv:1.2.3.4"
-	var _regex = new RegExp(_pattern, "ig");
-	var _UA = navigator.userAgent;
-</script>
-
-<script type="text/javascript">
-	var _vds = _vds || [];
-	window._vds = _vds;
-	(function() {
-		_vds.push([ 'setAccountId', '87d10bc8158a4ed0a2206a6f0bdd2a5c' ]);
-
-		(function() {
-			var vds = document.createElement('script');
-			vds.type = 'text/javascript';
-			vds.async = true;
-			vds.src = ('https:' == document.location.protocol ? 'https://'
-					: 'http://')
-					+ 'dn-growing.qbox.me/vds.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(vds, s);
-		})();
-	})();
-	function DivLoads(state) {
-		var DivRef1 = document.getElementById("Loader");
-		var IfrRef1 = document.getElementById("Shimerx");
-		if (state) {
-			DivRef1.style.display = "block";
-			IfrRef1.style.width = DivRef1.offsetWidth;
-			IfrRef1.style.height = DivRef1.offsetHeight;
-			IfrRef1.style.top = DivRef1.style.top;
-			IfrRef1.style.left = DivRef1.style.left;
-			IfrRef1.style.zIndex = DivRef1.style.zIndex - 1;
-			IfrRef1.style.display = "block";
-		} else {
-			DivRef1.style.display = "none";
-			IfrRef1.style.display = "none";
-		}
-	}
-</script>
-
 <title>考试信息数字化平台</title>
-<link rel="SHORTCUT ICON" href="./img/wdh2.jpg"/>
+<link rel="SHORTCUT ICON" href="./img/circle.jpg"/>
 </head>
 
 <body>
@@ -67,28 +25,27 @@
 			<img class="img-bg" src="./img/login-bg-small.jpg">
 		</div>
 		<div class="login-content-wrap">
-			<div class="login-content">
-				<form action="Login"
-					name="form_wm" class="login-form" id="loginForm">
-					<img src="./img/wdh1.jpg" alt="logo" style="max-width:100%;">
+			<div class="login-content" >
+				<form action="./login" name="form_wm" class="login-form" id="loginForm" method="post">
+					<img src="./img/school.jpg" alt="logo" style="max-width:100%;">
 					<div class="main-error-tips" id="errormsg"></div>
 
 					<div class="username" style="border-bottom:0px ; padding-bottom:0px">
 						<em class="glyphicon glyphicon-certificate" aria-hidden="true"></em><span>|</span>
 						<label class="radio-inline"> <input type="radio"
-							name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+							name="inlineRadioOptions" id="inlineRadio1" value="student" checked>
 							学生
 						</label> <label class="radio-inline"> <input type="radio"
-							name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							name="inlineRadioOptions" id="inlineRadio2" value="teacher">
 							教师
 						</label> <label class="radio-inline"> <input type="radio"
-							name="inlineRadioOptions" id="inlineRadio3" value="option3">
+							name="inlineRadioOptions" id="inlineRadio3" value="admin">
 							管理员
 						</label>
 					</div>
 					<div class="username">
 						<em class="glyphicon glyphicon-user" aria-hidden="true"></em><span>|</span>
-						<input type="text" name="userNameInput" id="username"
+						<input type="text" name="username" id="username"
 							placeholder="账号" class="userNameInput">
 					</div>
 					<div class="password">
@@ -103,7 +60,7 @@
 						<a href="https://www.kaoshixing.com/account/find_pwd/"
 							class="forget-password">忘记密码</a>
 					</div>
-					<a href="admin/index" class="btn btn-login btn-primary">登录</a>
+					<input type="submit" class="btn btn-login btn-primary" value="登录">
 
 					<a
 						href="https://open.weixin.qq.com/connect/qrconnect?appid=wx3dbf3a23e8456f1a&amp;redirect_uri=https://www.kaoshixing.com/account/wechat_login_independent&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE#wechat_redirect"
@@ -122,21 +79,6 @@
 						href="javascript:void(0);" class="btn btn-goto-login">先不绑定，直接登录</a>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<button type="button" class="btn btn-primary">（首选项）Primary</button>
-
-	<a href="helloworld">hello world</a>
-	<br />
-	<a href="testPathVariable/1">testPathVariable</a>
-	<br />
-
-	<div class="progress">
-		<div class="progress-bar progress-bar-success" role="progressbar"
-			aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-			style="width: 40%">
-			<span class="sr-only">40% Complete (success)</span>
 		</div>
 	</div>
 

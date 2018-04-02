@@ -12,15 +12,16 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
+<link rel="stylesheet" type="text/css" href="../css/pikaday.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_index.css">
+<!-- growingIO  website data analysis -->
 
-<link rel="SHORTCUT ICON" href="../img/circle.jpg" />
 
 <title>考试信息数字化平台</title>
-
+<link rel="SHORTCUT ICON" href="../img/circle.jpg" />
 </head>
-
 <body>
 
 	<div class="viewFrameWork sidebar-full" id="viewFrameWork">
@@ -28,7 +29,7 @@
 		<div class="viewFrameWork-sidebar">
 			<a href="../index.jsp" class="sidebar-top sidebar-logo sidebar-btn"
 				title="管理员端首页"> <!--小图标样式--> <span class="icon-logo logo-min"><i
-					class="glyphicon glyphicon-log-out"></i></span><!--对有没有logo进行判断--> <img
+					class="glyphicon glyphicon-log-out"></i></span> <!--对有没有logo进行判断--> <img
 				class="icon-logo logo-full logo-ksx" src="../img/circle.jpg">
 			</a>
 			<div class="sidebar-inner">
@@ -43,8 +44,7 @@
 				<div class="sidebar-nav">
 					<ul class="sidebar-trans">
 
-						<li class="sidebar-nav-active"><a
-							href="./index"
+						<li class="sidebar-nav-active"><a href="./index"
 							data-toggle="tooltip" data-placement="right"
 							data-container="body" title="" data-original-title="首页">
 								<div class="nav-icon font-color">
@@ -54,13 +54,12 @@
 
 
 
-						<li class="nav-item"><a
-							href="./exam"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="考试管理">
+						<li class="nav-item"><a href="./exam" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="考试管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-list-alt"></i>
-								</div> <span class="nav-title">考试管理</span>
+								</div> <span class="nav-title">考试信息</span>
 						</a></li>
 
 						<li class="nav-item"><a
@@ -69,66 +68,14 @@
 							data-container="body" title="" data-original-title="课程管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-book"></i>
-								</div> <span class="nav-title">课程管理</span>
+								</div> <span class="nav-title">选修课程</span>
 						</a></li>
-
-						<li class="nav-item"><a
-							href="./student"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="学生管理">
-								<div class="nav-icon">
-									<i class="glyphicon glyphicon-paperclip"></i>
-								</div> <span class="nav-title">学生管理</span>
-						</a></li>
-						<li class="nav-item"><a
-							href="./teacher"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="教师管理">
-								<div class="nav-icon">
-									<i class="glyphicon glyphicon-leaf"></i>
-								</div> <span class="nav-title">教师管理</span>
-						</a></li>
-
-
 
 					</ul>
 				</div>
 			</div>
 
 
-			<div class="sidebar-bottom sidebar-btn">
-				<ul class="sidebar-trans">
-
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<div class="nav-icon">
-								<i class="glyphicon glyphicon-cog"></i>
-							</div> <span class="nav-title">点点滴滴</span>
-					</a>
-						<div class="dropdown-menu company-info-panel">
-							<div class="info-content">
-								<div class="info-content-img">
-									<img src="../img/circle.jpg" class="user_img" alt="">
-								</div>
-								<div class="info-content-wrap">
-									<div class="user" id="user">
-										<span>点点滴滴</span> <a
-											href="#"
-											class="glyphicon glyphicon-wrench "> <i
-											class="unread-notice"></i>
-
-										</a>
-									</div>
-									<div class="company">点点滴滴</div>
-									<a role="button" class="btn btn-danger btn-exit" id="logoutBtn">
-										<i class="glyphicon glyphicon-off"></i> 退出
-									</a>
-								</div>
-							</div>
-						</div></li>
-				</ul>
-
-			</div>
 		</div>
 
 		<!-- viewFrameWork-body -->
@@ -144,60 +91,25 @@
 					</div>
 				</div>
 
-				<!-- body-section-add keep static -->
-				<div class="body-top-right body-section-add">
-					<div class="section-add-btn" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						<i class="glyphicon glyphicon-plus section-add-icon"></i> <span
-							class="section-add-title">添加</span>
-					</div>
-					<div class="dropdown-menu section-add-panel">
-						<div class="section-add-panel-content">
-							<ul class="section-add-menu">
-
-
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i
-										class="glyphicon glyphicon-paperclip"></i> <span
-										class="section-add-menu-title">添加学生</span>
-								</a></li>
-
-
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#">
-										<i class="glyphicon glyphicon-leaf"></i> <span
-										class="section-add-menu-title">添加教师</span>
-								</a></li>
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i
-										class="glyphicon glyphicon-file"></i> <span
-										class="section-add-menu-title">创建考试</span>
-								</a></li>
-
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i
-										class="glyphicon glyphicon-list"></i> <span
-										class="section-add-menu-title">创建课程</span>
-								</a></li>
-
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="body-bottom body-content">
+				<!-- loading -->
+				<div class="spinner-wrapper hidden" id="spinnerLoading">
+					<div class="spinner">
+						<div class="rect1"></div>
+						<div class="rect2"></div>
+						<div class="rect3"></div>
+						<div class="rect4"></div>
+						<div class="rect5"></div>
+					</div>
+				</div>
 				<div class="page_wrapper ">
 
 					<div class="exam_process_wrapper">
 						<div class="top_wrapper">
 							<div class="exam_process_top">
 								<h1 class="exam_process_title">最近结束</h1>
-								<span class="see_all"><a
-									href="./exam">查看全部<i
+								<span class="see_all"><a href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
 							</div>
 							<div class="divide_line"></div>
@@ -205,6 +117,7 @@
 
 
 
+						
 						<div class="page_item animate">
 							<div class="page_item_main">
 								<h1 class="page_item_title">
@@ -222,14 +135,14 @@
 							<ul class="near_footer_nav">
 								<li data-toggle="tooltip" data-placement="top"
 									data-container="body" data-original-title="编辑"
-									onclick="#"><a
-									href="#"><i
+									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/exam/update/112322&#39;"><a
+									href="https://admin.kaoshixing.com/admin/exam/update/112322"><i
 										class="glyphicon glyphicon-pencil"></i></a></li>
 								<li class="examed_total" data-toggle="tooltip"
 									data-placement="top" data-container="body"
 									data-original-title="成绩查询批改"
-									onclick="#"><a
-									href="#"><i
+									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322&#39;"><a
+									href="https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322"><i
 										class="glyphicon glyphicon-edit"></i></a></li>
 							</ul>
 						</div>
@@ -245,13 +158,13 @@
 						<div class="top_wrapper">
 							<div class="exam_near_top">
 								<h1 class="exam_near_title">最近添加</h1>
-								<span class="see_all"><a
-									href="./exam">查看全部<i
+								<span class="see_all"><a href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
 							</div>
 							<div class="divide_line"></div>
 						</div>
 
+						
 						<div class="page_item animate">
 							<div class="page_item_main">
 								<h1 class="page_item_title">
@@ -269,14 +182,14 @@
 							<ul class="near_footer_nav">
 								<li data-toggle="tooltip" data-placement="top"
 									data-container="body" data-original-title="编辑"
-									onclick="#"><a
-									href="#"><i
+									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/exam/update/112322&#39;"><a
+									href="https://admin.kaoshixing.com/admin/exam/update/112322"><i
 										class="glyphicon glyphicon-pencil"></i></a></li>
 								<li class="examed_total" data-toggle="tooltip"
 									data-placement="top" data-container="body"
 									data-original-title="成绩查询批改"
-									onclick="#"><a
-									href="#"><i
+									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322&#39;"><a
+									href="https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322"><i
 										class="glyphicon glyphicon-edit"></i></a></li>
 							</ul>
 						</div>
@@ -284,10 +197,10 @@
 
 						<div class="create_new_wrapper" style="width: 542px;">
 							<div class="page_exam_create animate"
-								onclick="#">
+								onclick="document.location=&#39;https://admin.kaoshixing.com/admin/paper_add_new&#39;;">
 								<ul class="exam_create_wrapper">
 									<li class="exam_create_btn"><a
-										href="#"><i
+										href="https://admin.kaoshixing.com/admin/paper_add_new"><i
 											class="glyphicon glyphicon-plus-sign"></i></a></li>
 									<li class="exam_create_prompt">创建新考试</li>
 								</ul>
@@ -306,7 +219,10 @@
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.bootgrid-ksx.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
+	<script type="text/javascript" src="../js/colResizable-1.6.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
+	<script type="text/javascript" src="../js/pikaday.js"></script>
+	<script type="text/javascript" src="../js/pikaday.jquery.js"></script>
 	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
 
 

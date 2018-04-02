@@ -29,9 +29,4 @@ public class HelloWorld {
 		return "success";
 	}
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-	
 }

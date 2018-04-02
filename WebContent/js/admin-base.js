@@ -26,14 +26,14 @@ $(function () {
         if($(this).hasClass("icon-unfold")){
             // fold sidebar
             $(this).removeClass("icon-unfold").addClass("icon-fold").attr("title","展开导航").attr("data-original-title","展开导航");
-            $(this).find(".icons8").removeClass("icons8-icon").addClass("icons8-icon-3");
+            $(this).children(".glyphicon").removeClass("glyphicon-chevron-left").addClass("glyphicon-chevron-right");
             $(".viewFrameWork").removeClass("sidebar-full").addClass("sidebar-min");
             document.cookie = "ksxFoldState=fold; path =; domain=;";
             $('.sidebar-inner [data-toggle="tooltip"]').tooltip();
         }else if ($(this).hasClass("icon-fold")) {
             // unfold sidebar
             $(this).removeClass("icon-fold").addClass("icon-unfold").attr("title","收起导航").attr("data-original-title","收起导航");
-            $(this).find(".icons8").removeClass("icons8-icon-3").addClass("icons8-icon");
+            $(this).children(".glyphicon").removeClass("glyphicon-chevron-right").addClass("glyphicon-chevron-left");
             $(".viewFrameWork").removeClass("sidebar-min").addClass("sidebar-full");
             document.cookie = "ksxFoldState=unfold; path =; domain=;";
             /*$('.sidebar-inner [data-toggle="tooltip"]').tooltip();*/
@@ -46,6 +46,7 @@ $(function () {
         var current_url = window.location.href;
         $(".sidebar-nav .nav-item a").each(function (index, element) {
             var item_url = $(this).attr("href");
+            //alert(current_url+"..."+item_url);
             if(current_url.indexOf(item_url) != -1){
                 $(this).parent(".nav-item").addClass("sidebar-nav-active");
                 $(this).children("div,span").addClass("font-color");
@@ -64,129 +65,6 @@ $(function () {
         $(this).parent(".nav-item").removeClass("sidebar-nav-active");
         $(this).children("div,span").removeClass("font-color");
     });
-
-    // // initial online count
-    // $.ajax({
-    //     type: "GET",
-    //     cache : false,
-    //     headers: { "cache-control": "no-cache" },
-    //     dataType: "json",
-    //     url: "/admin/userOnlineCount",
-    //     success: function (msg) {
-    //         if(msg.success){
-    //             var count = parseFloat(msg.bizContent.onlineCount);
-    //             var limit = parseFloat(msg.bizContent.onlineLimit)
-    //             var percent = Math.floor(count*100/limit);
-    //             $("#stateOnlineCount").text(count+"/"+limit);
-    //             $("#stateOnlineBar").attr("aria-valuenow",percent+'%').css('width',percent+'%');
-    //         }
-    //     }
-    // });
-
-    //初始化系统消息
-    var POPOVER_HTML = '';
-    $.ajax({
-        type:'POST',
-        cache : false,
-        headers: { "cache-control": "no-cache" },
-        dataType: "json",
-        url: '/account/notification/',
-        success:function (msg) {
-            var tool_count=msg.bizContent.unreadCount;
-            //样式调整，先注释
-            /*var tool_html = '';
-
-            if(tool_count==0){
-                tool_html = '<span>暂无消息</span>'
-            }*/
-
-            // 未读标志
-            if(tool_count>9){
-                $('#stateMessage .state-message-count').text('9+').removeClass('hidden');
-            }else if (tool_count>0) {
-                $('#stateMessage .state-message-count').text(tool_count).removeClass('hidden');
-            }else {
-                $('#stateMessage .state-message-count').addClass('hidden');
-            }
-
-
-
-            // notifications是最新的消息，最多为5条，添加支消息框
-            for (var i = 0; i <msg.bizContent.notifications.length; i++) {
-                var content=msg.bizContent.notifications[i].content;
-                if(msg.bizContent.notifications[i].isRead==0){//若状态为未读添加未读类
-                    tool_html+='<div class="message unread" id="'+msg.bizContent.notifications[i].id+'">'+
-                        '<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>'
-                        +content+'</div>';
-                }else {
-                    tool_html+='<span class="message read" id="'+msg.bizContent.notifications[i].id+'">'+content+'</span><br>';
-                }
-            }
-
-            // 如果所有消息中未读消息的数目不为0，则显示有未读消息的标志
-            if (tool_count != 0) {
-                $(".hasUnread").css("display","inline-block");
-            }else {
-                $(".hasUnread").hide();
-            }
-
-            POPOVER_HTML = tool_html;
-
-        }
-    });
-
-    // 初始化系统消息popover
-    //样式改动，先暂时注释掉,不要删
-    /*$('#stateMessage').popover({
-        container:'#stateMessage',
-        placement: 'bottom',
-        trigger: 'hover',
-        delay: { "show": 0, "hide": 300 },
-        html: true,
-        title: '最新消息',
-        content: function() {
-            return POPOVER_HTML+'<div class="popover-footer"><a href="/account/notification/">查看更多</a></div>';
-        }
-    });*/
-
-
-
-
-
-    // 若点击消息内部链接，则认为消息已读
-    $("body").on('click', "#stateMessageSection .unread a", function () {
-        var notification_id = $(this).parent(".unread").attr("id");
-        $.ajax({
-            type:'POST',
-            cache : false,
-            headers: { "cache-control": "no-cache" },
-            dataType: "json",
-            url: '/account/read_notification/',
-            data: 'ids='+notification_id,
-            success:function (msg) {}
-        })
-    });
-
-    // //若有表格，则初始化表格拖拽
-    // if($("#grid-data").length!=0){
-    //     $("#grid-data").colResizable({
-    //         fixed:false,
-    //         liveDrag:true,
-    //         draggingClass:"dragging"
-    //     });
-    // }
-
-
-    $(".state-message-icon").hover(function(){
-       $(".state-message-icon").addClass("icon-color");
-    },function(){
-        $(".state-message-icon").removeClass("icon-color");
-    });
-
-    $(".state-message-icon").click(function(){
-        window.location.href="/account/notification/";
-    });
-
 
 
 });
@@ -329,46 +207,4 @@ function createQrcode(examUrl) {
             this.download = $("input[name=examName]").val() + "_二维码大.png";
         }
     });
-}
-
-//发送通知
-function sendNotice(url,jumpUrl) {
-    // var dataForm = $('#sendForm').serialize();
-    var sendWay ='';
-    var isSendNotice = $("#sendForm input:checked").length;
-    if(isSendNotice == 0){
-        window.location.href = jumpUrl;
-    }else {
-        $('#sendForm input:checked').each(function(index,ele) {
-            sendWay += $(ele).prop('id')+',';
-        });
-        sendWay = sendWay.substring(0,sendWay.length-1);
-        $.ajax({
-            type: "POST",
-            cache: false,
-            headers: { "cache-control": "no-cache" },
-            dataType: "json",
-            url: url,
-            data: 'sendWay=' + sendWay,
-            success: function (msg) {
-                if (msg.success == true) {
-                    $(".sendAnimation").addClass("sendTips");
-                    // 动画完成后的动作
-                    var compAnimation = $(".sendAnimation").get(0);
-                    compAnimation.addEventListener("animationend", animationEndFunction(jumpUrl));
-                } else {
-                    alert(msg.desc);
-                }
-            }
-        });
-    }
-}
-
-// 提示动画完成后
-function animationEndFunction(jumpUrl) {
-    $('#okModal .modal-content').hide();
-    $("#animationLoading").removeClass("hidden");
-    setTimeout(function(){
-        window.location.href = jumpUrl;
-    },1000);
 }
