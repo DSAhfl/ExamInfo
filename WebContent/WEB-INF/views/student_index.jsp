@@ -3,20 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="webkit">
 <meta name="description" content="">
 <meta name="author" content="">
+
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
-<link rel="stylesheet" type="text/css" href="../css/pikaday.css">
+<link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_index.css">
-<!-- growingIO  website data analysis -->
 
 
 <title>考试信息数字化平台</title>
@@ -52,8 +50,6 @@
 								</div> <span class="nav-title font-color">首页</span>
 						</a></li>
 
-
-
 						<li class="nav-item"><a href="./exam" data-toggle="tooltip"
 							data-placement="right" data-container="body" title=""
 							data-original-title="考试管理">
@@ -61,20 +57,26 @@
 									<i class="glyphicon glyphicon-list-alt"></i>
 								</div> <span class="nav-title">考试信息</span>
 						</a></li>
-
-						<li class="nav-item"><a
-							href="./lesson"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="课程管理">
-								<div class="nav-icon">
-									<i class="glyphicon glyphicon-book"></i>
-								</div> <span class="nav-title">选修课程</span>
-						</a></li>
-
 					</ul>
 				</div>
 			</div>
-
+			
+			<div class="sidebar-bottom sidebar-btn">
+				<ul class="sidebar-trans">
+					<li class="nav-item"><a class="sidebar-bottom-wrap"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="nav-icon">
+								<i class="glyphicon glyphicon-user"></i>
+							</div> <span class="nav-title">个人信息</span>
+					</a></li>
+					<li class="nav-item"><a class="sidebar-bottom-wrap"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="nav-icon">
+								<i class="glyphicon glyphicon-cog"></i>
+							</div> <span class="nav-title">修改密码</span>
+					</a></li>
+				</ul>
+			</div>
 
 		</div>
 
@@ -108,7 +110,7 @@
 					<div class="exam_process_wrapper">
 						<div class="top_wrapper">
 							<div class="exam_process_top">
-								<h1 class="exam_process_title">最近结束</h1>
+								<h1 class="exam_process_title">最近考试</h1>
 								<span class="see_all"><a href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
 							</div>
@@ -117,34 +119,20 @@
 
 
 
-						
+
 						<div class="page_item animate">
 							<div class="page_item_main">
 								<h1 class="page_item_title">
-									<span>考试示例</span><span>（总分：100.0）</span>
+									<span>考试示例</span>
 								</h1>
 								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
 									12:00</p>
 								<ul class="page_item_information">
-									<li>创建人：点点滴滴</li>
-									<li>类型：选题组卷</li>
-									<li>信息：登录考试</li>
-									<li>时长：60</li>
+									<li>总分：100</li>
+									<li>任课教师：点点滴滴</li>
+									<li>成绩：未批改</li>
 								</ul>
 							</div>
-							<ul class="near_footer_nav">
-								<li data-toggle="tooltip" data-placement="top"
-									data-container="body" data-original-title="编辑"
-									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/exam/update/112322&#39;"><a
-									href="https://admin.kaoshixing.com/admin/exam/update/112322"><i
-										class="glyphicon glyphicon-pencil"></i></a></li>
-								<li class="examed_total" data-toggle="tooltip"
-									data-placement="top" data-container="body"
-									data-original-title="成绩查询批改"
-									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322&#39;"><a
-									href="https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322"><i
-										class="glyphicon glyphicon-edit"></i></a></li>
-							</ul>
 						</div>
 
 
@@ -152,64 +140,6 @@
 
 					<!-- 正在进行 结束 -->
 
-					<!-- 最近添加 开始 -->
-
-					<div class="exam_near_wrapper">
-						<div class="top_wrapper">
-							<div class="exam_near_top">
-								<h1 class="exam_near_title">最近添加</h1>
-								<span class="see_all"><a href="./exam">查看全部<i
-										class="glyphicon glyphicon-chevron-right"></i></a></span>
-							</div>
-							<div class="divide_line"></div>
-						</div>
-
-						
-						<div class="page_item animate">
-							<div class="page_item_main">
-								<h1 class="page_item_title">
-									<span>考试示例</span><span>（总分：100.0）</span>
-								</h1>
-								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
-									12:00</p>
-								<ul class="page_item_information">
-									<li>创建人：点点滴滴</li>
-									<li>类型：选题组卷</li>
-									<li>信息：登录考试</li>
-									<li>时长：60</li>
-								</ul>
-							</div>
-							<ul class="near_footer_nav">
-								<li data-toggle="tooltip" data-placement="top"
-									data-container="body" data-original-title="编辑"
-									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/exam/update/112322&#39;"><a
-									href="https://admin.kaoshixing.com/admin/exam/update/112322"><i
-										class="glyphicon glyphicon-pencil"></i></a></li>
-								<li class="examed_total" data-toggle="tooltip"
-									data-placement="top" data-container="body"
-									data-original-title="成绩查询批改"
-									onclick="document.location=&#39;https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322&#39;"><a
-									href="https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322"><i
-										class="glyphicon glyphicon-edit"></i></a></li>
-							</ul>
-						</div>
-
-
-						<div class="create_new_wrapper" style="width: 542px;">
-							<div class="page_exam_create animate"
-								onclick="document.location=&#39;https://admin.kaoshixing.com/admin/paper_add_new&#39;;">
-								<ul class="exam_create_wrapper">
-									<li class="exam_create_btn"><a
-										href="https://admin.kaoshixing.com/admin/paper_add_new"><i
-											class="glyphicon glyphicon-plus-sign"></i></a></li>
-									<li class="exam_create_prompt">创建新考试</li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div>
-					<!-- 最近添加 结束 -->
 				</div>
 			</div>
 		</div>
@@ -217,13 +147,8 @@
 
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.bootgrid-ksx.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
-	<script type="text/javascript" src="../js/colResizable-1.6.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
-	<script type="text/javascript" src="../js/pikaday.js"></script>
-	<script type="text/javascript" src="../js/pikaday.jquery.js"></script>
-	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
 
 
 </body>

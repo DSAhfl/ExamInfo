@@ -10,9 +10,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
-<link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
+<link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_index.css">
 
 <link rel="SHORTCUT ICON" href="../img/circle.jpg" />
@@ -98,36 +97,13 @@
 
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-
 					<li class="nav-item"><a class="sidebar-bottom-wrap"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
-							</div> <span class="nav-title">点点滴滴</span>
-					</a>
-						<div class="dropdown-menu company-info-panel">
-							<div class="info-content">
-								<div class="info-content-img">
-									<img src="../img/circle.jpg" class="user_img" alt="">
-								</div>
-								<div class="info-content-wrap">
-									<div class="user" id="user">
-										<span>点点滴滴</span> <a
-											href="#"
-											class="glyphicon glyphicon-wrench "> <i
-											class="unread-notice"></i>
-
-										</a>
-									</div>
-									<div class="company">点点滴滴</div>
-									<a role="button" class="btn btn-danger btn-exit" id="logoutBtn">
-										<i class="glyphicon glyphicon-off"></i> 退出
-									</a>
-								</div>
-							</div>
-						</div></li>
+							</div> <span class="nav-title">修改密码</span>
+					</a></li>
 				</ul>
-
 			</div>
 		</div>
 
@@ -195,7 +171,7 @@
 					<div class="exam_process_wrapper">
 						<div class="top_wrapper">
 							<div class="exam_process_top">
-								<h1 class="exam_process_title">最近结束</h1>
+								<h1 class="exam_process_title">最近考试</h1>
 								<span class="see_all"><a
 									href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
@@ -304,10 +280,8 @@
 
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.bootgrid-ksx.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
-	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
 
 
 </body>

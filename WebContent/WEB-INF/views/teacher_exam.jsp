@@ -100,7 +100,22 @@ table#grid-data {
 					</ul>
 				</div>
 			</div>
-
+			<div class="sidebar-bottom sidebar-btn">
+				<ul class="sidebar-trans">
+					<li class="nav-item"><a class="sidebar-bottom-wrap"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="nav-icon">
+								<i class="glyphicon glyphicon-user"></i>
+							</div> <span class="nav-title">个人信息</span>
+					</a></li>
+					<li class="nav-item"><a class="sidebar-bottom-wrap"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="nav-icon">
+								<i class="glyphicon glyphicon-cog"></i>
+							</div> <span class="nav-title">修改密码</span>
+					</a></li>
+				</ul>
+			</div>
 		</div>
 
 		<!-- viewFrameWork-body -->
@@ -115,13 +130,17 @@ table#grid-data {
 						</div>
 
 					</div>
+					<div class="body-top-right body-section-add">
+						<div class="section-add-btn" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							<i class="glyphicon glyphicon-plus section-add-icon"></i><span
+								class="section-add-title">创建考试</span>
+						</div>
 
+					</div>
 					<div class="body-toolbar clearfix">
 						<div class="body-toolbar-left pull-left toolbar-left-operation">
-							<button type="button" class="btn btn-default inactive"
-								id="batchDel">
-								<i class="glyphicon glyphicon-trash btn-icon-left"></i> 删除
-							</button>
+
 						</div>
 						<div class="body-toolbar-right pull-right toolbar-right-operation">
 							<div class="search-section">
@@ -136,7 +155,7 @@ table#grid-data {
 					</div>
 				</div>
 				<!-- body-section-add keep static -->
-				
+
 			</div>
 			<div class="body-bottom body-content">
 				<table id="grid-data" class="table bootgrid-table JColResizer"
@@ -149,36 +168,24 @@ table#grid-data {
 									{{ctx.checked}}=""><span class="select-box"><i
 										class="icons8-checked-checkbox"></i></span></label></th>
 							<th data-column-id="examName" class="text-left"
-								style="width: 10.2%;"><a href="javascript:void(0);"
+								style="width: 15%;"><a href="javascript:void(0);"
 								class="column-header-anchor "><span class="text">考试名称</span><span
 									class="icon glyphicon "></span></a></th>
-							<th data-column-id="examStyleName" class="text-left"
-								style="width: 10%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">分类</span><span
-									class="icon glyphicon "></span></a></th>
-							<th data-column-id="paperTotalScore" class="text-left"
-								style="width: 6.3%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">总分</span><span
-									class="icon glyphicon "></span></a></th>
 							<th data-column-id="examStartTime" class="text-left"
-								style="width: 15.8%;"><a href="javascript:void(0);"
+								style="width: 20%;"><a href="javascript:void(0);"
 								class="column-header-anchor sortable"><span class="text">开始时间</span><span
 									class="icon glyphicon "></span></a></th>
 							<th data-column-id="examEndTime" class="text-left"
-								style="width: 15.2%;"><a href="javascript:void(0);"
+								style="width: 20%;"><a href="javascript:void(0);"
 								class="column-header-anchor sortable"><span class="text">结束时间</span><span
 									class="icon glyphicon "></span></a></th>
 							<th data-column-id="createUserName" class="text-left"
-								style="width: 9.1%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">创建人</span><span
+								style="width: 15%;"><a href="javascript:void(0);"
+								class="column-header-anchor "><span class="text">任课教师</span><span
 									class="icon glyphicon "></span></a></th>
-							<th data-column-id="createTime" class="text-left"
-								style="width: 13.2%;"><a href="javascript:void(0);"
-								class="column-header-anchor sortable"><span class="text">创建时间</span><span
-									class="icon glyphicon "></span></a></th>
-							<th data-column-id="sender" class="text-left"
-								style="width: 15.5%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">操作</span><span
+							<th data-column-id="sender" class="text-left" style="width: 20%;"><a
+								href="javascript:void(0);" class="column-header-anchor "><span
+									class="text">操作</span><span
 									class="icon glyphicon icons8-settings"></span></a></th>
 						</tr>
 					</thead>
@@ -188,23 +195,19 @@ table#grid-data {
 									name="select" type="checkbox" class="select-box" value="112322"><span
 									class="select-box"><i class="icons8-checked-checkbox"></i></span></label></td>
 							<td class="text-left" style="width: 116px;">考试示例</td>
-							<td class="text-left" style="width: 116px;">示例</td>
-							<td class="text-left" style="width: 80px;">100</td>
 							<td class="text-left" style="width: 178px;">2018-03-23 12:00</td>
 							<td class="text-left" style="width: 175px;">2018-03-26 12:00</td>
 							<td class="text-left" style="width: 115px;">点点滴滴</td>
-							<td class="text-left" style="width: 159px;">2018-03-23 12:00</td>
-							<td class="text-left" style="width: 186px;">
-								<a href="#" class="glyphicon glyphicon-edit updateExam" examid="112322"
+							<td class="text-left" style="width: 186px;"><a href="#"
+								class="glyphicon glyphicon-edit updateExam" examid="112322"
 								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" data-original-title="编辑"></a>
-								<a href="#" class="glyphicon glyphicon-pencil linkScore"
+								title="" data-original-title="编辑"></a> <a href="#"
+								class="glyphicon glyphicon-pencil linkScore"
 								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="成绩查询批改"></a>
-								<a href="#" class="glyphicon glyphicon-trash linkScore"
+								title="" examid="112322" data-original-title="成绩修改"></a> <a
+								href="#" class="glyphicon glyphicon-trash linkScore"
 								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="删除"></a>
-							</td>
+								title="" examid="112322" data-original-title="删除"></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -212,21 +215,24 @@ table#grid-data {
 					<div class="row">
 						<div class="col-sm-6 infoBar">
 							<div class="infos">共1项记录</div>
-							
+
 						</div>
 						<div class="col-sm-6">
 							<ul class="pagination">
 								<li class="first disabled" aria-disabled="true"><a
-									href="#first" class="button"><i class="glyphicon glyphicon-step-backward"></i></a></li>
+									href="#first" class="button"><i
+										class="glyphicon glyphicon-step-backward"></i></a></li>
 								<li class="prev disabled" aria-disabled="true"><a
-									href="#prev" class="button"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+									href="#prev" class="button"><i
+										class="glyphicon glyphicon-chevron-left"></i></a></li>
 								<li class="page-1 active" aria-disabled="false"
 									aria-selected="true"><a href="#1" class="button">1</a></li>
 								<li class="next disabled" aria-disabled="true"><a
 									href="#next" class="button"><i
 										class="glyphicon glyphicon-chevron-right"></i></a></li>
 								<li class="last disabled" aria-disabled="true"><a
-									href="#last" class="button"><i class="glyphicon glyphicon-step-forward"></i></a></li>
+									href="#last" class="button"><i
+										class="glyphicon glyphicon-step-forward"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -241,7 +247,6 @@ table#grid-data {
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
 	<script type="text/javascript" src="../js/jquery.qrcode.min.js"></script>
-	<script type="text/javascript" src="../js/admin_examManager.js"></script>
 
 </body>
 </html>
