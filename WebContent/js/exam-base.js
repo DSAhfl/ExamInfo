@@ -158,6 +158,21 @@ $(function () {
 
         $("#setPasswordModal").modal();
     });
+    
+    
+    $("#chooseLessonBtn").click(function (e) {
+    	e.stopPropagation();
+    	e.preventDefault();
+    	
+    	$("#chooseLessonModal").modal();
+    });
+    
+    $("#createExamBtn").click(function (e) {
+    	e.stopPropagation();
+    	e.preventDefault();
+    	
+    	$("#createExamModal").modal();
+    });
 
 
 

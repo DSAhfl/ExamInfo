@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
 <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
+<link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 
 
@@ -62,7 +63,7 @@ table#grid-data {
 		<!-- viewFrameWork-sidebar -->
 		<div class="viewFrameWork-sidebar">
 			<a href="../index.jsp" class="sidebar-top sidebar-logo sidebar-btn"
-				title="管理员端首页"> <!--小图标样式--> <span class="icon-logo logo-min"><i
+				title="首页"> <!--小图标样式--> <span class="icon-logo logo-min"><i
 					class="glyphicon glyphicon-log-out"></i></span> <!--对有没有logo进行判断--> <img
 				class="icon-logo logo-full logo-ksx" src="../img/circle.jpg">
 			</a>
@@ -99,17 +100,17 @@ table#grid-data {
 			</div>
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
+					<li class="nav-item" id="userInfoBtn"><a class="sidebar-bottom-wrap"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-user"></i>
 							</div> <span class="nav-title">个人信息</span>
 					</a></li>
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
+					<li class="nav-item" id="setPasswordBtn"><a class="sidebar-bottom-wrap"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
-							</div> <span class="nav-title">修改密码</span>
+							</div> <span class="nav-title" >修改密码</span>
 					</a></li>
 				</ul>
 			</div>
@@ -128,7 +129,7 @@ table#grid-data {
 						</div>
 
 					</div>
-					<div class="body-top-right body-section-add">
+					<div class="body-top-right body-section-add" id="chooseLessonBtn">
 						<div class="section-add-btn" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false">
 							<i class="glyphicon glyphicon-plus section-add-icon"></i> <span
@@ -166,7 +167,7 @@ table#grid-data {
 										class="icons8-checked-checkbox"></i></span></label></th>
 							<th data-column-id="examName" class="text-left"
 								style="width: 15%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">考试名称</span><span
+								class="column-header-anchor "><span class="text">课程名称</span><span
 									class="icon glyphicon "></span></a></th>
 							<th data-column-id="examStartTime" class="text-left"
 								style="width: 20%;"><a href="javascript:void(0);"
@@ -237,11 +238,163 @@ table#grid-data {
 		</div>
 	</div>
 
+	<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-user-info" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="user-header">
+						<div class="character">
+							<div class="img-wrapper">
+
+								<img class="img character-img" src="../img/tx.jpg">
+							</div>
+						</div>
+						<div class="icon-operation icon-edit" id="userEditBtn">
+							<i class="icon glyphicon glyphicon-pencil"></i>
+						</div>
+						<div class="icon-operation icon-cancel" id="cancelEditBtn">
+							<i class="icon glyphicon glyphicon-remove"></i>
+						</div>
+						<div class="icon-operation icon-save" id="saveEditBtn">
+							<i class="icon glyphicon glyphicon-pencil"></i>
+						</div>
+
+					</div>
+
+
+					<div class="items">
+						<form id="userInfoForm">
+							<div class="item">
+								<div class="item-label">姓&nbsp;&nbsp;名：</div>
+								<div class="item-data">
+									<span class="item-value">点点滴滴</span>
+								</div>
+								<input class="item-input" type="text" name="user" value="点点滴滴"
+									placeholder="请输入姓名"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<br /> <br />
+							<div class="item item-static">
+								<div class="item-label">学&nbsp;&nbsp;号：</div>
+								<div class="item-data">17854296875@52562</div>
+							</div>
+							<br /> <br />
+							<div class="item">
+								<div class="item-label">身份证：</div>
+								<div class="item-data">
+									<span class="item-value">17854296875</span>
+								</div>
+								<input class="item-input" type="text" name="tel"
+									value="17854296875" placeholder="请输入身份证"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="setPasswordModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">修改密码</div>
+					<form id="setPwdForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">原密码：</div>
+								<input class="item-input" type="password" name="oldPassword"
+									id="oldPassword" placeholder="请输入原密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">新密码：</div>
+								<input class="item-input" type="password" name="newPassword"
+									id="newPassword" placeholder="新密码为6-20位数字、字母或符号的任意组合">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">确认密码：</div>
+								<input class="item-input" type="password" name="reNewPassword"
+									id="reNewPassword" placeholder="请再次输入新密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="chooseLessonModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">选修课程</div>
+					<form id="chooseLessonForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">课程：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										请选择课程 <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+										<li><a href="#">C++</a></li>
+										<li><a href="#">Java</a></li>
+										<li><a href="#">MySQL</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
-
+	<script type="text/javascript" src="../js/user.js"></script>
 </body>
 </html>

@@ -1211,26 +1211,6 @@ i[class^="icons8-us-"]{
     margin-right: -14px;
     margin-bottom: -9px;
 }
-/*modal*/
-/*一般modal样式*/
-/*.modal-dialog {width: 950px;}*/
-/*.modal-header {background-color: #1A8CFE;color: #fff;font-size: 16px;margin: 0px !important;padding: 10px 25px !important;text-align: center;}*/
-/*.modal-footer{text-align: center;}*/
-/*.modal-footer .btn+.btn{margin-left: 40px;}*/
-/*删除弹出框定制样式*/
-/*.bootstrap-dialog .bootstrap-dialog-message {text-align: center;font-size: 14px;}*/
-/*.bootstrap-dialog .modal-header {height: 35px;}*/
-/*.bootstrap-dialog .modal-dialog {width: 400px;margin-top: 15%;}*/
-/*.bootstrap-dialog .modal-footer {padding: 10px 15px;}*/
-/*.bootstrap-dialog-footer-buttons {width: 200px;margin: 0 auto;}*/
-/*.bootstrap-dialog-footer-buttons .btn {width: 80px;height: 27px;font-size: 14px;padding: 0 22px;}*/
-/*.bootstrap-dialog-footer-buttons .btn + .btn {margin-left: 40px;}*/
-/*包含ztree的modal统一样式*/
-/*.modal-unify .modal-dialog {width: 500px;}*/
-/*.modal-unify .modal-body {padding: 0 15px;}*/
-/*.modal-unify .modal-footer {width: 235px;margin: 0 auto;border: none;}*/
-/*.modal-unify .modal-footer .btn {width: 80px;height: 27px;font-size: 14px;padding: 0 22px;}*/
-/*.modal-unify .modal-footer .btn + .btn {margin-left: 40px;}*/
 /*calendar*/
 .calendar em{ background:url(../images/icon.gif) no-repeat}
 .calendar{display:inline-block; width:130px; height:24px; line-height:24px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;background:url(../images/icon.gif) repeat-x 0 -92px; font-size:12px;border:#1A8CFE 1px solid;border-color:transparent;}
@@ -1273,45 +1253,45 @@ i[class^="icons8-us-"]{
 
 
 
-/* modal统一样式 */
-.modal-dialog{background: #FFFFFF; box-shadow: 0 2px 20px 0 rgba(0,0,0,0.20); border-radius: 4px; /*overflow-y: auto;*/}
-.modal-dialog .modal-content .modal-body{padding: 0;}
-.modal-header{height: 54px;  line-height: 54px; border-bottom: 1px solid #F2F2F2}
-.modal-header .modal-title{font-family: PingFangSC-Medium;color: #333333;  text-align: center;}
+/* md统一样式 */
+.md-dialog{background: #FFFFFF; box-shadow: 0 2px 20px 0 rgba(0,0,0,0.20); border-radius: 4px; /*overflow-y: auto;*/}
+.md-dialog .md-content .md-body{padding: 0;}
+.md-header{height: 54px;  line-height: 54px; border-bottom: 1px solid #F2F2F2}
+.md-header .md-title{font-family: PingFangSC-Medium;color: #333333;  text-align: center;}
 
-.modal-content{padding: 0 40px 0 40px;}
-.modal-content .modal-body iframe{border: 0;}
+.md-content{padding: 0 40px 0 40px;}
+.md-content .md-body iframe{border: 0;}
 
 /*1070*600 大*/
-.modal-large{width: 1070px;}
-.modal-large .modal-header .modal-title{font-size: 22px;}
+.md-large{width: 1070px;}
+.md-large .md-header .md-title{font-size: 22px;}
 /*500*547 小*/
-.modal-small{width: 500px;}
-.modal-small .modal-header .modal-title{font-size: 18px;}
+.md-small{width: 500px;}
+.md-small .md-header .md-title{font-size: 18px;}
 /*800 中*/
-.modal-middle{width: 800px;}
-.modal-middle .modal-header .modal-title{font-size: 18px;}
+.md-middle{width: 800px;}
+.md-middle .md-header .md-title{font-size: 18px;}
 /*800分享*/
-.modal-share{width: 800px;}
-.modal-share .modal-header{height: 50px;  line-height: 50px;border: 1px solid #DEDEDE;}
-.modal-share .modal-header .modal-title{font-size: 20px;}
-.modal-share .modal-content{padding: 0}
+.md-share{width: 800px;}
+.md-share .md-header{height: 50px;  line-height: 50px;border: 1px solid #DEDEDE;}
+.md-share .md-header .md-title{font-size: 20px;}
+.md-share .md-content{padding: 0}
 
-/*modal-iframe*/
-.modal-iframe{position: absolute;left: 50%;margin: 0;top: 50px;bottom: 50px;overflow: hidden;margin-left: -535px;}
-.modal-iframe .modal-content{height: 100%;}
-.modal-iframe .modal-content .modal-body{position: absolute;top: 54px; bottom: 0;left: 40px;right: 40px;}
+/*md-iframe*/
+.md-iframe{position: absolute;left: 50%;margin: 0;top: 50px;bottom: 50px;overflow: hidden;margin-left: -535px;}
+.md-iframe .md-content{height: 100%;}
+.md-iframe .md-content .md-body{position: absolute;top: 54px; bottom: 0;left: 40px;right: 40px;}
 
-.modal-440{width: 440px;}
-.modal-600{width: 600px;}
+.md-440{width: 440px;}
+.md-600{width: 600px;}
 
 
-.bootstrap-dialog .modal-dialog {width: 400px;margin-top: 15%;}
+.bootstrap-dialog .md-dialog {width: 400px;margin-top: 15%;}
 .bootstrap-dialog .bootstrap-dialog-message {text-align: center;font-size: 14px;}
-.bootstrap-dialog .modal-header {/*height: 35px;*/}
+.bootstrap-dialog .md-header {/*height: 35px;*/}
 .bootstrap-dialog .bootstrap-dialog-header{text-align: center;line-height: 35px;}
 .bootstrap-dialog .bootstrap-dialog-header .bootstrap-dialog-close-button{display:none;}
-.bootstrap-dialog .modal-footer {padding: 10px 15px;}
+.bootstrap-dialog .md-footer {padding: 10px 15px;}
 .bootstrap-dialog-footer-buttons {width: 200px;margin: 0 auto;}
 .bootstrap-dialog-footer-buttons .btn {width: 80px;height: 27px;font-size: 14px;padding: 0 22px;}
 .bootstrap-dialog-footer-buttons .btn + .btn {margin-left: 40px;}
@@ -1376,22 +1356,22 @@ i.icon.icon-ksx-支付.icon-pay {line-height: 1.8;  font-size: 16px;}
 
 
 /**新版本公告*/
-.change-log-modal{
+.change-log-md{
     margin-top: 50px;
 }
-.change-log-modal .modal-content{
+.change-log-md .md-content{
     border: none;
     padding-bottom: 40px;
 }
 
-.change-log-modal .modal-header{
+.change-log-md .md-header{
     height: 200px;
     font-size: 30px;
     line-height: 42px;
     color: #FFF;
     letter-spacing: 2px;
     text-align: center;
-    background-image: url("../images/modal-header-bg.png");
+    background-image: url("../images/md-header-bg.png");
     background-repeat: no-repeat;
     background-position: top center;
     background-size: contain;
@@ -1400,11 +1380,11 @@ i.icon.icon-ksx-支付.icon-pay {line-height: 1.8;  font-size: 16px;}
     margin-right: -40px;
     padding-top: 54px;
 }
-.change-log-modal .modal-header .title{
+.change-log-md .md-header .title{
     margin-bottom: 10px;
 }
 
-.change-log-modal .modal-header .version{
+.change-log-md .md-header .version{
     font-family: PingFangSC-Regular;
     height: 30px;
     line-height: 28px;
@@ -1418,17 +1398,17 @@ i.icon.icon-ksx-支付.icon-pay {line-height: 1.8;  font-size: 16px;}
     margin: auto;
 
 }
-.change-log-modal .modal-body .content{
+.change-log-md .md-body .content{
     padding: 30px 16px;
     max-height: 314px;
     overflow-x: hidden;
     overflow-y: auto;
 }
-.change-log-modal .modal-body .btn-row {
+.change-log-md .md-body .btn-row {
     font-family: PingFangSC-Regular;
     text-align: center;
 }
-.change-log-modal .modal-body .btn-row .btn{
+.change-log-md .md-body .btn-row .btn{
     height: 34px;
     width: 100px;
     font-size: 14px;
@@ -1436,10 +1416,182 @@ i.icon.icon-ksx-支付.icon-pay {line-height: 1.8;  font-size: 16px;}
     line-height: 32px;
     letter-spacing: 2px;
 }
-.change-log-modal .modal-body .btn-row .more{
+.change-log-md .md-body .btn-row .more{
     position: absolute;
     right: -10px;
     display: inline-block;
     font-size: 14px;
     line-height: 34px;
 }
+
+/*个人信息modal*/
+.modal-user-info{
+    width: 520px;
+    height: 550px;
+}
+.modal-user-info .modal-content{
+    height: 100%;
+}
+.modal-user-info .modal-header{
+    height: 135px;
+    background-color: #B4B6BD;
+    background-image: url(../img/header-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.modal-user-info .modal-body{
+    padding: 70px 70px 65px;
+    position: relative;
+}
+.modal-user-info .modal-body .user-header{
+    position: absolute;
+    top: -40px;
+    left: 30px;
+    right: 30px;
+    height: 80px;
+    line-height: 80px;
+    padding-left: 18px;
+}
+.modal-user-info .modal-body .user-header .character{
+    background: #B4B6BD;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    text-align: center;
+    border-radius: 50%;
+}
+.modal-user-info .modal-body .user-header .character .img-wrapper{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.modal-user-info .modal-body .user-header .character .img{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+/*上传*/
+.modal-user-info .modal-body .user-header .icon-capture{
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: #747785;
+    border-radius: 50%;
+    position: absolute;
+    right: 7px;
+    bottom: -11px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+.modal-user-info .modal-body .user-header .icon-capture .icon{
+    cursor: pointer;
+}
+.modal-user-info .modal-body .user-header .icon-capture input[type='file']{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer!important;
+}
+
+.modal-user-info .modal-body .user-header .icon-operation{
+    position: absolute;
+    right: 0;
+    top: 20px;
+    background: #1A8CFE;
+    box-shadow: 0 2px 4px 0 rgba(58,62,81,0.20);
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+.modal-user-info .modal-body .user-header .icon-operation.icon-edit,
+.modal-user-info .modal-body .user-header .icon-operation.icon-save{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 20px;
+}
+.modal-user-info .modal-body .user-header .icon-operation.icon-cancel{
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    line-height: 28px;
+    top: 26px;
+    right: 60px;
+    background: #fff;
+    color: #B4B6BD;
+}
+.modal-user-info .modal-body .user-header .icon-capture,
+.modal-user-info .modal-body .user-header .icon-operation.icon-save,
+.modal-user-info .modal-body .user-header .icon-operation.icon-cancel{
+    display: none;
+}
+.modal-user-info .items{
+    font-size: 16px;
+}
+
+.modal-user-info .item .item-input,
+.modal-user-info .item .item-radio,
+.modal-user-info .item .item-icon{
+    display: none;
+}
+
+/*编辑模式*/
+.modal-user-info.edit-mode .modal-body .user-header .icon-capture,
+.modal-user-info.edit-mode .modal-body .user-header .icon-operation.icon-save,
+.modal-user-info.edit-mode .modal-body .user-header .icon-operation.icon-cancel{
+    display: block;
+}
+.modal-user-info.edit-mode .modal-body{
+    padding-top: 67px;
+}
+.modal-user-info.edit-mode .modal-body .items .item-input-group + .item-input-group{
+    margin-top: 23px;
+}
+.modal-user-info.edit-mode .item.item-input-group .item-label{
+    width: 68px;
+}
+.modal-user-info.edit-mode .item .item-data{
+    display: none;
+}
+.modal-user-info.edit-mode .item.item-static .item-data{
+    display: block;
+}
+
+.modal-user-info.edit-mode .item .item-input,
+.modal-user-info.edit-mode .item .item-radio{
+    display: inline-block;
+    font-size: 16px;
+}
+.modal-user-info.edit-mode .item .item-radio{
+    font-size: 14px;
+}
+
+/*.modal-user-info.edit-mode .item .btn-wechat{*/
+    /*border-color: #FF0000;*/
+    /*color: #FF0000;*/
+/*}*/
+
+
+/*修改密码modal*/
+.modal-set-password .modal-body .error-info{
+    color: #FF0000;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 6px;
+}
+.modal-set-password .items{
+    padding: 0 40px;
+}
+
+/********************************************************************/

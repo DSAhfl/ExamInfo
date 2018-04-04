@@ -9,9 +9,8 @@
 <meta name="renderer" content="webkit">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="stylesheet" href="./css/loading.css">
+
 <link rel="stylesheet" type="text/css" href="./css/styles.min.css">
-<link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 <link rel="stylesheet" href="./css/login-reg-style.css">
 

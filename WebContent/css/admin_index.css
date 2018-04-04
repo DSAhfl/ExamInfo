@@ -336,19 +336,19 @@ li>a>i{
     /*border-radius: 4px;*/
     /*display: inline-block;*/
 /*}*/
-#okModal .modal-body .guide { display: -webkit-flex;display: flex;justify-content: center;margin: auto;margin-top: 64px;  text-align: center;}
-#okModal .modal-body .guide-pwd {margin-top: 30px}
-#okModal .modal-body .guide .address {border: 1px solid #DEDEDE;padding: 6px 15px 6px 10px;border-right: none;text-align: left;display: inline-block;border-radius: 4px;}
-#okModal .modal-body .guide .btn-copy {  font-family: MicrosoftYaHei;  font-size: 14px;  color: #1A8CFE;  line-height: 8px;  position: relative;  left: -5px;  padding: 0 16px; }
-#okModal .modal-body .qr-code {  text-align: center;  margin-top: 35px;  }
-#okModal .modal-body .qr-code .btn-group .btn-download{  font-family: MicrosoftYaHei;  font-size: 14px;  color: #2F7CDB;  letter-spacing: -0.4px;  padding: 9px 22px;  }
-#okModal .modal-body .qr-code .download-qrcode {display: inline-block;  vertical-align: middle;text-align: left;}
-#okModal .modal-body .qr-code .invite-link-qrcode {display: inline-block;  vertical-align: middle;margin-right: 20px;}
-#okModal .modal-body .sendForm {margin-top: 25px; text-align: center;  font-family: MicrosoftYaHei;  font-size: 16px;  color: #666666;  letter-spacing: 0;position: relative}
-#okModal .modal-body .sendForm input {vertical-align: text-top}
-#okModal .modal-body .btn-div { margin-top: 60px;  text-align: center;  margin-bottom: 25px;}
-#okModal .modal-body .btn-div button {margin-right: 14px;width: 100px}
-/*#okModal .modal-body .btn-div span { width: 100px;  height: 34px;  line-height: 34px;  padding: 0;  color: #ffffff; }*/
+#okmd .md-body .guide { display: -webkit-flex;display: flex;justify-content: center;margin: auto;margin-top: 64px;  text-align: center;}
+#okmd .md-body .guide-pwd {margin-top: 30px}
+#okmd .md-body .guide .address {border: 1px solid #DEDEDE;padding: 6px 15px 6px 10px;border-right: none;text-align: left;display: inline-block;border-radius: 4px;}
+#okmd .md-body .guide .btn-copy {  font-family: MicrosoftYaHei;  font-size: 14px;  color: #1A8CFE;  line-height: 8px;  position: relative;  left: -5px;  padding: 0 16px; }
+#okmd .md-body .qr-code {  text-align: center;  margin-top: 35px;  }
+#okmd .md-body .qr-code .btn-group .btn-download{  font-family: MicrosoftYaHei;  font-size: 14px;  color: #2F7CDB;  letter-spacing: -0.4px;  padding: 9px 22px;  }
+#okmd .md-body .qr-code .download-qrcode {display: inline-block;  vertical-align: middle;text-align: left;}
+#okmd .md-body .qr-code .invite-link-qrcode {display: inline-block;  vertical-align: middle;margin-right: 20px;}
+#okmd .md-body .sendForm {margin-top: 25px; text-align: center;  font-family: MicrosoftYaHei;  font-size: 16px;  color: #666666;  letter-spacing: 0;position: relative}
+#okmd .md-body .sendForm input {vertical-align: text-top}
+#okmd .md-body .btn-div { margin-top: 60px;  text-align: center;  margin-bottom: 25px;}
+#okmd .md-body .btn-div button {margin-right: 14px;width: 100px}
+/*#okmd .md-body .btn-div span { width: 100px;  height: 34px;  line-height: 34px;  padding: 0;  color: #ffffff; }*/
 /*发布成功以及邮件提醒*/
 .sendTips {position: fixed; left:0;right:0; z-index: 9999;  width: 400px;  height: 30px;  font-size: 14px;  color: #666;  background: #F5DBCE;  text-align: center;  border-radius: 4px;  margin: 0 auto;line-height: 30px;animation:sendTips 0.8s linear;-webkit-animation:sendTips 0.8s linear;animation-iteration-count:1;
     -webkit-animation-iteration-count:1;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards }
@@ -361,7 +361,7 @@ li>a>i{
     from {top:0;}
     to {top:20px;}
 }
-/*#okModal .modal-footer .btn-close{*/
+/*#okmd .md-footer .btn-close{*/
     /*width: 100px;*/
     /*height: 34px;*/
     /*font-size: 12px;*/
@@ -383,7 +383,7 @@ li>a>i{
     /*color: #ffffff;*/
     /*cursor: pointer;*/
 /*}*/
-/*#okModal .trial-link {*/
+/*#okmd .trial-link {*/
     /*display: inline-block;*/
     /*height: 100%;*/
     /*width: 100%;*/

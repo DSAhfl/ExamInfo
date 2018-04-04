@@ -11,6 +11,7 @@
 <meta name="author" content="">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
+<link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_index.css">
 
@@ -27,7 +28,7 @@
 		<div class="viewFrameWork-sidebar">
 			<a href="../index.jsp" class="sidebar-top sidebar-logo sidebar-btn"
 				title="管理员端首页"> <!--小图标样式--> <span class="icon-logo logo-min"><i
-					class="glyphicon glyphicon-log-out"></i></span><!--对有没有logo进行判断--> <img
+					class="glyphicon glyphicon-log-out"></i></span> <!--对有没有logo进行判断--> <img
 				class="icon-logo logo-full logo-ksx" src="../img/circle.jpg">
 			</a>
 			<div class="sidebar-inner">
@@ -42,8 +43,7 @@
 				<div class="sidebar-nav">
 					<ul class="sidebar-trans">
 
-						<li class="sidebar-nav-active"><a
-							href="./index"
+						<li class="sidebar-nav-active"><a href="./index"
 							data-toggle="tooltip" data-placement="right"
 							data-container="body" title="" data-original-title="首页">
 								<div class="nav-icon font-color">
@@ -53,34 +53,30 @@
 
 
 
-						<li class="nav-item"><a
-							href="./exam"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="考试管理">
+						<li class="nav-item"><a href="./exam" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="考试管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-list-alt"></i>
 								</div> <span class="nav-title">考试管理</span>
 						</a></li>
 
-						<li class="nav-item"><a
-							href="./lesson"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="课程管理">
+						<li class="nav-item"><a href="./lesson" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="课程管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-book"></i>
 								</div> <span class="nav-title">课程管理</span>
 						</a></li>
 
-						<li class="nav-item"><a
-							href="./student"
+						<li class="nav-item"><a href="./student"
 							data-toggle="tooltip" data-placement="right"
 							data-container="body" title="" data-original-title="学生管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-paperclip"></i>
 								</div> <span class="nav-title">学生管理</span>
 						</a></li>
-						<li class="nav-item"><a
-							href="./teacher"
+						<li class="nav-item"><a href="./teacher"
 							data-toggle="tooltip" data-placement="right"
 							data-container="body" title="" data-original-title="教师管理">
 								<div class="nav-icon">
@@ -97,8 +93,9 @@
 
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item" id="setPasswordBtn"><a
+						class="sidebar-bottom-wrap" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
 							</div> <span class="nav-title">修改密码</span>
@@ -119,51 +116,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- body-section-add keep static -->
-				<div class="body-top-right body-section-add">
-					<div class="section-add-btn" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						<i class="glyphicon glyphicon-plus section-add-icon"></i> <span
-							class="section-add-title">添加</span>
-					</div>
-					<div class="dropdown-menu section-add-panel">
-						<div class="section-add-panel-content">
-							<ul class="section-add-menu">
-
-
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i
-										class="glyphicon glyphicon-paperclip"></i> <span
-										class="section-add-menu-title">添加学生</span>
-								</a></li>
-
-
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#">
-										<i class="glyphicon glyphicon-leaf"></i> <span
-										class="section-add-menu-title">添加教师</span>
-								</a></li>
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i
-										class="glyphicon glyphicon-file"></i> <span
-										class="section-add-menu-title">创建考试</span>
-								</a></li>
-
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i
-										class="glyphicon glyphicon-list"></i> <span
-										class="section-add-menu-title">创建课程</span>
-								</a></li>
-
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="body-bottom body-content">
 				<div class="page_wrapper ">
@@ -172,8 +124,7 @@
 						<div class="top_wrapper">
 							<div class="exam_process_top">
 								<h1 class="exam_process_title">最近考试</h1>
-								<span class="see_all"><a
-									href="./exam">查看全部<i
+								<span class="see_all"><a href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
 							</div>
 							<div class="divide_line"></div>
@@ -198,14 +149,11 @@
 							<ul class="near_footer_nav">
 								<li data-toggle="tooltip" data-placement="top"
 									data-container="body" data-original-title="编辑"
-									onclick="#"><a
-									href="#"><i
+									class="updateExamBtn"><a href=""><i
 										class="glyphicon glyphicon-pencil"></i></a></li>
 								<li class="examed_total" data-toggle="tooltip"
 									data-placement="top" data-container="body"
-									data-original-title="成绩查询批改"
-									onclick="#"><a
-									href="#"><i
+									data-original-title="成绩查询批改" onclick=""><a href="#"><i
 										class="glyphicon glyphicon-edit"></i></a></li>
 							</ul>
 						</div>
@@ -221,8 +169,7 @@
 						<div class="top_wrapper">
 							<div class="exam_near_top">
 								<h1 class="exam_near_title">最近添加</h1>
-								<span class="see_all"><a
-									href="./exam">查看全部<i
+								<span class="see_all"><a href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
 							</div>
 							<div class="divide_line"></div>
@@ -245,25 +192,20 @@
 							<ul class="near_footer_nav">
 								<li data-toggle="tooltip" data-placement="top"
 									data-container="body" data-original-title="编辑"
-									onclick="#"><a
-									href="#"><i
+									class="updateExamBtn"><a href=""><i
 										class="glyphicon glyphicon-pencil"></i></a></li>
 								<li class="examed_total" data-toggle="tooltip"
 									data-placement="top" data-container="body"
-									data-original-title="成绩查询批改"
-									onclick="#"><a
-									href="#"><i
+									data-original-title="成绩查询批改" onclick=""><a href="#"><i
 										class="glyphicon glyphicon-edit"></i></a></li>
 							</ul>
 						</div>
 
 
 						<div class="create_new_wrapper" style="width: 542px;">
-							<div class="page_exam_create animate"
-								onclick="#">
+							<div class="page_exam_create animate createExamBtn">
 								<ul class="exam_create_wrapper">
-									<li class="exam_create_btn"><a
-										href="#"><i
+									<li class="exam_create_btn"><a href="#"><i
 											class="glyphicon glyphicon-plus-sign"></i></a></li>
 									<li class="exam_create_prompt">创建新考试</li>
 								</ul>
@@ -278,11 +220,211 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="setPasswordModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">修改密码</div>
+					<form id="setPwdForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">原密码：</div>
+								<input class="item-input" type="password" name="oldPassword"
+									id="oldPassword" placeholder="请输入原密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">新密码：</div>
+								<input class="item-input" type="password" name="newPassword"
+									id="newPassword" placeholder="新密码为6-20位数字、字母或符号的任意组合">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">确认密码：</div>
+								<input class="item-input" type="password" name="reNewPassword"
+									id="reNewPassword" placeholder="请再次输入新密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="createExamModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">创建考试</div>
+					<form id="createExamForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">考试课程：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										请选择课程 <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+										<li><a href="#">C++</a></li>
+										<li><a href="#">Java</a></li>
+										<li><a href="#">MySQL</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">开始时间：</div>
+								<div class="input-group date form_date " data-date=""
+									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd">
+									<input name="date" class="item-input" type="text" readonly
+										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-remove"></span></span> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">结束时间：</div>
+								<div class="input-group date form_date " data-date=""
+									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd">
+									<input name="date" class="item-input" type="text" readonly
+										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-remove"></span></span> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="updateExamModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">编辑考试</div>
+					<form id="updateExamForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">考试课程：</div>
+								<input class="item-input" type="text" value="考试示例"
+									readonly="readonly"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">开始时间：</div>
+								<div class="input-group date form_date " data-date=""
+									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd">
+									<input name="date" class="item-input" type="text" readonly
+										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-remove"></span></span> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">结束时间：</div>
+								<div class="input-group date form_date " data-date=""
+									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd">
+									<input name="date" class="item-input" type="text" readonly
+										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-remove"></span></span> <span
+										class="input-group-addon"><span
+										class="glyphicon glyphicon-calendar"></span></span>
+								</div>
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
-
+	<script type="text/javascript" src="../js/user.js"></script>
+	<script type="text/javascript"
+		src="../js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+	<script type="text/javascript"
+		src="../js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script type="text/javascript">
+		$('.form_date').datetimepicker({
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
+		});
+	</script>
 
 </body>
 </html>

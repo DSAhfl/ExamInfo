@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
 <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
+<link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 
 
@@ -88,9 +89,9 @@ table#grid-data {
 
 
 
-						<li class="nav-item"><a href="./exam"
-							data-toggle="tooltip" data-placement="right"
-							data-container="body" title="" data-original-title="考试管理">
+						<li class="nav-item"><a href="./exam" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="考试管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-list-alt"></i>
 								</div> <span class="nav-title ">考试管理</span>
@@ -104,16 +105,16 @@ table#grid-data {
 								</div> <span class="nav-title">课程管理</span>
 						</a></li>
 
-						<li class="sidebar-nav-active"><a href="./student" data-toggle="tooltip"
-							data-placement="right" data-container="body" title=""
-							data-original-title="学生管理">
+						<li class="sidebar-nav-active"><a href="./student"
+							data-toggle="tooltip" data-placement="right"
+							data-container="body" title="" data-original-title="学生管理">
 								<div class="nav-icon   font-color">
 									<i class="glyphicon glyphicon-paperclip"></i>
 								</div> <span class="nav-title font-color">学生管理</span>
 						</a></li>
-						<li class="nav-item"><a href="./teacher" data-toggle="tooltip"
-							data-placement="right" data-container="body" title=""
-							data-original-title="教师管理">
+						<li class="nav-item"><a href="./teacher"
+							data-toggle="tooltip" data-placement="right"
+							data-container="body" title="" data-original-title="教师管理">
 								<div class="nav-icon">
 									<i class="glyphicon glyphicon-leaf"></i>
 								</div> <span class="nav-title">教师管理</span>
@@ -127,7 +128,7 @@ table#grid-data {
 
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
+					<li class="nav-item"  id="setPasswordBtn"><a class="sidebar-bottom-wrap"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
@@ -166,38 +167,12 @@ table#grid-data {
 					</div>
 				</div>
 				<!-- body-section-add keep static -->
-				<div class="body-top-right body-section-add">
-					<div class="section-add-btn" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
+				<div class="body-top-right body-section-add addStudentBtn">
+					<div class="section-add-btn" >
 						<i class="glyphicon glyphicon-plus section-add-icon"></i> <span
-							class="section-add-title">添加</span>
+							class="section-add-title">添加学生</span>
 					</div>
-					<div class="dropdown-menu section-add-panel">
-						<div class="section-add-panel-content">
-							<ul class="section-add-menu">
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i class="glyphicon glyphicon-paperclip"></i> <span
-										class="section-add-menu-title">添加学生</span>
-								</a></li>
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i class="glyphicon glyphicon-leaf"></i> <span
-										class="section-add-menu-title">添加教师</span>
-								</a></li>
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i class="glyphicon glyphicon-file"></i> <span
-										class="section-add-menu-title">创建考试</span>
-								</a></li>
-
-								<li class="dropdown-menu-list section-add-menu-list"><a
-									href="#"> <i class="glyphicon glyphicon-list"></i> <span
-										class="section-add-menu-title">创建课程</span>
-								</a></li>
-							</ul>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 			<div class="body-bottom body-content">
@@ -222,9 +197,9 @@ table#grid-data {
 								style="width: 20%;"><a href="javascript:void(0);"
 								class="column-header-anchor "><span class="text">身份证</span><span
 									class="icon glyphicon "></span></a></th>
-							<th data-column-id="sender" class="text-left"
-								style="width: 20%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">操作</span><span
+							<th data-column-id="sender" class="text-left" style="width: 20%;"><a
+								href="javascript:void(0);" class="column-header-anchor "><span
+									class="text">操作</span><span
 									class="icon glyphicon icons8-settings"></span></a></th>
 						</tr>
 					</thead>
@@ -236,14 +211,13 @@ table#grid-data {
 							<td class="text-left" style="width: 116px;">1111</td>
 							<td class="text-left" style="width: 116px;">示例</td>
 							<td class="text-left" style="width: 80px;">100</td>
-							<td class="text-left" style="width: 186px;">
-								<a href="#" class="glyphicon glyphicon-edit updateExam" examid="112322"
+							<td class="text-left" style="width: 186px;"><a href=""
+								class="glyphicon glyphicon-edit updateStudentBtn" examid="112322"
 								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" data-original-title="编辑"></a>
-								<a href="#" class="glyphicon glyphicon-trash linkScore"
+								title="" data-original-title="编辑"></a> <a href=""
+								class="glyphicon glyphicon-trash linkScore"
 								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="删除"></a>
-							</td>
+								title="" examid="112322" data-original-title="删除"></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -251,21 +225,24 @@ table#grid-data {
 					<div class="row">
 						<div class="col-sm-6 infoBar">
 							<div class="infos">共1项记录</div>
-							
+
 						</div>
 						<div class="col-sm-6">
 							<ul class="pagination">
 								<li class="first disabled" aria-disabled="true"><a
-									href="#first" class="button"><i class="glyphicon glyphicon-step-backward"></i></a></li>
+									href="#first" class="button"><i
+										class="glyphicon glyphicon-step-backward"></i></a></li>
 								<li class="prev disabled" aria-disabled="true"><a
-									href="#prev" class="button"><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+									href="#prev" class="button"><i
+										class="glyphicon glyphicon-chevron-left"></i></a></li>
 								<li class="page-1 active" aria-disabled="false"
 									aria-selected="true"><a href="#1" class="button">1</a></li>
 								<li class="next disabled" aria-disabled="true"><a
 									href="#next" class="button"><i
 										class="glyphicon glyphicon-chevron-right"></i></a></li>
 								<li class="last disabled" aria-disabled="true"><a
-									href="#last" class="button"><i class="glyphicon glyphicon-step-forward"></i></a></li>
+									href="#last" class="button"><i
+										class="glyphicon glyphicon-step-forward"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -274,11 +251,138 @@ table#grid-data {
 		</div>
 	</div>
 
+	<div class="modal fade" id="setPasswordModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">修改密码</div>
+					<form id="setPwdForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">原密码：</div>
+								<input class="item-input" type="password" name="oldPassword"
+									id="oldPassword" placeholder="请输入原密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">新密码：</div>
+								<input class="item-input" type="password" name="newPassword"
+									id="newPassword" placeholder="新密码为6-20位数字、字母或符号的任意组合">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">确认密码：</div>
+								<input class="item-input" type="password" name="reNewPassword"
+									id="reNewPassword" placeholder="请再次输入新密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		<div class="modal fade" id="addStudentModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">添加学生</div>
+					<form id="addStudentForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">学生姓名：</div>
+								<input class="item-input" type="text" placeholder="请输入学生姓名">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">身份证：</div>
+								<input class="item-input" type="text" placeholder="请输入身份证">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoLesson"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelLessonBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="saveLessonBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="modal fade" id="updateStudentModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">编辑学生信息</div>
+					<form id="updateStudentForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">学生学号：</div>
+								<input class="item-input" type="text" value="1111"
+									readonly="readonly"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">学生姓名：</div>
+								<input class="item-input" type="text" value="示例" placeholder="请输入学生姓名">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">身份证：</div>
+								<input class="item-input" type="text" value="100" placeholder="请输入身份证">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoLesson"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelLessonBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="saveLessonBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
+	<script type="text/javascript" src="../js/user.js"></script>
 
 </body>
 </html>

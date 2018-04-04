@@ -13,6 +13,7 @@
 
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/styles.min.css">
+<link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_index.css">
 
@@ -26,7 +27,7 @@
 		<!-- viewFrameWork-sidebar -->
 		<div class="viewFrameWork-sidebar">
 			<a href="../index.jsp" class="sidebar-top sidebar-logo sidebar-btn"
-				title="管理员端首页"> <!--小图标样式--> <span class="icon-logo logo-min"><i
+				title="首页"> <!--小图标样式--> <span class="icon-logo logo-min"><i
 					class="glyphicon glyphicon-log-out"></i></span> <!--对有没有logo进行判断--> <img
 				class="icon-logo logo-full logo-ksx" src="../img/circle.jpg">
 			</a>
@@ -60,16 +61,16 @@
 					</ul>
 				</div>
 			</div>
-			
+
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
+					<li class="nav-item" id="userInfoBtn"><a class="sidebar-bottom-wrap"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-user"></i>
 							</div> <span class="nav-title">个人信息</span>
 					</a></li>
-					<li class="nav-item"><a class="sidebar-bottom-wrap"
+					<li class="nav-item" id="setPasswordBtn"><a class="sidebar-bottom-wrap"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
@@ -95,16 +96,6 @@
 
 			</div>
 			<div class="body-bottom body-content">
-				<!-- loading -->
-				<div class="spinner-wrapper hidden" id="spinnerLoading">
-					<div class="spinner">
-						<div class="rect1"></div>
-						<div class="rect2"></div>
-						<div class="rect3"></div>
-						<div class="rect4"></div>
-						<div class="rect5"></div>
-					</div>
-				</div>
 				<div class="page_wrapper ">
 
 					<div class="exam_process_wrapper">
@@ -145,10 +136,126 @@
 		</div>
 	</div>
 
+
+
+
+	<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-user-info" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="user-header">
+						<div class="character">
+							<div class="img-wrapper">
+
+								<img class="img character-img" src="../img/tx.jpg">
+							</div>
+						</div>
+						<div class="icon-operation icon-edit" id="userEditBtn">
+							<i class="icon glyphicon glyphicon-pencil"></i>
+						</div>
+						<div class="icon-operation icon-cancel" id="cancelEditBtn">
+							<i class="icon glyphicon glyphicon-remove"></i>
+						</div>
+						<div class="icon-operation icon-save" id="saveEditBtn">
+							<i class="icon glyphicon glyphicon-pencil"></i>
+						</div>
+
+					</div>
+
+
+					<div class="items">
+						<form id="userInfoForm">
+							<div class="item">
+								<div class="item-label">姓&nbsp;&nbsp;名：</div>
+								<div class="item-data">
+									<span class="item-value">点点滴滴</span>
+								</div>
+								<input class="item-input" type="text" name="user" value="点点滴滴"
+									placeholder="请输入姓名"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<br /> <br />
+							<div class="item item-static">
+								<div class="item-label">学&nbsp;&nbsp;号：</div>
+								<div class="item-data">17854296875@52562</div>
+							</div>
+							<br /> <br />
+							<div class="item">
+								<div class="item-label">身份证：</div>
+								<div class="item-data">
+									<span class="item-value">17854296875</span>
+								</div>
+								<input class="item-input" type="text" name="tel"
+									value="17854296875" placeholder="请输入身份证"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="setPasswordModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog modal-440 modal-set-password" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="title">修改密码</div>
+					<form id="setPwdForm">
+						<div class="items">
+							<div class="item item-input-group">
+								<div class="item-label">原密码：</div>
+								<input class="item-input" type="password" name="oldPassword"
+									id="oldPassword" placeholder="请输入原密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">新密码：</div>
+								<input class="item-input" type="password" name="newPassword"
+									id="newPassword" placeholder="新密码为6-20位数字、字母或符号的任意组合">
+								<i class="icon item-icon icon-m_exam_error"></i>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">确认密码：</div>
+								<input class="item-input" type="password" name="reNewPassword"
+									id="reNewPassword" placeholder="请再次输入新密码"> <i
+									class="icon item-icon icon-m_exam_error"></i>
+							</div>
+						</div>
+					</form>
+
+					<div class="error-info hidden" id="errorInfoPwd"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>
 	<script type="text/javascript" src="../js/admin-base.js"></script>
+	<script type="text/javascript" src="../js/user.js"></script>
 
 
 </body>
