@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +95,11 @@
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name"><%
+									Teacher teacher = (Teacher)session.getAttribute("user");
+									String name = teacher.getTeacherName();
+									out.write(name);
+								%></div>
 						</div>
 
 					</div>
@@ -130,7 +135,7 @@
 									12:00</p>
 								<ul class="page_item_information">
 									<li>总分：100</li>
-									<li>任课教师：点点滴滴</li>
+									<li>任课教师：<%out.write(name); %></li>
 								</ul>
 							</div>
 							<ul class="near_footer_nav">
@@ -172,7 +177,7 @@
 									12:00</p>
 								<ul class="page_item_information">
 									<li>总分：100</li>
-									<li>任课教师：点点滴滴</li>
+									<li>任课教师：<%out.write(name); %></li>
 								</ul>
 							</div>
 							<ul class="near_footer_nav ">
@@ -243,9 +248,9 @@
 							<div class="item">
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
-									<span class="item-value">点点滴滴</span>
+									<span class="item-value"><%out.write(name); %></span>
 								</div>
-								<input class="item-input" type="text" name="user" value="点点滴滴"
+								<input class="item-input" type="text" name="user" value="<%out.write(name); %>"
 									placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
+<%@ page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,15 @@
 <link rel="SHORTCUT ICON" href="../img/circle.jpg" />
 </head>
 <body>
+	<%
+		List<StuExamView> stuExams = (List<StuExamView>) session
+				.getAttribute("stuExams");
+		StuExamView stuExam = (StuExamView)session.getAttribute("recentExam");
 
+		Student student = (Student) session.getAttribute("user");
+		int ID = student.getStuId();
+		String IC = student.getStuIC();
+	%>
 	<div class="viewFrameWork sidebar-full" id="viewFrameWork">
 		<!-- viewFrameWork-sidebar -->
 		<div class="viewFrameWork-sidebar">
@@ -64,14 +75,16 @@
 
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-					<li class="nav-item" id="userInfoBtn"><a class="sidebar-bottom-wrap"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item" id="userInfoBtn"><a
+						class="sidebar-bottom-wrap" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-user"></i>
 							</div> <span class="nav-title">个人信息</span>
 					</a></li>
-					<li class="nav-item" id="setPasswordBtn"><a class="sidebar-bottom-wrap"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item" id="setPasswordBtn"><a
+						class="sidebar-bottom-wrap" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
 							</div> <span class="nav-title">修改密码</span>
@@ -89,7 +102,31 @@
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name">
+
+								<%
+									String name = student.getStuName();
+									out.write(name);
+								%>
+							</div>
+						</div>
+						<div class="nav-right">
+							<%
+								String update = (String) session.getAttribute("update");
+								if (update != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${update }</strong>
+							</div>
+							<%
+								}
+								session.removeAttribute("update");
+							%>
 						</div>
 					</div>
 				</div>
@@ -114,14 +151,32 @@
 						<div class="page_item animate">
 							<div class="page_item_main">
 								<h1 class="page_item_title">
-									<span>考试示例</span>
+									<span>
+										<%
+											out.print(stuExam.getLessonName());
+										%>
+									</span>
 								</h1>
-								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
-									12:00</p>
+								<p class="page_item_time">
+									<%
+										out.print(stuExam.getBeginTime());
+									%> 至 <%
+										out.print(stuExam.getEndTime());
+									%>
+								</p>
 								<ul class="page_item_information">
 									<li>总分：100</li>
-									<li>任课教师：点点滴滴</li>
-									<li>成绩：未批改</li>
+									<li>任课教师：<%
+											out.print(stuExam.getTeacherName());
+										%></li>
+									<li>成绩：<%
+											int grade = stuExam.getGrade();
+									if(grade>0){
+										out.print(grade);
+									}else{
+										out.print("未批改");
+									}
+										%></li>
 								</ul>
 							</div>
 						</div>
@@ -170,30 +225,37 @@
 
 
 					<div class="items">
-						<form id="userInfoForm">
+						<form id="userInfoForm" action="./chgInfo" method="post">
 							<div class="item">
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
-									<span class="item-value">点点滴滴</span>
+									<span class="item-value"> <%
+ 	out.write(name);
+ %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="user" value="点点滴滴"
-									placeholder="请输入姓名"> <i
+								<input class="item-input" type="text" name="user"
+									value="<%out.write(name);%>" placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<br /> <br />
 							<div class="item item-static">
 								<div class="item-label">学&nbsp;&nbsp;号：</div>
-								<div class="item-data">17854296875@52562</div>
+								<div class="item-data">
+									<%
+										out.write(ID + "");
+									%>
+								</div>
 							</div>
 							<br /> <br />
-							<div class="item">
+							<div class="item item-static">
 								<div class="item-label">身份证：</div>
 								<div class="item-data">
-									<span class="item-value">17854296875</span>
+									<span class="item-value"> <%
+ 	out.write(IC);
+ %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="tel"
-									value="17854296875" placeholder="请输入身份证"> <i
-									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 
 						</form>
@@ -215,7 +277,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" method="post" action="./chgPwd">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -250,7 +312,7 @@
 	</div>
 
 
-	
+
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap-dialog.min.js"></script>

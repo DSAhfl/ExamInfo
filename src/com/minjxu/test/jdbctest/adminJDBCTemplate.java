@@ -19,11 +19,9 @@ public class adminJDBCTemplate implements AdminDAO {
 
 	@Override
 	public List<Admin> listAdmins() {
-	      String SQL = "select * from admin";
-	      List <Admin> admins = jdbcTemplateObject.query(SQL, 
-	                                new AdminMapper());
-	      return admins;
+		String SQL = "select * from admin";
+		List<Admin> admins = jdbcTemplateObject.query(SQL, new AdminMapper());
+		return admins;
 	}
-
 
 }

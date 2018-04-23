@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
+<%@ page import="java.util.*"%>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -100,17 +103,19 @@ table#grid-data {
 			</div>
 			<div class="sidebar-bottom sidebar-btn">
 				<ul class="sidebar-trans">
-					<li class="nav-item" id="userInfoBtn"><a class="sidebar-bottom-wrap"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item" id="userInfoBtn"><a
+						class="sidebar-bottom-wrap" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-user"></i>
 							</div> <span class="nav-title">个人信息</span>
 					</a></li>
-					<li class="nav-item" id="setPasswordBtn"><a class="sidebar-bottom-wrap"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item" id="setPasswordBtn"><a
+						class="sidebar-bottom-wrap" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
 							<div class="nav-icon">
 								<i class="glyphicon glyphicon-cog"></i>
-							</div> <span class="nav-title" >修改密码</span>
+							</div> <span class="nav-title">修改密码</span>
 					</a></li>
 				</ul>
 			</div>
@@ -125,9 +130,34 @@ table#grid-data {
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name">
+								<%
+									Student student = (Student) session.getAttribute("user");
+															int ID = student.getStuId();
+															String IC = student.getStuIC();
+															String name = student.getStuName();
+															out.write(name);
+								%>
+							</div>
 						</div>
-
+						<div class="nav-right">
+							<%
+								String choose = (String) session.getAttribute("choose");
+													if (choose != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${choose }</strong>
+							</div>
+							<%
+								}
+													session.removeAttribute("choose");
+							%>
+						</div>
 					</div>
 					<div class="body-top-right body-section-add" id="chooseLessonBtn">
 						<div class="section-add-btn" data-toggle="dropdown"
@@ -135,22 +165,8 @@ table#grid-data {
 							<i class="glyphicon glyphicon-plus section-add-icon"></i> <span
 								class="section-add-title">选课</span>
 						</div>
+					</div>
 
-					</div>
-					<div class="body-toolbar clearfix">
-						<div class="body-toolbar-left pull-left toolbar-left-operation">
-						</div>
-						<div class="body-toolbar-right pull-right toolbar-right-operation">
-							<div class="search-section">
-								<div class="search-section-normal" id="normalSearch">
-									<i class="glyphicon glyphicon-search search-section-icon"
-										id="searchIcon"></i> <input
-										class="search-section-area placeholder" name="exam_name"
-										type="text" placeholder="请输入考试名称">
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<!-- body-section-add keep static -->
 
@@ -162,9 +178,8 @@ table#grid-data {
 						<tr>
 							<th class="select-cell" style="width: 4.7%;"><label
 								class="select-label"><input name="select"
-									type="checkbox" class="select-box" value="all"
-									{{ctx.checked}}=""><span class="select-box"><i
-										class="icons8-checked-checkbox"></i></span></label></th>
+									type="checkbox" class="select-box" value="all"><span
+									class="select-box"><i class="icons8-checked-checkbox"></i></span></label></th>
 							<th data-column-id="examName" class="text-left"
 								style="width: 15%;"><a href="javascript:void(0);"
 								class="column-header-anchor "><span class="text">课程名称</span><span
@@ -192,26 +207,52 @@ table#grid-data {
 						</tr>
 					</thead>
 					<tbody>
-						<tr data-row-id="112322">
-							<td class="select-cell" style=""><label class="select-label"><input
-									name="select" type="checkbox" class="select-box" value="112322"><span
-									class="select-box"><i class="icons8-checked-checkbox"></i></span></label></td>
-							<td class="text-left" style="width: 116px;">考试示例</td>
-							<td class="text-left" style="width: 178px;">2018-03-23 12:00</td>
-							<td class="text-left" style="width: 175px;">2018-03-26 12:00</td>
-							<td class="text-left" style="width: 115px;">点点滴滴</td>
-							<td class="text-left" style="width: 80px;">未批改</td>
-							<td class="text-left" style="width: 80px;"><a href="#"
-								class="glyphicon glyphicon-trash linkScore"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="退课"></a></td>
-						</tr>
+						<%
+							List<StuExamView> stuExams = (List<StuExamView>) session.getAttribute("stuExams");
+							for (StuExamView stuExam : stuExams) {
+								out.println("<tr>");
+								out.println("<td class='select-cell'></td>"
+								+"<td class='text-left' style='width: 116px;'>"+stuExam.getLessonName()+"</td>"
+								+"<td class='text-left' style='width: 178px'>");
+								if(stuExam.getBeginTime()==null){
+										out.print("未安排");				
+								}else{
+									out.print(stuExam.getBeginTime());
+								}
+								out.println("</td>"
+								+"<td class='text-left' style='width: 175px'>");
+								int timeCmp = 1;
+								if(stuExam.getEndTime()==null){
+									out.print("未安排");				
+								}else{
+									out.print(stuExam.getEndTime());
+									timeCmp=stuExam.getBeginTime().compareTo(new Date());
+								}
+								out.println("</td>"
+								+"<td class='text-left' style='width: 115px'>"+stuExam.getTeacherName()+"</td>"
+								+"<td class='text-left' style='width: 80px;'>");
+								if(stuExam.getGrade()==-1){
+									out.print("未批改");				
+								}else{
+									out.print(stuExam.getGrade());
+								}
+								out.println("</td>"
+								+"<td class='text-left' style='width: 80px;'><a href='/ExamInfo/student/dropout?lessonName="
+								+ stuExam.getLessonName() + "&timeCmp=" + timeCmp + "'"
+								+"class='glyphicon glyphicon-trash dropout'"
+								+"data-toggle='tooltip' data-placement='top' data-container='body'"
+								+" data-original-title='退课'></a></td>");
+								out.println("</tr>");
+							}
+							
+						%>
+					
 					</tbody>
 				</table>
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
-							<div class="infos">共1项记录</div>
+							<div class="infos">共<%out.print(stuExams.size()); %>项记录</div>
 
 						</div>
 						<div class="col-sm-6">
@@ -269,30 +310,37 @@ table#grid-data {
 
 
 					<div class="items">
-						<form id="userInfoForm">
+						<form id="userInfoForm" action="./chgInfo" method="post">
 							<div class="item">
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
-									<span class="item-value">点点滴滴</span>
+									<span class="item-value"> <%
+ 	out.write(name);
+ %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="user" value="点点滴滴"
-									placeholder="请输入姓名"> <i
+								<input class="item-input" type="text" name="user"
+									value="<%out.write(name);%>" placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<br /> <br />
 							<div class="item item-static">
 								<div class="item-label">学&nbsp;&nbsp;号：</div>
-								<div class="item-data">17854296875@52562</div>
+								<div class="item-data">
+									<%
+										out.write(ID + "");
+									%>
+								</div>
 							</div>
 							<br /> <br />
-							<div class="item">
+							<div class="item item-static">
 								<div class="item-label">身份证：</div>
 								<div class="item-data">
-									<span class="item-value">17854296875</span>
+									<span class="item-value"> <%
+ 	out.write(IC);
+ %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="tel"
-									value="17854296875" placeholder="请输入身份证"> <i
-									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 
 						</form>
@@ -314,7 +362,7 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" method="post" action="./chgPwd">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -347,8 +395,8 @@ table#grid-data {
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="modal fade" id="chooseLessonModal" tabindex="-1"
 		role="dialog">
 		<div class="modal-dialog modal-440 modal-set-password" role="document">
@@ -368,24 +416,29 @@ table#grid-data {
 								<div class="dropdown">
 									<button class="btn btn-default dropdown-toggle" type="button"
 										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="true">
-										请选择课程 <span class="caret"></span>
+										aria-expanded="true" data-target="#">
+										<a id="dropdownText">请选择课程</a> <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-										<li><a href="#">C++</a></li>
-										<li><a href="#">Java</a></li>
-										<li><a href="#">MySQL</a></li>
+										<%
+											List<Lesson> lessons = (List<Lesson>) session
+																					.getAttribute("allLessons");
+																			for (Lesson lesson : lessons) {
+																				out.print("<li><a href='#'>" + lesson.getLessonName()
+																						+ "</a></li>");
+																			}
+										%>
 									</ul>
 								</div>
 							</div>
 						</div>
 					</form>
-					<div class="error-info hidden" id="errorInfoPwd"></div>
+					<div class="error-info hidden" id="errorInfo"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">确定</button>
+					<button type="button" class="btn btn-primary" id="chooseBtn">确定</button>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,7 +114,12 @@
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name">
+								<%
+									Admin admin = (Admin)session.getAttribute("user");
+									out.write(admin.getAdminName());
+								%>
+							</div>
 						</div>
 					</div>
 				</div>

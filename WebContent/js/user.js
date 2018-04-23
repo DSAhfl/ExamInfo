@@ -1,4 +1,22 @@
 $(function () {
+	
+
+	
+	//choose lesson dropdown menu
+	$(".dropdown-menu a").click(function () {
+
+        $("#dropdownText").html($(this).text());
+        
+        
+    });
+	
+    $("#chooseBtn").click(function (e) {
+    	var url = "/ExamInfo/student/chooseLesson?lesson="+$("#dropdownText").html();
+    	window.location.href = url;
+//      document.getElementById("chooseLessonForm").submit();
+  });
+
+	
     //编辑用户信息
     $("#userEditBtn").click(function (e) {
         e.stopPropagation();
@@ -67,38 +85,12 @@ $(function () {
         });
     });
 
-    //验证邮箱
-    $("#checkEmailBtn").click(function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-
-        var email = $(this).parents(".item").find(".item-input").val();
-
-        if(email==''){
-            alert("请添加邮箱");
-        }else {
-            $.ajax({
-                type: "GET",
-                cache: false,
-                headers: { "cache-control": "no-cache" },
-                dataType: "json",
-                url: "/admin/user/verify_emails/" + userId,
-                success: function(msg) {
-                    if (msg.success) {
-                        alert("验证邮件已发送");
-                    }else {
-                        alert("操作失败，请联系管理员");
-                    }
-                }
-            });
-        }
-    });
 
 
     //保存编辑信息
     $("#saveEditBtn").click(function (e) {
-        e.stopPropagation();
-        e.preventDefault();
+//        e.stopPropagation();
+//        e.preventDefault();
 
         var _user = $("#userInfoForm input[name=user]");
         $("#userInfoForm").find(".item").removeClass("error");
@@ -108,30 +100,11 @@ $(function () {
             return;
         }
 
-        var dataForm = $("#userInfoForm").serialize();
-        $.ajax({
-        	type: "POST",
-        	cache : false,
-        	headers: { "cache-control": "no-cache" },
-        	url: "/account/user/update",
-        	data: dataForm + "&t="+Math.random(),
-        	success: function(msg){
-        		if(msg=='true'){
-        		    $(".item-input").each(function (index, element) {
-        		        var value = $(this).val();
-
-                        $(this).parents(".item").find(".item-value").text(value);
-                    });
-                    //性别
-                    var sex = $("input[name=sex]:checked").val()==1 ? '男' : '女';
-                    $("#userSex").text(sex);
-                    $("#userInfoModal .modal-user-info").removeClass("edit-mode");
-                    $("#userInfoModal .modal-user-info .item").removeClass("item-input-group");
-                }else {
-                    alert("发生未知错误,重试或联系管理员");
-                }
-        	}
-        });
+        
+        $("#userInfoModal .modal-user-info").removeClass("edit-mode");
+        $("#userInfoModal .modal-user-info .item").removeClass("item-input-group");
+        
+        document.getElementById("userInfoForm").submit();
     });
 
 
@@ -166,29 +139,7 @@ $(function () {
             return;
         }
 
-        var oldPassword = $('#oldPassword').val();
-        var newPassword = $('#newPassword').val();
-        var reNewPassword = $('#reNewPassword').val();
-        var dataForm = "oldPassword=" + md5(oldPassword) +
-            "&newPassword=" + md5(newPassword) +
-            "&reNewPassword=" + md5(reNewPassword);
-
-        $.ajax({
-            type: "POST",
-            cache : false,
-            headers: { "cache-control": "no-cache" },
-            dataType: "json",
-            url: "/account/user/set_pass",
-            data: dataForm + "&t="+Math.random(),
-            success: function(msg){
-                if(msg.success){
-                    alert("修改成功！");
-                    $("#setPasswordModal").modal('hide');
-                }else {
-                    alert(msg.desc);
-                }
-            }
-        });
+        document.getElementById("setPwdForm").submit();
     });
 
     //验证密码

@@ -1,5 +1,7 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.*"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -28,7 +30,12 @@
 				<form action="./login" name="form_wm" class="login-form"
 					id="loginForm" method="post">
 					<img src="./img/school.jpg" alt="logo" style="max-width: 100%;">
-					<div class="main-error-tips" id="errormsg"></div>
+					<div class="main-error-tips" id="errormsg">
+						${msg }
+						<%
+							session.removeAttribute("msg");
+						%>
+					</div>
 
 					<div class="username"
 						style="border-bottom: 0px; padding-bottom: 0px">
@@ -51,16 +58,14 @@
 					</div>
 					<div class="password">
 						<em class="glyphicon glyphicon-pencil" aria-hidden="true"></em><span>|</span>
-						<input type="password" name="password" id="userTypePwd"
+						<input type="password" name="password" id="password"
 							placeholder="密码" class="passwordInput">
 					</div>
 
 					<div class="remember">
-						<a href="https://www.kaoshixing.com/account/find_pwd/"
-							class="forget-password">忘记密码</a>
+						<a href="" class="forget-password">忘记密码</a>
 					</div>
 					<input type="submit" class="btn btn-login btn-primary" value="登录">
-
 					<a
 						href="https://open.weixin.qq.com/connect/qrconnect?appid=wx3dbf3a23e8456f1a&amp;redirect_uri=https://www.kaoshixing.com/account/wechat_login_independent&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE#wechat_redirect"
 						class="btn btn-wechat btn-default"><em

@@ -6,5 +6,6 @@ import javax.sql.DataSource;
 
 public interface AdminDAO {
 	public void setDataSource(DataSource ds);
-	 public List<Admin> listAdmins();
+
+	public List<Admin> listAdmins();
 }

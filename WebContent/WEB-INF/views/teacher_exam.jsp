@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -129,7 +130,11 @@ table#grid-data {
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name"><%
+									Teacher teacher = (Teacher)session.getAttribute("user");
+									String name = teacher.getTeacherName();
+									out.write(name);
+								%></div>
 						</div>
 
 					</div>
@@ -200,7 +205,7 @@ table#grid-data {
 							<td class="text-left" style="width: 116px;">考试示例</td>
 							<td class="text-left" style="width: 178px;">2018-03-23 12:00</td>
 							<td class="text-left" style="width: 175px;">2018-03-26 12:00</td>
-							<td class="text-left" style="width: 115px;">点点滴滴</td>
+							<td class="text-left" style="width: 115px;"><%out.write(name); %></td>
 							<td class="text-left" style="width: 186px;"><a href="#"
 								class="glyphicon glyphicon-edit updateExamBtn" examid="112322"
 								data-toggle="tooltip" data-placement="top" data-container="body"
@@ -280,9 +285,9 @@ table#grid-data {
 							<div class="item">
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
-									<span class="item-value">点点滴滴</span>
+									<span class="item-value"><%out.write(name); %></span>
 								</div>
-								<input class="item-input" type="text" name="user" value="点点滴滴"
+								<input class="item-input" type="text" name="user" value="<%out.write(name); %>"
 									placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
