@@ -10,4 +10,6 @@ public interface TeacherDao {
 	public void setDataSource(DataSource ds);
 
 	public List<Teacher> listTeachers();
+	
+	public int update(Teacher teacher);
 }

@@ -109,7 +109,8 @@ $(function() {
 	$(".updateExamBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		
+		$("#errorInfoExam").text("").addClass("hidden");
+		$("#editExamName").val($(this).parent().parent().children().eq(1).text());
 		$("#updateExamModal").modal();
 	});
 

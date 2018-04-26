@@ -46,9 +46,9 @@ public class StudentJDBCTemplate implements StudentDao {
 	}
 
 	public int update(Student student) {
-		String SQL = "UPDATE student SET stuName = ? , stuPwd = ? , stuIC = ? WHERE stuId = ?";
+		String SQL = "UPDATE student SET stuName = ? , stuPwd = ? WHERE stuId = ?";
 		int res = jdbcTemplateObject.update(SQL, student.getStuName(),
-				student.getStuPwd(), student.getStuIC(), student.getStuId());
+				student.getStuPwd(), student.getStuId());
 		return res;
 	}
 

@@ -27,4 +27,11 @@ public class TeacherJDBCTemplate implements TeacherDao {
 		return teachers;
 	}
 
+	public int update(Teacher teacher) {
+		String SQL = "UPDATE teacher SET teacherName = ? , teacherPwd = ?  WHERE teacherId = ?";
+		int res = jdbcTemplateObject.update(SQL, teacher.getTeacherName(),
+				teacher.getTeacherPwd(), teacher.getTeacherId());
+		return res;
+	}
+
 }

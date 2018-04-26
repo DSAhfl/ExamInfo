@@ -133,17 +133,15 @@ table#grid-data {
 							<div class="company-name">
 								<%
 									Student student = (Student) session.getAttribute("user");
-															int ID = student.getStuId();
-															String IC = student.getStuIC();
-															String name = student.getStuName();
-															out.write(name);
+									String name = student.getStuName();
+									out.write(name);
 								%>
 							</div>
 						</div>
 						<div class="nav-right">
 							<%
 								String choose = (String) session.getAttribute("choose");
-													if (choose != null) {
+								if (choose != null) {
 							%>
 							<div class="alert alert-info alert-dismissible" role="alert"
 								style="width: 500px; right: 100px;">
@@ -155,7 +153,7 @@ table#grid-data {
 							</div>
 							<%
 								}
-													session.removeAttribute("choose");
+								session.removeAttribute("choose");
 							%>
 						</div>
 					</div>
@@ -208,51 +206,60 @@ table#grid-data {
 					</thead>
 					<tbody>
 						<%
-							List<StuExamView> stuExams = (List<StuExamView>) session.getAttribute("stuExams");
+							List<StuExamView> stuExams = (List<StuExamView>) session
+									.getAttribute("stuExams");
 							for (StuExamView stuExam : stuExams) {
 								out.println("<tr>");
 								out.println("<td class='select-cell'></td>"
-								+"<td class='text-left' style='width: 116px;'>"+stuExam.getLessonName()+"</td>"
-								+"<td class='text-left' style='width: 178px'>");
-								if(stuExam.getBeginTime()==null){
-										out.print("未安排");				
-								}else{
+										+ "<td class='text-left' style='width: 116px;'>"
+										+ stuExam.getLessonName() + "</td>"
+										+ "<td class='text-left' style='width: 178px'>");
+								if (stuExam.getBeginTime() == null) {
+									out.print("未安排");
+								} else {
 									out.print(stuExam.getBeginTime());
 								}
 								out.println("</td>"
-								+"<td class='text-left' style='width: 175px'>");
+										+ "<td class='text-left' style='width: 175px'>");
 								int timeCmp = 1;
-								if(stuExam.getEndTime()==null){
-									out.print("未安排");				
-								}else{
+								if (stuExam.getEndTime() == null) {
+									out.print("未安排");
+								} else {
 									out.print(stuExam.getEndTime());
-									timeCmp=stuExam.getBeginTime().compareTo(new Date());
+									timeCmp = stuExam.getBeginTime().compareTo(new Date());
 								}
 								out.println("</td>"
-								+"<td class='text-left' style='width: 115px'>"+stuExam.getTeacherName()+"</td>"
-								+"<td class='text-left' style='width: 80px;'>");
-								if(stuExam.getGrade()==-1){
-									out.print("未批改");				
-								}else{
+										+ "<td class='text-left' style='width: 115px'>"
+										+ stuExam.getTeacherName() + "</td>"
+										+ "<td class='text-left' style='width: 80px;'>");
+								if (stuExam.getGrade() == -1) {
+									out.print("未批改");
+								} else {
 									out.print(stuExam.getGrade());
 								}
 								out.println("</td>"
-								+"<td class='text-left' style='width: 80px;'><a href='/ExamInfo/student/dropout?lessonName="
-								+ stuExam.getLessonName() + "&timeCmp=" + timeCmp + "'"
-								+"class='glyphicon glyphicon-trash dropout'"
-								+"data-toggle='tooltip' data-placement='top' data-container='body'"
-								+" data-original-title='退课'></a></td>");
+										+ "<td class='text-left' style='width: 80px;'><a href='/ExamInfo/student/dropout?lessonName="
+										+ stuExam.getLessonName()
+										+ "&timeCmp="
+										+ timeCmp
+										+ "'"
+										+ "class='glyphicon glyphicon-trash dropout'"
+										+ "data-toggle='tooltip' data-placement='top' data-container='body'"
+										+ " data-original-title='退课'></a></td>");
 								out.println("</tr>");
 							}
-							
 						%>
-					
+
 					</tbody>
 				</table>
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
-							<div class="infos">共<%out.print(stuExams.size()); %>项记录</div>
+							<div class="infos">
+								共<%
+								out.print(stuExams.size());
+							%>项记录
+							</div>
 
 						</div>
 						<div class="col-sm-6">
@@ -328,7 +335,7 @@ table#grid-data {
 								<div class="item-label">学&nbsp;&nbsp;号：</div>
 								<div class="item-data">
 									<%
-										out.write(ID + "");
+										out.write(student.getStuId() + "");
 									%>
 								</div>
 							</div>
@@ -337,7 +344,7 @@ table#grid-data {
 								<div class="item-label">身份证：</div>
 								<div class="item-data">
 									<span class="item-value"> <%
- 	out.write(IC);
+ 	out.write(student.getStuIC());
  %>
 									</span>
 								</div>
@@ -422,11 +429,11 @@ table#grid-data {
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 										<%
 											List<Lesson> lessons = (List<Lesson>) session
-																					.getAttribute("allLessons");
-																			for (Lesson lesson : lessons) {
-																				out.print("<li><a href='#'>" + lesson.getLessonName()
-																						+ "</a></li>");
-																			}
+													.getAttribute("allLessons");
+											for (Lesson lesson : lessons) {
+												out.print("<li><a href='#'>" + lesson.getLessonName()
+														+ "</a></li>");
+											}
 										%>
 									</ul>
 								</div>

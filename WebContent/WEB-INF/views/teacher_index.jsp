@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.minjxu.exam.entity.* "%>
+<%@ page import="java.util.* "%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
 <link rel="stylesheet" type="text/css" href="../css/admin_index.css">
-
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.css">
 
 <title>考试信息数字化平台</title>
 <link rel="SHORTCUT ICON" href="../img/circle.jpg" />
@@ -95,13 +96,34 @@
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name"><%
-									Teacher teacher = (Teacher)session.getAttribute("user");
+							<div class="company-name">
+								<%
+									List<Lesson> teacherLessons = (List<Lesson>)session.getAttribute("teacherLessons");
+									List<Exam> teacherExams = (List<Exam>)session.getAttribute("teacherExams");
+									Teacher teacher = (Teacher) session.getAttribute("user");
 									String name = teacher.getTeacherName();
 									out.write(name);
-								%></div>
+								%>
+							</div>
 						</div>
-
+						<div class="nav-right">
+							<%
+								String update = (String) session.getAttribute("update");
+																		if (update != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${update }</strong>
+							</div>
+							<%
+								}
+								session.removeAttribute("update");
+							%>
+						</div>
 					</div>
 
 				</div>
@@ -112,56 +134,11 @@
 			<div class="body-bottom body-content">
 
 				<div class="page_wrapper ">
-
-					<div class="exam_process_wrapper">
-						<div class="top_wrapper">
-							<div class="exam_process_top">
-								<h1 class="exam_process_title">最近考试</h1>
-								<span class="see_all"><a href="./exam">查看全部<i
-										class="glyphicon glyphicon-chevron-right"></i></a></span>
-							</div>
-							<div class="divide_line"></div>
-						</div>
-
-
-
-
-						<div class="page_item animate">
-							<div class="page_item_main">
-								<h1 class="page_item_title">
-									<span>考试示例</span>
-								</h1>
-								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
-									12:00</p>
-								<ul class="page_item_information">
-									<li>总分：100</li>
-									<li>任课教师：<%out.write(name); %></li>
-								</ul>
-							</div>
-							<ul class="near_footer_nav">
-								<li data-toggle="tooltip" data-placement="top"
-									data-container="body" data-original-title="编辑"
-									class="updateExamBtn"><a href=""><i
-										class="glyphicon glyphicon-pencil"></i></a></li>
-								<li class="examed_total" data-toggle="tooltip"
-									data-placement="top" data-container="body"
-									data-original-title="成绩修改"><a
-									href="https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322"><i
-										class="glyphicon glyphicon-edit"></i></a></li>
-							</ul>
-						</div>
-
-
-					</div>
-
-					<!-- 正在进行 结束 -->
-
-					<!-- 最近添加 开始 -->
-
+					<!-- 最近考试 结束 -->
 					<div class="exam_near_wrapper">
 						<div class="top_wrapper">
-							<div class="exam_near_top">
-								<h1 class="exam_near_title">最近添加</h1>
+							<div class="exam_process_top">
+								<h1 class="exam_process_title">最近添加</h1>
 								<span class="see_all"><a href="./exam">查看全部<i
 										class="glyphicon glyphicon-chevron-right"></i></a></span>
 							</div>
@@ -171,42 +148,41 @@
 						<div class="page_item animate">
 							<div class="page_item_main">
 								<h1 class="page_item_title">
-									<span>考试示例</span>
+									<span>
+									<% String lessonName = null;
+										for(Lesson lesson : teacherLessons){
+											if(lesson.getLessonId()==teacherExams.get(0).getLessonId()){
+												lessonName=lesson.getLessonName();
+											}
+										}
+										out.print(lessonName);
+									%></span>
 								</h1>
-								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
-									12:00</p>
+								<p class="page_item_time">
+								<%out.print(teacherExams.get(0).getBeginTime()); %> 至
+								 <%out.print(teacherExams.get(0).getEndTime()); %></p>
 								<ul class="page_item_information">
 									<li>总分：100</li>
-									<li>任课教师：<%out.write(name); %></li>
+									<li>任课教师：<%
+										out.write(name);
+									%></li>
 								</ul>
 							</div>
-							<ul class="near_footer_nav ">
-								<li data-toggle="tooltip" data-placement="top"
-									data-container="body" data-original-title="编辑"
-									class="updateExamBtn"><a href=""><i
-										class="glyphicon glyphicon-pencil"></i></a></li>
-								<li class="examed_total" data-toggle="tooltip"
-									data-placement="top" data-container="body"
-									data-original-title="成绩修改"><a
-									href="https://admin.kaoshixing.com/admin/result/mgr_new?examInfoId=112322"><i
-										class="glyphicon glyphicon-edit"></i></a></li>
-							</ul>
 						</div>
 
-
 						<div class="create_new_wrapper" style="width: 542px;">
-							<div class="page_exam_create animate createExamBtn" >
+							<div class="page_exam_create animate createExamBtn">
 								<ul class="exam_create_wrapper">
-									<li class="exam_create_btn" ><a><i
+									<li class="exam_create_btn"><a><i
 											class="glyphicon glyphicon-plus-sign"></i></a></li>
 									<li class="exam_create_prompt">创建新考试</li>
 								</ul>
 							</div>
 
 						</div>
-
 					</div>
-					<!-- 最近添加 结束 -->
+
+					<!-- 最近考试 结束 -->
 				</div>
 			</div>
 		</div>
@@ -244,30 +220,37 @@
 
 
 					<div class="items">
-						<form id="userInfoForm">
+						<form id="userInfoForm" action="./chgInfo" method="post">
 							<div class="item">
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
-									<span class="item-value"><%out.write(name); %></span>
+									<span class="item-value"> <%
+									 	out.write(name);
+									 %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="user" value="<%out.write(name); %>"
-									placeholder="请输入姓名"> <i
+								<input class="item-input" type="text" name="user"
+									value="<%out.write(name);%>" placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<br /> <br />
 							<div class="item item-static">
 								<div class="item-label">工&nbsp;&nbsp;号：</div>
-								<div class="item-data">17854296875@52562</div>
+								<div class="item-data">
+									<%
+										out.write(teacher.getTeacherId() + "");
+									%>
+								</div>
 							</div>
 							<br /> <br />
-							<div class="item">
+							<div class="item item-static">
 								<div class="item-label">身份证：</div>
 								<div class="item-data">
-									<span class="item-value">17854296875</span>
+									<span class="item-value"> <%
+									 	out.write(teacher.getTeacherIC());
+									 %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="tel"
-									value="17854296875" placeholder="请输入身份证"> <i
-									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 
 						</form>
@@ -289,7 +272,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" method="post" action="./chgPwd">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -411,7 +394,8 @@
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">考试课程：</div>
-								<input class="item-input" type="text" value="考试示例" readonly="readonly"> <i
+								<input class="item-input" type="text" value="考试示例"
+									readonly="readonly"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">

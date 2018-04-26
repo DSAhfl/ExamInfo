@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.minjxu.exam.dao.LessonDao;
 import com.minjxu.exam.entity.Lesson;
+import com.minjxu.exam.entity.Teacher;
 import com.minjxu.exam.mapper.LessonMapper;
 
 public class LessonJDBCTemplate implements LessonDao {
@@ -22,6 +23,14 @@ public class LessonJDBCTemplate implements LessonDao {
 	@Override
 	public List<Lesson> listLesson() {
 		String SQL = "SELECT * FROM lesson";
+		List<Lesson> lessons = jdbcTemplateObject
+				.query(SQL, new LessonMapper());
+		return lessons;
+	}
+
+	public List<Lesson> listLessonByTeacher(Teacher teacher) {
+		String SQL = "SELECT * FROM lesson WHERE teacherId = "
+				+ teacher.getTeacherId();
 		List<Lesson> lessons = jdbcTemplateObject
 				.query(SQL, new LessonMapper());
 		return lessons;

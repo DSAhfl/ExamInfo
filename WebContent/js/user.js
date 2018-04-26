@@ -215,5 +215,22 @@ $(function () {
         return (hasNum>=1);
     }
 
+    $("#saveExamBtn").click(function(e) {
+        $("#errorInfoExam").text("").addClass("hidden");
+        
+
+        if($("#beginDate").val()=='' ){
+            $("#beginDate").addClass("error");
+            $("#errorInfoExam").text("请选择日期").removeClass("hidden");
+            return;
+        }
+        if($("#endDate").val()==''){
+        	$("#endDate").addClass("error");
+        	$("#errorInfoExam").text("请选择日期").removeClass("hidden");
+        	return;
+        }
+
+        document.getElementById("updateExamForm").submit();
+    });
 
 });

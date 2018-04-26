@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.minjxu.exam.entity.Exam;
 import com.minjxu.exam.entity.Lesson;
-import com.minjxu.exam.entity.Teacher;
 
-public interface LessonDao {
+public interface ExamDao {
 	public void setDataSource(DataSource ds);
 
-	public List<Lesson> listLesson();
+	public List<Exam> listExams();
 	
-	public List<Lesson> listLessonByTeacher(Teacher teacher);
+	
+	public List<Exam> listExamByLesson(List<Lesson> teacherLessons);
 }

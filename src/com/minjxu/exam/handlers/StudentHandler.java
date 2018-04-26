@@ -24,6 +24,8 @@ public class StudentHandler {
 	ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	StudentJDBCTemplate studentJDBCTemplate = (StudentJDBCTemplate) context
 			.getBean("studentJDBCTemplate");
+	LessonJDBCTemplate lessonJDBCTemplate = (LessonJDBCTemplate) context
+			.getBean("lessonJDBCTemplate");
 
 	@RequestMapping("/index")
 	public String studentIndex(HttpServletRequest request,
@@ -31,9 +33,6 @@ public class StudentHandler {
 
 		HttpSession session = request.getSession(true);
 		request.setCharacterEncoding("UTF-8");
-
-		LessonJDBCTemplate lessonJDBCTemplate = (LessonJDBCTemplate) context
-				.getBean("lessonJDBCTemplate");
 
 		Student student = (Student) session.getAttribute("user");
 

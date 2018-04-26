@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.minjxu.exam.entity.* "%>
+<%@ page import="java.util.* "%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -14,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
 <link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.css">
 
 
 <link rel="shortcut icon" href="../img/circle.jpg">
@@ -130,13 +132,34 @@ table#grid-data {
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name"><%
-									Teacher teacher = (Teacher)session.getAttribute("user");
+							<div class="company-name">
+								<%
+									List<Lesson> teacherLessons = (List<Lesson>)session.getAttribute("teacherLessons");
+									List<Exam> teacherExams = (List<Exam>)session.getAttribute("teacherExams");
+									Teacher teacher = (Teacher) session.getAttribute("user");
 									String name = teacher.getTeacherName();
 									out.write(name);
-								%></div>
+								%>
+							</div>
 						</div>
-
+						<div class="nav-right">
+							<%
+								String msg = (String) session.getAttribute("msg");
+								if (msg != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${msg }</strong>
+							</div>
+							<%
+								}
+								session.removeAttribute("msg");
+							%>
+						</div>
 					</div>
 					<div class="body-top-right body-section-add createExamBtn">
 						<div class="section-add-btn" data-toggle="dropdown"
@@ -146,21 +169,7 @@ table#grid-data {
 						</div>
 
 					</div>
-					<div class="body-toolbar clearfix">
-						<div class="body-toolbar-left pull-left toolbar-left-operation">
 
-						</div>
-						<div class="body-toolbar-right pull-right toolbar-right-operation">
-							<div class="search-section">
-								<div class="search-section-normal" id="normalSearch">
-									<i class="glyphicon glyphicon-search search-section-icon"
-										id="searchIcon"></i> <input
-										class="search-section-area placeholder" name="exam_name"
-										type="text" placeholder="请输入考试名称">
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<!-- body-section-add keep static -->
 
@@ -198,31 +207,49 @@ table#grid-data {
 						</tr>
 					</thead>
 					<tbody>
-						<tr data-row-id="112322">
-							<td class="select-cell" style=""><label class="select-label"><input
-									name="select" type="checkbox" class="select-box" value="112322"><span
-									class="select-box"><i class="icons8-checked-checkbox"></i></span></label></td>
-							<td class="text-left" style="width: 116px;">考试示例</td>
-							<td class="text-left" style="width: 178px;">2018-03-23 12:00</td>
-							<td class="text-left" style="width: 175px;">2018-03-26 12:00</td>
-							<td class="text-left" style="width: 115px;"><%out.write(name); %></td>
-							<td class="text-left" style="width: 186px;"><a href="#"
-								class="glyphicon glyphicon-edit updateExamBtn" examid="112322"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" data-original-title="编辑"></a> <a href="#"
-								class="glyphicon glyphicon-pencil linkScore"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="成绩修改"></a> <a
-								href="#" class="glyphicon glyphicon-trash linkScore"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="删除"></a></td>
-						</tr>
+					<%
+							for (Exam exam :teacherExams ) {
+								String lessonName = null;
+								for(Lesson lesson : teacherLessons){
+									if(lesson.getLessonId() == exam.getLessonId()){
+										lessonName=lesson.getLessonName();
+										break;
+									}
+								}
+								out.println("<tr>");
+								out.println("<td class='select-cell'></td>"
+										+ "<td class='text-left' style='width: 116px;'>"
+										+ lessonName + "</td>"
+										+ "<td class='text-left' style='width: 178px'>");
+								out.print(exam.getBeginTime());
+								out.println("</td>"
+										+ "<td class='text-left' style='width: 175px'>");
+								int timeCmp = 1;
+								out.print(exam.getEndTime());
+								timeCmp = exam.getBeginTime().compareTo(new Date());
+								out.println("</td>"
+										+ "<td class='text-left' style='width: 115px'>"
+										+ name + "</td>");
+								out.println("<td class='text-left' style='width: 186px;'><a href='#'"
+								+"class='glyphicon glyphicon-edit updateExamBtn'"
+								+"data-toggle='tooltip' data-placement='top' data-container='body'"
+								+"data-original-title='编辑'></a> <a href='#'"
+								+"class='glyphicon glyphicon-pencil linkScore'"
+								+"data-toggle='tooltip' data-placement='top' data-container='body'"
+								+"data-original-title='成绩修改'></a>"
+								+" <a href='#' class='glyphicon glyphicon-trash linkScore'"
+								+"data-toggle='tooltip' data-placement='top' data-container='body'"
+								+"data-original-title='删除'></a></td>");
+								out.println("</tr>");
+							}
+						%>
+						
 					</tbody>
 				</table>
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
-							<div class="infos">共1项记录</div>
+							<div class="infos">共<%out.print(teacherExams.size()); %>项记录</div>
 
 						</div>
 						<div class="col-sm-6">
@@ -281,30 +308,37 @@ table#grid-data {
 
 
 					<div class="items">
-						<form id="userInfoForm">
+						<form id="userInfoForm" action="./chgInfo" method="post">
 							<div class="item">
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
-									<span class="item-value"><%out.write(name); %></span>
+									<span class="item-value"> <%
+									 	out.write(name);
+									 %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="user" value="<%out.write(name); %>"
-									placeholder="请输入姓名"> <i
+								<input class="item-input" type="text" name="user"
+									value="<%out.write(name);%>" placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<br /> <br />
 							<div class="item item-static">
 								<div class="item-label">工&nbsp;&nbsp;号：</div>
-								<div class="item-data">17854296875@52562</div>
+								<div class="item-data">
+									<%
+										out.write(teacher.getTeacherId() + "");
+									%>
+								</div>
 							</div>
 							<br /> <br />
-							<div class="item">
+							<div class="item item-static">
 								<div class="item-label">身份证：</div>
 								<div class="item-data">
-									<span class="item-value">17854296875</span>
+									<span class="item-value"> <%
+											 	out.write(teacher.getTeacherIC());
+											 %>
+									</span>
 								</div>
-								<input class="item-input" type="text" name="tel"
-									value="17854296875" placeholder="请输入身份证"> <i
-									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 
 						</form>
@@ -326,7 +360,7 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" method="post" action="./chgPwd">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -359,8 +393,8 @@ table#grid-data {
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="modal fade" id="createExamModal" tabindex="-1"
 		role="dialog">
 		<div class="modal-dialog modal-440 modal-set-password" role="document">
@@ -431,7 +465,7 @@ table#grid-data {
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="updateExamModal" tabindex="-1"
 		role="dialog">
 		<div class="modal-dialog modal-440 modal-set-password" role="document">
@@ -444,19 +478,20 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">编辑考试</div>
-					<form id="updateExamForm">
+					<form id="updateExamForm" action="./editExam">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">考试课程：</div>
-								<input class="item-input" type="text" value="考试示例" readonly="readonly"> <i
+								<input class="item-input" type="text" id="editExamName" name="examName" value="考试示例"
+									readonly="readonly"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
 								<div class="item-label">开始时间：</div>
 								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
+									data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd hh:ii:ss">
+									<input name="beginTime" class="item-input" type="text" readonly
 										placeholder="请选择日期" style="width: 160px; background: #FFF;">
 									<span class="input-group-addon"><span
 										class="glyphicon glyphicon-remove"></span></span> <span
@@ -468,9 +503,9 @@ table#grid-data {
 							<div class="item item-input-group">
 								<div class="item-label">结束时间：</div>
 								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
+									data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd hh:ii:ss">
+									<input name="endTime" class="item-input" type="text" readonly
 										placeholder="请选择日期" style="width: 160px; background: #FFF;">
 									<span class="input-group-addon"><span
 										class="glyphicon glyphicon-remove"></span></span> <span
@@ -482,12 +517,12 @@ table#grid-data {
 						</div>
 					</form>
 
-					<div class="error-info hidden" id="errorInfoPwd"></div>
+					<div class="error-info hidden" id="errorInfoExam"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+					<button type="button" class="btn btn-primary" id="saveExamBtn">保存</button>
 				</div>
 			</div>
 		</div>
@@ -505,14 +540,16 @@ table#grid-data {
 		src="../js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script type="text/javascript">
 		$('.form_date').datetimepicker({
+			format: 'yyyy-mm-dd hh:ii:ss',
 			language : 'zh-CN',
 			weekStart : 1,
 			todayBtn : 1,
 			autoclose : 1,
 			todayHighlight : 1,
 			startView : 2,
-			minView : 2,
-			forceParse : 0
+			minView : 0,
+			forceParse : 0,
+			minuteStep :5,
 		});
 	</script>
 </body>
