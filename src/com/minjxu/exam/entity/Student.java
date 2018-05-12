@@ -5,17 +5,19 @@ public class Student {
 	private String stuName;
 	private String stuPwd;
 	private String stuIC;
+	private int classId;
 
 	public Student() {
 		super();
 	}
 
-	public Student(int stuId, String stuName, String stuPwd, String stuIC) {
-		super();
+	public Student(int stuId, String stuName, String stuPwd, String stuIC,
+			int classId) {
 		this.stuId = stuId;
 		this.stuName = stuName;
 		this.stuPwd = stuPwd;
 		this.stuIC = stuIC;
+		this.classId = classId;
 	}
 
 	public int getStuId() {
@@ -50,10 +52,18 @@ public class Student {
 		this.stuIC = stuIC;
 	}
 
+	public int getClassId() {
+		return classId;
+	}
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
+
 	@Override
 	public String toString() {
 		return "Student [stuId=" + stuId + ", stuName=" + stuName + ", stuPwd="
-				+ stuPwd + ", stuIC=" + stuIC + "]";
+				+ stuPwd + ", stuIC=" + stuIC + ", classId=" + classId + "]";
 	}
 
 }

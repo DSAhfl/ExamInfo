@@ -1,6 +1,7 @@
 package com.minjxu.exam.handlers;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.minjxu.exam.entity.Clazz;
+import com.minjxu.exam.entity.Exam;
+import com.minjxu.exam.entity.ExamDetail;
 import com.minjxu.exam.entity.Lesson;
+import com.minjxu.exam.entity.Room;
+import com.minjxu.exam.entity.Score;
 import com.minjxu.exam.entity.StuExamView;
 import com.minjxu.exam.entity.Student;
+import com.minjxu.exam.entity.Teacher;
+import com.minjxu.exam.jdbctemplate.ExamJDBCTemplate;
 import com.minjxu.exam.jdbctemplate.LessonJDBCTemplate;
 import com.minjxu.exam.jdbctemplate.StudentJDBCTemplate;
+import com.minjxu.exam.jdbctemplate.TeacherJDBCTemplate;
 
 @Controller
 @RequestMapping("/student")
@@ -26,6 +35,10 @@ public class StudentHandler {
 			.getBean("studentJDBCTemplate");
 	LessonJDBCTemplate lessonJDBCTemplate = (LessonJDBCTemplate) context
 			.getBean("lessonJDBCTemplate");
+	ExamJDBCTemplate examJDBCTemplate = (ExamJDBCTemplate) context
+			.getBean("examJDBCTemplate");
+	TeacherJDBCTemplate teacherJDBCTemplate = (TeacherJDBCTemplate) context
+			.getBean("teacherJDBCTemplate");
 
 	@RequestMapping("/index")
 	public String studentIndex(HttpServletRequest request,
@@ -37,21 +50,62 @@ public class StudentHandler {
 		Student student = (Student) session.getAttribute("user");
 
 		// 存储已选的课程
-		List<Lesson> allLessons = lessonJDBCTemplate.listLesson();
-		session.setAttribute("allLessons", allLessons);
+		List<Lesson> stuLessons = lessonJDBCTemplate.listLessonByStu(student);
+		List<Teacher> teachers = teacherJDBCTemplate.listTeachers();
+		List<Exam> exams = examJDBCTemplate.listExams();
+		List<ExamDetail> examDetails = examJDBCTemplate.listExamDetail();
+		List<Score> scores = examJDBCTemplate.listScore();
+		List<Room> rooms = examJDBCTemplate.listRoom();
+		List<Clazz> clazzs = studentJDBCTemplate.listClazz();
 
-		// 存放学生的选课信息成绩等视图
-		List<StuExamView> stuExams = studentJDBCTemplate.listStuExam(student);
+		List<StuExamView> stuExamViews = new ArrayList<StuExamView>();
 
-		for (StuExamView stuExamView : stuExams) {
-			if (stuExamView.getGrade() > 0) {
-				session.setAttribute("recentExam", stuExamView);// 显示最近一个有成绩的考试信息
-				break;
+		for (Lesson stuLesson : stuLessons) {
+			StuExamView view = new StuExamView();
+			for (Teacher teacher : teachers) {
+				// 为视图设置教师名称
+				if (teacher.getTeacherId() == stuLesson
+						.getTeacherId()) {
+					view.setLessonTeacher(teacher.getTeacherName());
+				}
 			}
-
+			view.setLessonName(stuLesson.getLessonName());
+			for (Exam exam : exams) {
+				if (exam.getLessonId() == stuLesson.getLessonId()) {
+					view.setExamDate(exam.getExamDate());
+					view.setExamTime(exam.getExamTime());
+					for (ExamDetail detail : examDetails) {
+						if (detail.getExamId() == exam.getExamId()
+								&& detail.getClassId() == student.getClassId()) {
+							for (Teacher teacher : teachers) {
+								// 为视图设置教师名称
+								if (teacher.getTeacherId() == detail.getTeacherId()) {
+									view.setExamTeacher(teacher.getTeacherName());
+								}
+							}
+							for(Room room : rooms){
+								if(room.getRoomId()==detail.getRoomId()){
+									view.setRoomName(room.getRoomName());
+								}
+							}
+						}
+					}
+				}
+			}
+			for (Score score : scores) {
+				if (score.getLessonId() == stuLesson.getLessonId()
+						&& score.getStuId() == student.getStuId()) {
+					view.setScore(score.getScore());
+				}
+			}
+			stuExamViews.add(view);
 		}
-		// System.out.println(stuExams);
-		session.setAttribute("stuExams", stuExams);
+		
+		System.out.println(stuExamViews);
+
+		session.setAttribute("stuExamViews", stuExamViews);
+		session.setAttribute("clazzs", clazzs);
+		
 
 		return "student_index";
 	}
@@ -62,49 +116,6 @@ public class StudentHandler {
 
 		HttpSession session = request.getSession(true);
 		request.setCharacterEncoding("UTF-8");
-
-		return "student_exam";
-	}
-
-	@RequestMapping("/chooseLesson")
-	public String studentChooseLesson(HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException {
-
-		HttpSession session = request.getSession(true);
-		request.setCharacterEncoding("UTF-8");
-
-		Student student = (Student) session.getAttribute("user");
-		String lessonName = request.getParameter("lesson");
-		// 检查课程是否已选
-		boolean choose = false;
-		List<StuExamView> stuExams = (List<StuExamView>) session
-				.getAttribute("stuExams");
-		for (StuExamView stuExam : stuExams) {
-			if (stuExam.getLessonName().equals(lessonName)) {
-				session.setAttribute("choose", "该课程已选！");
-				choose = true;
-				break;
-			}
-		}
-		if (!choose) {
-			List<Lesson> allLessons = (List<Lesson>) session
-					.getAttribute("allLessons");
-			// 如果没有选过，则选课
-			for (Lesson lesson : allLessons) {
-				if (lesson.getLessonName().equals(lessonName)) {
-					// 选课
-					if (studentJDBCTemplate.choose(student,
-							lesson.getLessonId()) > 0) {
-						session.setAttribute("choose", "选课成功！");
-						stuExams = studentJDBCTemplate.listStuExam(student);
-						session.setAttribute("stuExams", stuExams);
-					} else {
-						session.setAttribute("choose", "选课失败！");
-					}
-					break;
-				}
-			}
-		}
 
 		return "student_exam";
 	}
@@ -163,6 +174,7 @@ public class StudentHandler {
 		return "student_index";
 	}
 
+	/*
 	@RequestMapping("/dropout")
 	public String studentDropout(HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
@@ -174,7 +186,7 @@ public class StudentHandler {
 		int timeCmp = new Integer(request.getParameter("timeCmp")).intValue();
 
 		Student student = (Student) session.getAttribute("user");
-		List<StuExamView> stuExams = (List<StuExamView>) session
+		List<ExamView> stuExams = (List<ExamView>) session
 				.getAttribute("stuExams");
 		List<Lesson> allLessons = (List<Lesson>) session
 				.getAttribute("allLessons");
@@ -182,7 +194,7 @@ public class StudentHandler {
 		if (timeCmp <= 0) {
 			session.setAttribute("choose", "该课程已考试，无法退课！");
 		} else {
-			for (StuExamView stuExam : stuExams) {
+			for (ExamView stuExam : stuExams) {
 				if (stuExam.getLessonName().equals(lessonName)) {
 					stuExams.remove(stuExam);
 					break;
@@ -203,4 +215,5 @@ public class StudentHandler {
 
 		return "student_exam";
 	}
+	*/
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
+<%@ page import="java.util.* "%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -13,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css">
 <link rel="stylesheet" type="text/css" href="../css/base.css">
 <link rel="stylesheet" type="text/css" href="../css/ksx-base.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.css">
 
 
 <link rel="shortcut icon" href="../img/circle.jpg">
@@ -87,8 +90,6 @@ table#grid-data {
 								</div> <span class="nav-title">首页</span>
 						</a></li>
 
-
-
 						<li class="sidebar-nav-active"><a href="./exam"
 							data-toggle="tooltip" data-placement="right"
 							data-container="body" title="" data-original-title="考试管理">
@@ -96,7 +97,15 @@ table#grid-data {
 									<i class="glyphicon glyphicon-list-alt"></i>
 								</div> <span class="nav-title  font-color">考试管理</span>
 						</a></li>
-
+						
+						<li class="nav-item"><a href="./score" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="成绩管理">
+								<div class="nav-icon">
+									<i class="glyphicon glyphicon-file"></i>
+								</div> <span class="nav-title">成绩管理</span>
+						</a></li>
+						
 						<li class="nav-item"><a href="./lesson" data-toggle="tooltip"
 							data-placement="right" data-container="body" title=""
 							data-original-title="课程管理">
@@ -146,23 +155,37 @@ table#grid-data {
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name">
+								<%
+									Admin admin = (Admin)session.getAttribute("user");
+									out.write(admin.getAdminName());
+								%>
+							</div>
 						</div>
-
+						<div class="nav-right">
+							<%
+								String msg = (String) session.getAttribute("msg");
+																		if (msg != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${msg }</strong>
+							</div>
+							<%
+								}
+								session.removeAttribute("msg");
+							%>
+						</div>
 					</div>
 
 					<div class="body-toolbar clearfix">
 						<div class="body-toolbar-left pull-left toolbar-left-operation">
 						</div>
 						<div class="body-toolbar-right pull-right toolbar-right-operation">
-							<div class="search-section">
-								<div class="search-section-normal" id="normalSearch">
-									<i class="glyphicon glyphicon-search search-section-icon"
-										id="searchIcon"></i> <input
-										class="search-section-area placeholder" name="exam_name"
-										type="text" placeholder="请输入考试名称">
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -184,56 +207,109 @@ table#grid-data {
 							<th class="select-cell" style="width: 4.7%;"><label
 								class="select-label"><input name="select"
 									type="checkbox" class="select-box" value="all"
-									{{ctx.checked}}=""><span class="select-box"><i
+									><span class="select-box"><i
 										class="icons8-checked-checkbox"></i></span></label></th>
-							<th data-column-id="examName" class="text-left"
+							<th  class="text-left"
 								style="width: 15%;"><a href="javascript:void(0);"
 								class="column-header-anchor "><span class="text">考试名称</span><span
 									class="icon glyphicon "></span></a></th>
-							<th data-column-id="examStartTime" class="text-left"
-								style="width: 20%;"><a href="javascript:void(0);"
-								class="column-header-anchor sortable"><span class="text">开始时间</span><span
-									class="icon glyphicon "></span></a></th>
-							<th data-column-id="examEndTime" class="text-left"
-								style="width: 20%;"><a href="javascript:void(0);"
-								class="column-header-anchor sortable"><span class="text">结束时间</span><span
-									class="icon glyphicon "></span></a></th>
-							<th data-column-id="createUserName" class="text-left"
+							<th  class="text-left"
 								style="width: 15%;"><a href="javascript:void(0);"
-								class="column-header-anchor "><span class="text">任课教师</span><span
+								class="column-header-anchor sortable"><span class="text">考试日期</span><span
 									class="icon glyphicon "></span></a></th>
-							<th data-column-id="sender" class="text-left" style="width: 20%;"><a
+							<th  class="text-left"
+								style="width: 15%;"><a href="javascript:void(0);"
+								class="column-header-anchor sortable"><span class="text">考试时间</span><span
+									class="icon glyphicon "></span></a></th>
+							<th  class="text-left"
+								style="width: 15%;"><a href="javascript:void(0);"
+								class="column-header-anchor sortable"><span class="text">考试地点</span><span
+									class="icon glyphicon "></span></a></th>
+							<th  class="text-left"
+								style="width: 25%;"><a href="javascript:void(0);"
+								class="column-header-anchor sortable"><span class="text">考试班级</span><span
+									class="icon glyphicon "></span></a></th>
+							<th  class="text-left"
+								style="width: 15%;"><a href="javascript:void(0);"
+								class="column-header-anchor "><span class="text">监考教师</span><span
+									class="icon glyphicon "></span></a></th>
+							<th  class="text-left" style="width: 15%;"><a
 								href="javascript:void(0);" class="column-header-anchor "><span
 									class="text">操作</span><span
 									class="icon glyphicon icons8-settings"></span></a></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr data-row-id="112322">
-							<td class="select-cell" style=""><label class="select-label"><input
-									name="select" type="checkbox" class="select-box" value="112322"><span
-									class="select-box"><i class="icons8-checked-checkbox"></i></span></label></td>
-							<td class="text-left" style="width: 116px;">考试示例</td>
-							<td class="text-left" style="width: 178px;">2018-03-23 12:00</td>
-							<td class="text-left" style="width: 175px;">2018-03-26 12:00</td>
-							<td class="text-left" style="width: 115px;">点点滴滴</td>
-							<td class="text-left" style="width: 186px;"><a href=""
-								class="glyphicon glyphicon-edit updateExamBtn" examid="112322"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" data-original-title="编辑"></a> <a href=""
-								class="glyphicon glyphicon-pencil linkScore"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="成绩修改"></a> <a
-								href="" class="glyphicon glyphicon-trash linkScore"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="删除"></a></td>
-						</tr>
+						<%
+						List<StuExamView> stuExams = (List<StuExamView>) session
+						.getAttribute("stuExamViews");
+						int cnt = 0;
+					for (StuExamView stuExam : stuExams) {
+						if(stuExam.getExamDate()==null){
+							continue;
+						}
+						int timeCmp = 1;
+						timeCmp = stuExam.getExamDate().compareTo(new Date());
+						++cnt;
+						out.println("<tr><td class='select-cell' ><label class='select-label'>"
+								+ "<input name='select' type='checkbox' class='select-box' ><span class='select-box'>"
+								+ "<i class='icons8-checked-checkbox'></i></span></label></td>");
+						out.println("<td class='text-left' style='width: 116px;'>"
+								+ stuExam.getLessonName() + "</td>");
+						out.println("<td class='text-left' style='width: 178px'>");
+						if(timeCmp>0){
+							out.println("<a href='#' class='updateExamDateBtn'>");
+							out.print(stuExam.getExamDate()+"</a>");
+						}else{
+							out.print(stuExam.getExamDate());
+						}
+						out.println("</td><td class='text-left' style='width: 178px'>");
+						if(timeCmp>0){
+							out.println("<a href='#' class='updateExamTimeBtn'>");
+							out.print("第"+stuExam.getExamTime()/10
+									+ "-"+stuExam.getExamTime()%10+"节课" + "</a>");
+						}else{
+							out.print("第"+stuExam.getExamTime()/10
+									+ "-"+stuExam.getExamTime()%10+"节课");
+						}
+						out.println("</td>"
+								+ "<td class='text-left' style='width: 175px'>");
+						if(timeCmp>0){
+							out.println("<a href='#' class='updateExamRoomBtn'>");
+							out.print(stuExam.getRoomName()+"</a>");
+						}else{
+							out.print(stuExam.getRoomName());
+						}
+						out.println("</td><td class='text-left' style='width: 115px'>");
+							out.print(stuExam.getClazzName());
+						out.println("</td><td class='text-left' style='width: 115px'>");
+						if(timeCmp>0){
+							out.println("<a href='#' class='updateExamTeacherBtn'>");
+							out.print(stuExam.getExamTeacher()+"</a>");
+						}else{
+							out.print(stuExam.getExamTeacher());
+						}
+								
+								out.println("</td><td class='text-left' style='width: 80px;'>");
+								if(timeCmp>0){
+										out.println("<a href='/ExamInfo/admin/deleteExam?lessonName="
+										+ stuExam.getLessonName()
+										+ "&timeCmp="
+										+ timeCmp
+										+ "'"
+										+ "class='glyphicon glyphicon-trash dropout'"
+										+ "data-toggle='tooltip' data-placement='top' data-container='body'"
+										+ " data-original-title='删除'></a></td>");
+								}
+								out.println("</tr>");
+							}
+						%>
 					</tbody>
 				</table>
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
-							<div class="infos">共1项记录</div>
+							<div class="infos">共<%out.print(cnt); %>项记录</div>
 
 						</div>
 						<div class="col-sm-6">
@@ -272,7 +348,7 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" action="./chgPwd">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -320,30 +396,35 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">创建考试</div>
-					<form id="createExamForm">
+					<form id="createExamForm" action="./createExam" method="post">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">考试课程：</div>
 								<div class="dropdown">
 									<button class="btn btn-default dropdown-toggle" type="button"
-										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+										id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="true">
-										请选择课程 <span class="caret"></span>
+										<a id="dropdownText1">请选择课程</a> <span class="caret"></span>
+										<input id="createExamName" name="createExamName" value="" style="display:none;">
 									</button>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-										<li><a href="#">C++</a></li>
-										<li><a href="#">Java</a></li>
-										<li><a href="#">MySQL</a></li>
+									<ul class="dropdown-menu" id="dropdown-menu1" aria-labelledby="dropdownMenu1">
+										<%
+											List<Lesson> lessons = (List<Lesson>)session.getAttribute("lessons");
+											for (Lesson lesson : lessons) {
+													out.print("<li><a href='#'>" + lesson.getLessonName()
+														+ "</a></li>");
+											}
+										%>
 									</ul>
 								</div>
 							</div>
 							<div class="item item-input-group">
-								<div class="item-label">开始时间：</div>
+								<div class="item-label">考试日期：</div>
 								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd hh:ii:ss">
+									<input name="createExamDate" id="createExamDate" class="item-input" type="text" readonly
+										placeholder="请选择考试日期" style="width: 160px; background: #FFF;">
 									<span class="input-group-addon"><span
 										class="glyphicon glyphicon-remove"></span></span> <span
 										class="input-group-addon"><span
@@ -352,32 +433,36 @@ table#grid-data {
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
-								<div class="item-label">结束时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
+								<div class="item-label">考试时间：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<a id="dropdownText2">请选择时间</a> <span class="caret"></span>
+										<input id="createExamTime" name="createExamTime" value="" style="display:none;">
+									</button>
+									<ul class="dropdown-menu" id="dropdown-menu2" aria-labelledby="dropdownMenu1">
+										<li><a href='#'>第1-2节课</a></li>
+										<li><a href='#'>第3-4节课</a></li>
+										<li><a href='#'>第5-6节课</a></li>
+										<li><a href='#'>第7-8节课</a></li>
+									</ul>
 								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 						</div>
 					</form>
 
-					<div class="error-info hidden" id="errorInfoPwd"></div>
+					<div class="error-info hidden" id="errorInfoCreateExam"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+					<button type="button" class="btn btn-primary" id="createExamBtn">保存</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<div class="modal fade" id="updateExamModal" tabindex="-1"
 		role="dialog">
@@ -391,20 +476,21 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">编辑考试</div>
-					<form id="updateExamForm">
+					<form id="updateExamForm" action="./editExam">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">考试课程：</div>
-								<input class="item-input" type="text" value="考试示例" readonly="readonly"> <i
+								<input class="item-input" name="examName" id="editExamName" 
+								type="text" value="考试示例" readonly="readonly"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
-								<div class="item-label">开始时间：</div>
+								<div class="item-label">考试日期：</div>
 								<div class="input-group date form_date " data-date=""
 									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
 									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									<input name="editExamDate" id="editExamDate" class="item-input" type="text" 
+										placeholder="请选择考试日期" style="width: 160px; background: #FFF;">
 									<span class="input-group-addon"><span
 										class="glyphicon glyphicon-remove"></span></span> <span
 										class="input-group-addon"><span
@@ -413,28 +499,72 @@ table#grid-data {
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
-								<div class="item-label">结束时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
+								<div class="item-label">考试时间：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<a id="dropdownText3">请选择时间</a> <span class="caret"></span>
+										<input id="editExamTime" name="editExamTime" value="" style="display:none;">
+									</button>
+									<ul class="dropdown-menu" id="dropdown-menu3" aria-labelledby="dropdownMenu1">
+										<li><a href='#'>第1-2节课</a></li>
+										<li><a href='#'>第3-4节课</a></li>
+										<li><a href='#'>第5-6节课</a></li>
+										<li><a href='#'>第7-8节课</a></li>
+									</ul>
 								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
+							<div class="item item-input-group">
+								<div class="item-label">考试地点：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<a id="dropdownText4">请选择地点</a> <span class="caret"></span>
+										<input id="editExamRoom" name="editExamRoom" value="" style="display:none;">
+									</button>
+									<ul class="dropdown-menu" id="dropdown-menu4" aria-labelledby="dropdownMenu1">
+										<%
+											List<Room> rooms = (List<Room>)session.getAttribute("rooms");
+											for (Room room : rooms) {
+												out.print("<li><a href='#'>" + room.getRoomName()
+													+ "</a></li>");
+										}
+										%>
+									</ul>
+								</div>
+							</div>
+							<div class="item item-input-group">
+								<div class="item-label">监考教师：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<a id="dropdownText5">请选择教师</a> <span class="caret"></span>
+										<input id="editExamTeacher" name="editExamTeacher" value="" style="display:none;">
+									</button>
+									<ul class="dropdown-menu" id="dropdown-menu5" aria-labelledby="dropdownMenu1">
+										<%
+										List<Teacher> teachers = (List<Teacher>)session.getAttribute("teachers");
+										for (Teacher teacher : teachers) {
+												out.print("<li><a href='#'>" + teacher.getTeacherName()
+													+ "</a></li>");
+										}
+										%>
+									</ul>
+								</div>
+							</div>
+							<input id="editExamClass" name="editExamClass" value="" style="display:none;">
 						</div>
 					</form>
 
-					<div class="error-info hidden" id="errorInfoPwd"></div>
+					<div class="error-info hidden" id="errorInfoUpdateExam"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+					<button type="button" class="btn btn-primary" id="updateExam">保存</button>
 				</div>
 			</div>
 		</div>
@@ -451,16 +581,18 @@ table#grid-data {
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script type="text/javascript">
-		$('.form_date').datetimepicker({
-			language : 'zh-CN',
-			weekStart : 1,
-			todayBtn : 1,
-			autoclose : 1,
-			todayHighlight : 1,
-			startView : 2,
-			minView : 2,
-			forceParse : 0
-		});
+	$('.form_date').datetimepicker({
+		format: 'yyyy-mm-dd',
+		language : 'zh-CN',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 2,
+		forceParse : 0,
+		minuteStep :5,
+	});
 	</script>
 </body>
 </html>

@@ -1,21 +1,15 @@
 package com.minjxu.exam.entity;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Exam {
 	private int examId;
 	private int lessonId;
-	private Timestamp beginTime;
-	private Timestamp endTime;
+	private Date examDate;
+	private int examTime;
 	public Exam() {
 		super();
-	}
-	public Exam(int examId, int lessonId, Timestamp beginTime, Timestamp endTime) {
-		super();
-		this.examId = examId;
-		this.lessonId = lessonId;
-		this.beginTime = beginTime;
-		this.endTime = endTime;
 	}
 	public int getExamId() {
 		return examId;
@@ -29,22 +23,31 @@ public class Exam {
 	public void setLessonId(int lessonId) {
 		this.lessonId = lessonId;
 	}
-	public Timestamp getBeginTime() {
-		return beginTime;
+	public Date getExamDate() {
+		return examDate;
 	}
-	public void setBeginTime(Timestamp beginTime) {
-		this.beginTime = beginTime;
+	public void setExamDate(Date examDate) {
+		this.examDate = examDate;
 	}
-	public Timestamp getEndTime() {
-		return endTime;
+	public int getExamTime() {
+		return examTime;
 	}
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
+	public void setExamTime(int examTime) {
+		this.examTime = examTime;
+	}
+	public Exam(int examId, int lessonId, Date examDate, int examTime) {
+		super();
+		this.examId = examId;
+		this.lessonId = lessonId;
+		this.examDate = examDate;
+		this.examTime = examTime;
 	}
 	@Override
 	public String toString() {
 		return "Exam [examId=" + examId + ", lessonId=" + lessonId
-				+ ", beginTime=" + beginTime + ", endTime=" + endTime + "]";
+				+ ", examDate=" + examDate + ", examTime=" + examTime + "]";
 	}
+	
+	
 	
 }

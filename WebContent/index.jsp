@@ -66,20 +66,7 @@
 						<a href="" class="forget-password">忘记密码</a>
 					</div>
 					<input type="submit" class="btn btn-login btn-primary" value="登录">
-					<a
-						href="https://open.weixin.qq.com/connect/qrconnect?appid=wx3dbf3a23e8456f1a&amp;redirect_uri=https://www.kaoshixing.com/account/wechat_login_independent&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE#wechat_redirect"
-						class="btn btn-wechat btn-default"><em
-						class="glyphicon glyphicon-qrcode"></em>微信快速登录</a>
 				</form>
-				<div id="loginWechet" class="reg-form loginWechet weChatBind"
-					style="display: none;">
-					<div class="reg-tips finish-tips">登陆成功！</div>
-					<em class="icon icon-ksx-succeed"></em>
-					<div class="finish-text">绑定微信，即可扫码一键登录</div>
-					<a href="javascript:void(0);"
-						class="btn btn-goto-bind all-right btn-primary">立即绑定微信</a> <a
-						href="javascript:void(0);" class="btn btn-goto-login">先不绑定，直接登录</a>
-				</div>
 			</div>
 		</div>
 	</div>

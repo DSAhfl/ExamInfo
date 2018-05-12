@@ -24,4 +24,14 @@ public class AdminJDBCTemplate implements AdminDao {
 		List<Admin> admins = jdbcTemplateObject.query(SQL, new AdminMapper());
 		return admins;
 	}
+
+	@Override
+	public int update(Admin admin) {
+		int ret = 0;
+		
+		String SQL = "UPDATE admin SET adminName = ?, adminPwd = ? WHERE adminId = ?";
+		ret = jdbcTemplateObject.update(SQL, admin.getAdminName(), admin.getAdminPwd(), admin.getAdminId());
+		
+		return ret;
+	}
 }

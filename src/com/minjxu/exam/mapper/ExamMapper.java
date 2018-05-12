@@ -11,8 +11,8 @@ public class ExamMapper implements RowMapper<Exam> {
 
 	@Override
 	public Exam mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Exam exam = new Exam(rs.getInt(1), rs.getInt(2), rs.getTimestamp(3),
-				rs.getTimestamp(4));
+		Exam exam = new Exam(rs.getInt(1), rs.getInt(2), rs.getDate(3),
+				rs.getInt(4));
 		return exam;
 	}
 

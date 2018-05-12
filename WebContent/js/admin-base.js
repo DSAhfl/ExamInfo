@@ -95,35 +95,152 @@ $(function() {
 	$("#chooseLessonBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-
+		$("#dropdownText").text("请选择课程");
+		$("#errorInfo").text("").addClass("hidden");
 		$("#chooseLessonModal").modal();
 	});
 
 	$(".createExamBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-
+		$("#dropdownText").text("请选择课程");
+		$("#errorInfoCreateExam").text("").addClass("hidden");
 		$("#createExamModal").modal();
 	});
 
-	$(".updateExamBtn").click(function(e) {
+	$(".updateExamDateBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		$("#errorInfoExam").text("").addClass("hidden");
+		$("#errorInfoUpdateExam").text("").addClass("hidden");
+		$("#dropdownMenu1").attr('disabled',false);
+		$("#dropdownMenu2").attr('disabled',false);
+		$("#dropdownMenu3").attr('disabled',false);
+		$(".input-group-addon").show();
+		
+		$("#editExamTeacher").parent(".item-input-group").removeClass("error");
 		$("#editExamName").val($(this).parent().parent().children().eq(1).text());
+		$("#editExamDate").val($(this).parent().parent().children().eq(2).text());
+		$("#editExamTime").val($(this).parent().parent().children().eq(3).text());
+		$("#dropdownText3").text($(this).parent().parent().children().eq(3).text());
+		$("#editExamRoom").val($(this).parent().parent().children().eq(4).text());
+		$("#dropdownText4").text($(this).parent().parent().children().eq(4).text());
+		$("#editExamClass").val($(this).parent().parent().children().eq(5).text());
+		$("#dropdownText5").text($(this).parent().parent().children().eq(6).text());
+		$("#editExamTeacher").val($(this).parent().parent().children().eq(6).text());
+		
+		$("#dropdownMenu1").attr('disabled',true);
+		$("#dropdownMenu2").attr('disabled',true);
+		$("#dropdownMenu3").attr('disabled',true);
+		
 		$("#updateExamModal").modal();
+		
+	});
+	
+	$(".updateExamTimeBtn").click(function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#errorInfoUpdateExam").text("").addClass("hidden");
+		$("#dropdownMenu1").attr('disabled',false);
+		$("#dropdownMenu2").attr('disabled',false);
+		$("#dropdownMenu3").attr('disabled',false);
+		$(".input-group-addon").show();
+		
+		$("#editExamTeacher").parent(".item-input-group").removeClass("error");
+		$("#editExamName").val($(this).parent().parent().children().eq(1).text());
+		$("#editExamDate").val($(this).parent().parent().children().eq(2).text());
+		$("#editExamTime").val($(this).parent().parent().children().eq(3).text());
+		$("#dropdownText3").text($(this).parent().parent().children().eq(3).text());
+		$("#editExamRoom").val($(this).parent().parent().children().eq(4).text());
+		$("#dropdownText4").text($(this).parent().parent().children().eq(4).text());
+		$("#editExamClass").val($(this).parent().parent().children().eq(5).text());
+		$("#dropdownText5").text($(this).parent().parent().children().eq(6).text());
+		$("#editExamTeacher").val($(this).parent().parent().children().eq(6).text());
+		
+		$("#dropdownMenu2").attr('disabled',true);
+		$("#dropdownMenu3").attr('disabled',true);
+		$(".input-group-addon").hide();
+		
+		
+		$("#updateExamModal").modal();
+		
+	});
+	
+	
+	$(".updateExamRoomBtn").click(function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#errorInfoUpdateExam").text("").addClass("hidden");
+		$("#dropdownMenu1").attr('disabled',false);
+		$("#dropdownMenu2").attr('disabled',false);
+		$("#dropdownMenu3").attr('disabled',false);
+		$(".input-group-addon").show();
+		
+		$("#editExamTeacher").parent(".item-input-group").removeClass("error");
+		$("#editExamName").val($(this).parent().parent().children().eq(1).text());
+		$("#editExamDate").val($(this).parent().parent().children().eq(2).text());
+		$("#editExamTime").val($(this).parent().parent().children().eq(3).text());
+		$("#dropdownText3").text($(this).parent().parent().children().eq(3).text());
+		$("#editExamRoom").val($(this).parent().parent().children().eq(4).text());
+		$("#dropdownText4").text($(this).parent().parent().children().eq(4).text());
+		$("#editExamClass").val($(this).parent().parent().children().eq(5).text());
+		$("#dropdownText5").text($(this).parent().parent().children().eq(6).text());
+		$("#editExamTeacher").val($(this).parent().parent().children().eq(6).text());
+		
+		$("#dropdownMenu1").attr('disabled',true);
+		$("#dropdownMenu3").attr('disabled',true);
+		$(".input-group-addon").hide();
+		
+		$("#updateExamModal").modal();
+		
+	});
+	
+	$(".updateExamTeacherBtn").click(function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		$("#errorInfoUpdateExam").text("").addClass("hidden");
+		$("#dropdownMenu1").attr('disabled',false);
+		$("#dropdownMenu2").attr('disabled',false);
+		$("#dropdownMenu3").attr('disabled',false);
+		$(".input-group-addon").show();
+		
+		$("#editExamTeacher").parent(".item-input-group").removeClass("error");
+		$("#editExamName").val($(this).parent().parent().children().eq(1).text());
+		$("#editExamDate").val($(this).parent().parent().children().eq(2).text());
+		$("#editExamTime").val($(this).parent().parent().children().eq(3).text());
+		$("#dropdownText3").text($(this).parent().parent().children().eq(3).text());
+		$("#editExamRoom").val($(this).parent().parent().children().eq(4).text());
+		$("#dropdownText4").text($(this).parent().parent().children().eq(4).text());
+		$("#editExamClass").val($(this).parent().parent().children().eq(5).text());
+		$("#dropdownText5").text($(this).parent().parent().children().eq(6).text());
+		$("#editExamTeacher").val($(this).parent().parent().children().eq(6).text());
+		
+		$("#dropdownMenu1").attr('disabled',true);
+		$("#dropdownMenu2").attr('disabled',true);
+		$(".input-group-addon").hide();
+		
+		$("#updateExamModal").modal();
+		
 	});
 
-	$(".scoreExamBtn").click(function(e) {
+	$(".setScoreBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		
-		$("#scoreExamModal").modal();
+		$("#errorInfoScore").text("").addClass("hidden");
+		$("#scoreExamName").val($(this).parent().parent().children().eq(1).text());
+		$("#scoreStuId").val($(this).parent().parent().children().eq(2).text());
+		$("#scoreStuName").val($(this).parent().parent().children().eq(3).text());
+		$("#score").val($(this).parent().parent().children().eq(5).text());
+		$("#setScoreModal").modal();
 	});
+	
 	
 	$(".updateLessonBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
+		
+		$("#errorUpdateLesson").text("").addClass("hidden");
+		$("#updateLessonName").val($(this).parent().parent().children().eq(1).text());
+		$("#updateTeacherName").val($(this).parent().parent().children().eq(2).text());
 		
 		$("#updateLessonModal").modal();
 	});
@@ -132,11 +249,19 @@ $(function() {
 		e.stopPropagation();
 		e.preventDefault();
 		
+		$("#errorCreateLesson").text("").addClass("hidden");
+		$("#createLessonName").text("");
+		$("#createLessonTeacher").text("");	
+		
 		$("#createLessonModal").modal();
 	});
 	$(".addTeacherBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
+		
+		$("#errorAddTeacher").text("").addClass("hidden");
+		$("#addTeacherName").text("");
+		$("#addTeacherIC").text("");	
 		
 		$("#addTeacherModal").modal();
 	});
@@ -145,12 +270,22 @@ $(function() {
 		e.stopPropagation();
 		e.preventDefault();
 		
+		$("#errorUpdateTeacher").text("").addClass("hidden");
+		$("#updateTeacherId").val($(this).parent().parent().children().eq(1).text());
+		$("#updateTeacherName").val($(this).parent().parent().children().eq(2).text());
+		$("#updateTeacherIC").val($(this).parent().parent().children().eq(3).text());
+		
 		$("#updateTeacherModal").modal();
 	});
 	
 	$(".addStudentBtn").click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
+		
+		$("#errorAddStudent").text("").addClass("hidden");
+		$("#addStuName").text("");
+		$("#addStuClass").text("");
+		$("#addStuIC").text("");
 		
 		$("#addStudentModal").modal();
 	});
@@ -159,8 +294,15 @@ $(function() {
 		e.stopPropagation();
 		e.preventDefault();
 		
+		$("#errorUpdateStudent").text("").addClass("hidden");
+		$("#updateStudentId").val($(this).parent().parent().children().eq(1).text());
+		$("#updateStudentName").val($(this).parent().parent().children().eq(2).text());
+		$("#updateStudentClass").val($(this).parent().parent().children().eq(3).text());
+		$("#updateStudentIC").val($(this).parent().parent().children().eq(4).text());
+		
 		$("#updateStudentModal").modal();
 	});
+	
 	
 	
 
@@ -187,22 +329,6 @@ function getCookie(c_name) {
 	return "";
 }
 
-// 退出登陆(清空cookie,session&&sessionId)
-$("#logoutBtn").click(function(e) {
-	e.stopPropagation();
-	e.preventDefault();
 
-	$.ajax({
-		type : "POST",
-		cache : false,
-		dataType : "json",
-		url : "/account/logout",
-		success : function(msg) {
-			var jump_url = msg.bizContent.url;
-			window.location.href = jump_url;
-		}
-	});
-
-})
 
 

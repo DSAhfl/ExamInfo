@@ -12,4 +12,10 @@ public interface TeacherDao {
 	public List<Teacher> listTeachers();
 	
 	public int update(Teacher teacher);
+	
+	public int delete(int teacherId);
+	
+	public int add(String teacherName, String teacherIC);
+	
+	public int update(int teacherId, String teacherName, String teacherIC);
 }

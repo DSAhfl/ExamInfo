@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+
 public class adminJDBCTemplate implements AdminDAO {
 
 	private DataSource dataSource;
@@ -22,6 +23,11 @@ public class adminJDBCTemplate implements AdminDAO {
 		String SQL = "select * from admin";
 		List<Admin> admins = jdbcTemplateObject.query(SQL, new AdminMapper());
 		return admins;
+	}
+
+	public int update(Admin admin) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

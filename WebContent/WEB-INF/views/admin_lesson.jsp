@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.minjxu.exam.entity.* "%>
+<%@ page import="java.util.* "%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -96,6 +98,14 @@ table#grid-data {
 									<i class="glyphicon glyphicon-list-alt"></i>
 								</div> <span class="nav-title ">考试管理</span>
 						</a></li>
+						
+												<li class="nav-item"><a href="./score" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="成绩管理">
+								<div class="nav-icon">
+									<i class="glyphicon glyphicon-file"></i>
+								</div> <span class="nav-title">成绩管理</span>
+						</a></li>
 
 						<li class="sidebar-nav-active"><a href="./lesson"
 							data-toggle="tooltip" data-placement="right"
@@ -147,34 +157,47 @@ table#grid-data {
 					<!-- toolbar delayed on given pages, navpills, dropdown and search-section are changable -->
 					<div class="body-nav">
 						<div class="nav-left nav-title">
-							<div class="company-name">点点滴滴</div>
+							<div class="company-name">
+								<%
+									Admin admin = (Admin)session.getAttribute("user");
+									out.write(admin.getAdminName());
+								%>
+							</div>
 						</div>
-
+						<div class="nav-right">
+							<%
+								String msg = (String) session.getAttribute("msg");
+																		if (msg != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${msg }</strong>
+							</div>
+							<%
+								}
+								session.removeAttribute("msg");
+							%>
+						</div>
 					</div>
 
 					<div class="body-toolbar clearfix">
 						<div class="body-toolbar-left pull-left toolbar-left-operation">
 						</div>
-						<div class="body-toolbar-right pull-right toolbar-right-operation">
-							<div class="search-section">
-								<div class="search-section-normal" id="normalSearch">
-									<i class="glyphicon glyphicon-search search-section-icon"
-										id="searchIcon"></i> <input
-										class="search-section-area placeholder" name="exam_name"
-										type="text" placeholder="请输入课程名称">
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
-				<!-- body-section-add keep static -->
+				<!-- 
 				<div class="body-top-right body-section-add createLessonBtn">
 					<div class="section-add-btn">
 						<i class="glyphicon glyphicon-plus section-add-icon"></i> <span
-							class="section-add-title">创建课程</span>
+							class="section-add-title">添加课程</span>
 					</div>
 
 				</div>
+				 -->
 			</div>
 			<div class="body-bottom body-content">
 				<table id="grid-data" class="table bootgrid-table JColResizer"
@@ -184,7 +207,7 @@ table#grid-data {
 							<th class="select-cell" style="width: 4.7%;"><label
 								class="select-label"><input name="select"
 									type="checkbox" class="select-box" value="all"
-									{{ctx.checked}}=""><span class="select-box"><i
+									><span class="select-box"><i
 										class="icons8-checked-checkbox"></i></span></label></th>
 							<th data-column-id="examName" class="text-left"
 								style="width: 30%;"><a href="javascript:void(0);"
@@ -203,26 +226,36 @@ table#grid-data {
 						</tr>
 					</thead>
 					<tbody>
-						<tr data-row-id="112322">
-							<td class="select-cell" style=""><label class="select-label"><input
-									name="select" type="checkbox" class="select-box" value="112322"><span
-									class="select-box"><i class="icons8-checked-checkbox"></i></span></label></td>
-							<td class="text-left" style="width: 116px;">考试示例</td>
-							<td class="text-left" style="width: 115px;">点点滴滴</td>
-							<td class="text-left" style="width: 186px;"><a href="#"
-								class="glyphicon glyphicon-edit updateLessonBtn" examid="112322"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" data-original-title="编辑"></a> <a href="#"
-								class="glyphicon glyphicon-trash linkScore"
-								data-toggle="tooltip" data-placement="top" data-container="body"
-								title="" examid="112322" data-original-title="删除"></a></td>
-						</tr>
+						<%
+							List<Lesson> lessons = (List<Lesson>)session.getAttribute("lessons");
+							List<Teacher> teachers = (List<Teacher>)session.getAttribute("teachers");
+							int cnt = 0;
+							for(Teacher teacher : teachers){
+								for (Lesson lesson : lessons) {
+									if(teacher.getTeacherId()==lesson.getTeacherId()){
+										++cnt;
+										out.println("<tr><td class='select-cell' ><label class='select-label'>"
+								        		+ "<input name='select' type='checkbox' class='select-box' ><span class='select-box'>"
+								        		+ "<i class='icons8-checked-checkbox'></i></span></label></td>");
+										out.println("<td class='text-left' style='width: 116px;'>"
+												+ lesson.getLessonName() + "</td>");
+										out.println("<td class='text-left' style='width: 115px'>"
+												+ teacher.getTeacherName() + "</td>"
+												+ "<td class='text-left' style='width: 80px;'><a href='#'"
+												+"class='glyphicon glyphicon-edit updateLessonBtn'"
+												+"data-toggle='tooltip' data-placement='top' data-container='body'"
+												+"data-original-title='编辑'></a></td>");
+										out.println("</tr>");
+									}
+								}
+							}
+						%>
 					</tbody>
 				</table>
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
-							<div class="infos">共1项记录</div>
+							<div class="infos">共<%out.print(cnt); %>项记录</div>
 
 						</div>
 						<div class="col-sm-6">
@@ -261,7 +294,7 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" action="./chgPwd" method="post">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -307,29 +340,29 @@ table#grid-data {
 				</div>
 				<div class="modal-body">
 					<div class="title">编辑课程</div>
-					<form id="updateLessonForm">
+					<form id="updateLessonForm" action="./updateLesson">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">课程名称：</div>
-								<input class="item-input" type="text" value="考试示例"
-									placeholder="请输入课程名称"> <i
+								<input class="item-input" name="lessonName" id="updateLessonName" type="text" value="考试示例"
+									placeholder="请输入课程名称" readonly="readonly"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
 								<div class="item-label">任课教师：</div>
-								<input class="item-input" type="text" value="点点滴滴"
+								<input class="item-input" name="teacherName" id="updateTeacherName" type="text" value="点点滴滴"
 									placeholder="请输入任课教师姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
 						</div>
 					</form>
 
-					<div class="error-info hidden" id="errorInfoLesson"></div>
+					<div class="error-info hidden" id="errorUpdateLesson"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelLessonBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="saveLessonBtn">保存</button>
+					<button type="button" class="btn btn-primary" id="updateLesson">保存</button>
 				</div>
 			</div>
 		</div>
@@ -345,28 +378,28 @@ table#grid-data {
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="title">创建课程</div>
-					<form id="updateLessonForm">
+					<div class="title">添加课程</div>
+					<form id="createLessonForm" action="./createLesson">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">课程名称：</div>
-								<input class="item-input" type="text" placeholder="请输入课程名称">
+								<input class="item-input" name="lessonName" id="createLessonName" type="text" placeholder="请输入课程名称">
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
 								<div class="item-label">任课教师：</div>
-								<input class="item-input" type="text" placeholder="请输入任课教师姓名">
+								<input class="item-input" name="teacherName" id="createLessonTeacher" type="text" placeholder="请输入任课教师姓名">
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 						</div>
 					</form>
 
-					<div class="error-info hidden" id="errorInfoLesson"></div>
+					<div class="error-info hidden" id="errorCreateLesson"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelLessonBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="saveLessonBtn">保存</button>
+					<button type="button" class="btn btn-primary" id="createLesson">保存</button>
 				</div>
 			</div>
 		</div>

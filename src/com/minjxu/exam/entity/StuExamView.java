@@ -1,28 +1,40 @@
 package com.minjxu.exam.entity;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class StuExamView {
-	
+	private String lessonName;
+	private String lessonTeacher;
+	private Date examDate;
+	private int examTime;
+	private String roomName;
+	private String examTeacher;
+	private int score;
+	private String clazzName;
+
 	public StuExamView() {
 		super();
-	}
-	
-	public StuExamView(String lessonName, Timestamp beginTime, Timestamp endTime,
-			String teacherName, int grade) {
-		super();
-		this.lessonName = lessonName;
-		this.beginTime = beginTime;
-		this.endTime = endTime;
-		this.teacherName = teacherName;
-		this.grade = grade;
+		// TODO Auto-generated constructor stub
 	}
 
-	String lessonName;
-	Timestamp beginTime;
-	Timestamp endTime;
-	String teacherName;
-	int grade;
+	
+
+	public StuExamView(String lessonName, String lessonTeacher, Date examDate,
+			int examTime, String roomName, String examTeacher, int score,
+			String clazzName) {
+		super();
+		this.lessonName = lessonName;
+		this.lessonTeacher = lessonTeacher;
+		this.examDate = examDate;
+		this.examTime = examTime;
+		this.roomName = roomName;
+		this.examTeacher = examTeacher;
+		this.score = score;
+		this.clazzName = clazzName;
+	}
+
+
+
 	public String getLessonName() {
 		return lessonName;
 	}
@@ -31,43 +43,77 @@ public class StuExamView {
 		this.lessonName = lessonName;
 	}
 
-	public Timestamp getBeginTime() {
-		return beginTime;
+	public String getLessonTeacher() {
+		return lessonTeacher;
 	}
 
-	public void setBeginTime(Timestamp beginTime) {
-		this.beginTime = beginTime;
+	public void setLessonTeacher(String lessonTeacher) {
+		this.lessonTeacher = lessonTeacher;
 	}
 
-	public Timestamp getEndTime() {
-		return endTime;
+	public Date getExamDate() {
+		return examDate;
 	}
 
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
+	public void setExamDate(Date examDate) {
+		this.examDate = examDate;
 	}
 
-	public String getTeacherName() {
-		return teacherName;
+	public int getExamTime() {
+		return examTime;
 	}
 
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
+	public void setExamTime(int examTime) {
+		this.examTime = examTime;
 	}
 
-	public int getGrade() {
-		return grade;
+	public String getRoomName() {
+		return roomName;
 	}
 
-	public void setGrade(int grade) {
-		this.grade = grade;
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
+
+	public String getExamTeacher() {
+		return examTeacher;
+	}
+
+	public void setExamTeacher(String examTeacher) {
+		this.examTeacher = examTeacher;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+
+
+	public String getClazzName() {
+		return clazzName;
+	}
+
+
+
+	public void setClazzName(String clazzName) {
+		this.clazzName = clazzName;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "StuExamView [lessonName=" + lessonName + ", beginTime="
-				+ beginTime + ", endTime=" + endTime + ", teacherName="
-				+ teacherName + ", grade=" + grade + "]";
+		return "StuExamView [lessonName=" + lessonName + ", lessonTeacher="
+				+ lessonTeacher + ", examDate=" + examDate + ", examTime="
+				+ examTime + ", roomName=" + roomName + ", examTeacher="
+				+ examTeacher + ", score=" + score + ", clazzName=" + clazzName
+				+ "]";
 	}
-	
+
+
+
 }

@@ -11,4 +11,7 @@ public interface AdminDao {
 	public void setDataSource(DataSource ds);
 
 	public List<Admin> listAdmins();
+	
+	public int update(Admin admin);
+	
 }

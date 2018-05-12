@@ -52,8 +52,6 @@
 								</div> <span class="nav-title font-color">首页</span>
 						</a></li>
 
-
-
 						<li class="nav-item"><a href="./exam" data-toggle="tooltip"
 							data-placement="right" data-container="body" title=""
 							data-original-title="考试管理">
@@ -62,7 +60,13 @@
 								</div> <span class="nav-title">考试管理</span>
 						</a></li>
 
-
+						<li class="nav-item"><a href="./score" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="考试管理">
+								<div class="nav-icon">
+									<i class="glyphicon glyphicon-file"></i>
+								</div> <span class="nav-title">成绩查看</span>
+						</a></li>
 
 					</ul>
 				</div>
@@ -149,23 +153,45 @@
 							<div class="page_item_main">
 								<h1 class="page_item_title">
 									<span>
-									<% String lessonName = null;
-										for(Lesson lesson : teacherLessons){
-											if(lesson.getLessonId()==teacherExams.get(0).getLessonId()){
-												lessonName=lesson.getLessonName();
-											}
-										}
-										out.print(lessonName);
+									<%
+									List<StuExamView> stuExams = (List<StuExamView>) session
+									.getAttribute("stuExamViews");
+									StuExamView stuExam = stuExams.get(0);
+									out.print(stuExam.getLessonName());
 									%></span>
 								</h1>
 								<p class="page_item_time">
-								<%out.print(teacherExams.get(0).getBeginTime()); %> 至
-								 <%out.print(teacherExams.get(0).getEndTime()); %></p>
+								<%if(stuExam.getExamDate()!=null){
+									out.print(stuExam.getExamDate()+"  第"+stuExam.getExamTime()/10
+											+ "-"+stuExam.getExamTime()%10+"节课");
+								}else{
+									out.print("未安排");
+								} %></p>
 								<ul class="page_item_information">
-									<li>总分：100</li>
 									<li>任课教师：<%
-										out.write(name);
-									%></li>
+											out.print(stuExam.getLessonTeacher());
+										%></li>
+									<li>考试地点：<%
+									if(stuExam.getRoomName()!=null){
+										out.print(stuExam.getRoomName());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
+									<li>考试班级：<%
+									if(stuExam.getClazzName()!=null){
+										out.print(stuExam.getClazzName());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
+									<li>监考老师：<%
+									if(stuExam.getExamTeacher()!=null){
+										out.print(stuExam.getExamTeacher());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
 								</ul>
 							</div>
 						</div>
@@ -318,30 +344,34 @@
 				</div>
 				<div class="modal-body">
 					<div class="title">创建考试</div>
-					<form id="createExamForm">
+					<form id="createExamForm" action="./createExam" method="post">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">考试课程：</div>
 								<div class="dropdown">
 									<button class="btn btn-default dropdown-toggle" type="button"
-										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+										id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
 										aria-expanded="true">
-										请选择课程 <span class="caret"></span>
+										<a id="dropdownText1">请选择课程</a> <span class="caret"></span>
+										<input id="createExamName" name="createExamName" value="" style="display:none;">
 									</button>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-										<li><a href="#">C++</a></li>
-										<li><a href="#">Java</a></li>
-										<li><a href="#">MySQL</a></li>
+									<ul class="dropdown-menu" id="dropdown-menu1" aria-labelledby="dropdownMenu1">
+										<%
+											for (Lesson lesson : teacherLessons) {
+													out.print("<li><a href='#'>" + lesson.getLessonName()
+														+ "</a></li>");
+											}
+										%>
 									</ul>
 								</div>
 							</div>
 							<div class="item item-input-group">
 								<div class="item-label">开始时间：</div>
 								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
+									data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="dtp_input2"
+									data-link-format="yyyy-mm-dd hh:ii:ss">
+									<input name="createExamDate" id="createExamDate" class="item-input" type="text" readonly
+										placeholder="请选择考试日期" style="width: 160px; background: #FFF;">
 									<span class="input-group-addon"><span
 										class="glyphicon glyphicon-remove"></span></span> <span
 										class="input-group-addon"><span
@@ -350,95 +380,36 @@
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">
-								<div class="item-label">结束时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
+								<div class="item-label">考试时间：</div>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<a id="dropdownText2">请选择时间</a> <span class="caret"></span>
+										<input id="createExamTime" name="createExamTime" value="" style="display:none;">
+									</button>
+									<ul class="dropdown-menu" id="dropdown-menu2" aria-labelledby="dropdownMenu1">
+										<li><a href='#'>第1-2节课</a></li>
+										<li><a href='#'>第3-4节课</a></li>
+										<li><a href='#'>第5-6节课</a></li>
+										<li><a href='#'>第7-8节课</a></li>
+									</ul>
 								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 						</div>
 					</form>
 
-					<div class="error-info hidden" id="errorInfoPwd"></div>
+					<div class="error-info hidden" id="errorInfoCreateExam"></div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
 						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
+					<button type="button" class="btn btn-primary" id="createExamBtn">保存</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-
-	<div class="modal fade" id="updateExamModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog modal-440 modal-set-password" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="title">编辑考试</div>
-					<form id="updateExamForm">
-						<div class="items">
-							<div class="item item-input-group">
-								<div class="item-label">考试课程：</div>
-								<input class="item-input" type="text" value="考试示例"
-									readonly="readonly"> <i
-									class="icon item-icon icon-m_exam_error"></i>
-							</div>
-							<div class="item item-input-group">
-								<div class="item-label">开始时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
-								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
-							</div>
-							<div class="item item-input-group">
-								<div class="item-label">结束时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
-								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
-							</div>
-						</div>
-					</form>
-
-					<div class="error-info hidden" id="errorInfoPwd"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
-						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
@@ -451,6 +422,7 @@
 		src="../js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script type="text/javascript">
 		$('.form_date').datetimepicker({
+			format: 'yyyy-mm-dd',
 			language : 'zh-CN',
 			weekStart : 1,
 			todayBtn : 1,
@@ -458,7 +430,8 @@
 			todayHighlight : 1,
 			startView : 2,
 			minView : 2,
-			forceParse : 0
+			forceParse : 0,
+			minuteStep :5,
 		});
 	</script>
 </body>

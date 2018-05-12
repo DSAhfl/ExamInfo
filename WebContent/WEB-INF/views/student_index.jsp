@@ -26,11 +26,12 @@
 </head>
 <body>
 	<%
-		List<StuExamView> stuExams = (List<StuExamView>) session
-				.getAttribute("stuExams");
-		StuExamView stuExam = (StuExamView)session.getAttribute("recentExam");
-
 		Student student = (Student) session.getAttribute("user");
+	/*
+		List<ExamView> stuExams = (List<ExamView>) session
+				.getAttribute("stuExams");
+		ExamView stuExam = (ExamView)session.getAttribute("recentExam");
+	*/
 		int ID = student.getStuId();
 		String IC = student.getStuIC();
 	%>
@@ -153,29 +154,49 @@
 								<h1 class="page_item_title">
 									<span>
 										<%
-											out.print(stuExam.getLessonName());
+										List<StuExamView> stuExams = (List<StuExamView>) session
+										.getAttribute("stuExamViews");
+										StuExamView stuExam = stuExams.get(0);
+										out.print(stuExam.getLessonName());
 										%>
 									</span>
 								</h1>
 								<p class="page_item_time">
 									<%
-										out.print(stuExam.getBeginTime());
-									%> 至 <%
-										out.print(stuExam.getEndTime());
+									if(stuExam.getExamDate()!=null){
+										out.print(stuExam.getExamDate()+"  第"+stuExam.getExamTime()/10
+												+ "-"+stuExam.getExamTime()%10+"节课");
+									}else{
+										out.print("未安排");
+									}
 									%>
 								</p>
 								<ul class="page_item_information">
-									<li>总分：100</li>
 									<li>任课教师：<%
-											out.print(stuExam.getTeacherName());
+											out.print(stuExam.getLessonTeacher());
+										%></li>
+									<li>考试地点：<%
+									if(stuExam.getRoomName()!=null){
+										out.print(stuExam.getRoomName());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
+									<li>监考老师：<%
+									if(stuExam.getExamTeacher()!=null){
+										out.print(stuExam.getExamTeacher());
+									}else{
+										out.print("未安排");
+									}
 										%></li>
 									<li>成绩：<%
-											int grade = stuExam.getGrade();
+									int grade = stuExam.getScore();
 									if(grade>0){
 										out.print(grade);
 									}else{
 										out.print("未批改");
 									}
+									
 										%></li>
 								</ul>
 							</div>
@@ -230,15 +251,15 @@
 								<div class="item-label">姓&nbsp;&nbsp;名：</div>
 								<div class="item-data">
 									<span class="item-value"> <%
- 	out.write(name);
- %>
+									 	out.write(name);
+									 %>
 									</span>
 								</div>
 								<input class="item-input" type="text" name="user"
 									value="<%out.write(name);%>" placeholder="请输入姓名"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
-							<br /> <br />
+							<br />
 							<div class="item item-static">
 								<div class="item-label">学&nbsp;&nbsp;号：</div>
 								<div class="item-data">
@@ -246,14 +267,26 @@
 										out.write(ID + "");
 									%>
 								</div>
-							</div>
-							<br /> <br />
+							</div><div class="item item-static">
+								<div class="item-label">班&nbsp;&nbsp;级：</div>
+								<div class="item-data">
+									<%
+									List<Clazz> clazzs = (List<Clazz>) session
+									.getAttribute("clazzs");
+									for(Clazz clazz : clazzs){
+										if(clazz.getClassId()==student.getClassId()){
+											out.write(clazz.getClassName());
+										}
+									}
+									%>
+								</div>
+							</div><br />
 							<div class="item item-static">
 								<div class="item-label">身份证：</div>
 								<div class="item-data">
 									<span class="item-value"> <%
- 	out.write(IC);
- %>
+									 	out.write(IC);
+									 %>
 									</span>
 								</div>
 							</div>

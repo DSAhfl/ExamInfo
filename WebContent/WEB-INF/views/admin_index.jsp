@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.minjxu.exam.entity.* "%>
-
+<%@ page import="java.util.* "%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +62,14 @@
 									<i class="glyphicon glyphicon-list-alt"></i>
 								</div> <span class="nav-title">考试管理</span>
 						</a></li>
+						
+						<li class="nav-item"><a href="./score" data-toggle="tooltip"
+							data-placement="right" data-container="body" title=""
+							data-original-title="成绩管理">
+								<div class="nav-icon">
+									<i class="glyphicon glyphicon-file"></i>
+								</div> <span class="nav-title">成绩管理</span>
+						</a></li>
 
 						<li class="nav-item"><a href="./lesson" data-toggle="tooltip"
 							data-placement="right" data-container="body" title=""
@@ -121,6 +129,24 @@
 								%>
 							</div>
 						</div>
+						<div class="nav-right">
+							<%
+								String msg = (String) session.getAttribute("msg");
+																		if (msg != null) {
+							%>
+							<div class="alert alert-info alert-dismissible" role="alert"
+								style="width: 500px; right: 100px;">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>${msg }</strong>
+							</div>
+							<%
+								}
+								session.removeAttribute("msg");
+							%>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -142,26 +168,49 @@
 						<div class="page_item animate">
 							<div class="page_item_main">
 								<h1 class="page_item_title">
-									<span>考试示例</span><span>（总分：100.0）</span>
+									<span>
+									<%
+									List<StuExamView> stuExams = (List<StuExamView>) session
+									.getAttribute("stuExamViews");
+									StuExamView stuExam = stuExams.get(0);
+									out.print(stuExam.getLessonName());
+									%></span>
 								</h1>
-								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
-									12:00</p>
+								<p class="page_item_time">
+								<%if(stuExam.getExamDate()!=null){
+									out.print(stuExam.getExamDate()+"  第"+stuExam.getExamTime()/10
+											+ "-"+stuExam.getExamTime()%10+"节课");
+								}else{
+									out.print("未安排");
+								} %></p>
 								<ul class="page_item_information">
-									<li>创建人：点点滴滴</li>
-									<li>类型：选题组卷</li>
-									<li>信息：登录考试</li>
-									<li>时长：60</li>
+									<li>任课教师：<%
+											out.print(stuExam.getLessonTeacher());
+										%></li>
+									<li>考试地点：<%
+									if(stuExam.getRoomName()!=null){
+										out.print(stuExam.getRoomName());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
+									<li>考试班级：<%
+									if(stuExam.getClazzName()!=null){
+										out.print(stuExam.getClazzName());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
+									<li>监考老师：<%
+									if(stuExam.getExamTeacher()!=null){
+										out.print(stuExam.getExamTeacher());
+									}else{
+										out.print("未安排");
+									}
+										%></li>
 								</ul>
 							</div>
 							<ul class="near_footer_nav">
-								<li data-toggle="tooltip" data-placement="top"
-									data-container="body" data-original-title="编辑"
-									class="updateExamBtn"><a href=""><i
-										class="glyphicon glyphicon-pencil"></i></a></li>
-								<li class="examed_total" data-toggle="tooltip"
-									data-placement="top" data-container="body"
-									data-original-title="成绩查询批改" onclick=""><a href="#"><i
-										class="glyphicon glyphicon-edit"></i></a></li>
 							</ul>
 						</div>
 
@@ -170,58 +219,6 @@
 
 					<!-- 正在进行 结束 -->
 
-					<!-- 最近添加 开始 -->
-
-					<div class="exam_near_wrapper">
-						<div class="top_wrapper">
-							<div class="exam_near_top">
-								<h1 class="exam_near_title">最近添加</h1>
-								<span class="see_all"><a href="./exam">查看全部<i
-										class="glyphicon glyphicon-chevron-right"></i></a></span>
-							</div>
-							<div class="divide_line"></div>
-						</div>
-
-						<div class="page_item animate">
-							<div class="page_item_main">
-								<h1 class="page_item_title">
-									<span>考试示例</span><span>（总分：100.0）</span>
-								</h1>
-								<p class="page_item_time">2018-03-23 12:00 至 2018-03-26
-									12:00</p>
-								<ul class="page_item_information">
-									<li>创建人：点点滴滴</li>
-									<li>类型：选题组卷</li>
-									<li>信息：登录考试</li>
-									<li>时长：60</li>
-								</ul>
-							</div>
-							<ul class="near_footer_nav">
-								<li data-toggle="tooltip" data-placement="top"
-									data-container="body" data-original-title="编辑"
-									class="updateExamBtn"><a href=""><i
-										class="glyphicon glyphicon-pencil"></i></a></li>
-								<li class="examed_total" data-toggle="tooltip"
-									data-placement="top" data-container="body"
-									data-original-title="成绩查询批改" onclick=""><a href="#"><i
-										class="glyphicon glyphicon-edit"></i></a></li>
-							</ul>
-						</div>
-
-
-						<div class="create_new_wrapper" style="width: 542px;">
-							<div class="page_exam_create animate createExamBtn">
-								<ul class="exam_create_wrapper">
-									<li class="exam_create_btn"><a href="#"><i
-											class="glyphicon glyphicon-plus-sign"></i></a></li>
-									<li class="exam_create_prompt">创建新考试</li>
-								</ul>
-							</div>
-
-						</div>
-
-					</div>
-					<!-- 最近添加 结束 -->
 				</div>
 			</div>
 		</div>
@@ -239,7 +236,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="title">修改密码</div>
-					<form id="setPwdForm">
+					<form id="setPwdForm" action="./chgPwd">
 						<div class="items">
 							<div class="item item-input-group">
 								<div class="item-label">原密码：</div>
@@ -273,77 +270,6 @@
 		</div>
 	</div>
 
-
-	<div class="modal fade" id="createExamModal" tabindex="-1"
-		role="dialog">
-		<div class="modal-dialog modal-440 modal-set-password" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="title">创建考试</div>
-					<form id="createExamForm">
-						<div class="items">
-							<div class="item item-input-group">
-								<div class="item-label">考试课程：</div>
-								<div class="dropdown">
-									<button class="btn btn-default dropdown-toggle" type="button"
-										id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="true">
-										请选择课程 <span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-										<li><a href="#">C++</a></li>
-										<li><a href="#">Java</a></li>
-										<li><a href="#">MySQL</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="item item-input-group">
-								<div class="item-label">开始时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
-								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
-							</div>
-							<div class="item item-input-group">
-								<div class="item-label">结束时间：</div>
-								<div class="input-group date form_date " data-date=""
-									data-date-format="yyyy-mm-dd" data-link-field="dtp_input2"
-									data-link-format="yyyy-mm-dd">
-									<input name="date" class="item-input" type="text" readonly
-										placeholder="请选择日期" style="width: 160px; background: #FFF;">
-									<span class="input-group-addon"><span
-										class="glyphicon glyphicon-remove"></span></span> <span
-										class="input-group-addon"><span
-										class="glyphicon glyphicon-calendar"></span></span>
-								</div>
-								<i class="icon item-icon icon-m_exam_error"></i>
-							</div>
-						</div>
-					</form>
-
-					<div class="error-info hidden" id="errorInfoPwd"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-gray" id="cancelSetPwdBtn"
-						data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="savePasswordBtn">保存</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="modal fade" id="updateExamModal" tabindex="-1"
 		role="dialog">
@@ -421,16 +347,18 @@
 	<script type="text/javascript"
 		src="../js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script type="text/javascript">
-		$('.form_date').datetimepicker({
-			language : 'zh-CN',
-			weekStart : 1,
-			todayBtn : 1,
-			autoclose : 1,
-			todayHighlight : 1,
-			startView : 2,
-			minView : 2,
-			forceParse : 0
-		});
+	$('.form_date').datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+		language : 'zh-CN',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 0,
+		forceParse : 0,
+		minuteStep :5,
+	});
 	</script>
 
 </body>
