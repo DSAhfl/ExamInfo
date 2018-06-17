@@ -101,7 +101,7 @@ public class StudentHandler {
 			stuExamViews.add(view);
 		}
 		
-		System.out.println(stuExamViews);
+//		System.out.println(stuExamViews);
 
 		session.setAttribute("stuExamViews", stuExamViews);
 		session.setAttribute("clazzs", clazzs);

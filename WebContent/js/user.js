@@ -229,6 +229,8 @@ $(function() {
 		
 		$("#dropdownText5").html($(this).text());
 		$("#editExamTeacher").val($(this).text());
+		$("#updateLessonTeacher").val($(this).text());
+//		alert($(this).text());
 	});
 
 	$("#chooseBtn").click(

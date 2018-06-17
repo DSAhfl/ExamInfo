@@ -156,7 +156,13 @@
 										<%
 										List<StuExamView> stuExams = (List<StuExamView>) session
 										.getAttribute("stuExamViews");
-										StuExamView stuExam = stuExams.get(0);
+										StuExamView stuExam  = null;
+										for(StuExamView view : stuExams){
+											if(view.getExamDate()!=null){
+												stuExam = view;
+												break;
+											}
+										}
 										out.print(stuExam.getLessonName());
 										%>
 									</span>

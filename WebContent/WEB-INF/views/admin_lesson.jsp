@@ -199,7 +199,7 @@ table#grid-data {
 				</div>
 				 -->
 			</div>
-			<div class="body-bottom body-content">
+			<div class="body-bottom body-content" style="background:#FFF;">
 				<table id="grid-data" class="table bootgrid-table JColResizer"
 					aria-busy="false">
 					<thead>
@@ -230,8 +230,8 @@ table#grid-data {
 							List<Lesson> lessons = (List<Lesson>)session.getAttribute("lessons");
 							List<Teacher> teachers = (List<Teacher>)session.getAttribute("teachers");
 							int cnt = 0;
-							for(Teacher teacher : teachers){
-								for (Lesson lesson : lessons) {
+							for (Lesson lesson : lessons) {
+								for(Teacher teacher : teachers){
 									if(teacher.getTeacherId()==lesson.getTeacherId()){
 										++cnt;
 										out.println("<tr><td class='select-cell' ><label class='select-label'>"
@@ -246,12 +246,15 @@ table#grid-data {
 												+"data-toggle='tooltip' data-placement='top' data-container='body'"
 												+"data-original-title='编辑'></a></td>");
 										out.println("</tr>");
+										break;
 									}
 								}
 							}
 						%>
 					</tbody>
 				</table>
+				
+				<!-- 
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
@@ -278,6 +281,7 @@ table#grid-data {
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 		</div>
 	</div>
@@ -348,11 +352,25 @@ table#grid-data {
 									placeholder="请输入课程名称" readonly="readonly"> <i
 									class="icon item-icon icon-m_exam_error"></i>
 							</div>
+							
 							<div class="item item-input-group">
 								<div class="item-label">任课教师：</div>
-								<input class="item-input" name="teacherName" id="updateTeacherName" type="text" value="点点滴滴"
-									placeholder="请输入任课教师姓名"> <i
-									class="icon item-icon icon-m_exam_error"></i>
+								<div class="dropdown">
+									<button class="btn btn-default dropdown-toggle" type="button"
+										id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										<a id="dropdownText5">请选择教师</a> <span class="caret"></span>
+										<input id="updateLessonTeacher" name="teacherName" value="" style="display:none;">
+									</button>
+									<ul class="dropdown-menu" id="dropdown-menu5" aria-labelledby="dropdownMenu1">
+										<%
+										for (Teacher teacher : teachers) {
+												out.print("<li><a href='#'>" + teacher.getTeacherName()
+													+ "</a></li>");
+										}
+										%>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -391,6 +409,7 @@ table#grid-data {
 								<input class="item-input" name="teacherName" id="createLessonTeacher" type="text" placeholder="请输入任课教师姓名">
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
+							
 						</div>
 					</form>
 

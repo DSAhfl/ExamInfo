@@ -202,7 +202,7 @@ table#grid-data {
 
 				</div>
 			</div>
-			<div class="body-bottom body-content">
+			<div class="body-bottom body-content" style="background:#FFF;">
 				<table id="grid-data" class="table bootgrid-table JColResizer"
 					aria-busy="false">
 					<thead>
@@ -266,6 +266,8 @@ table#grid-data {
 						%>
 					</tbody>
 				</table>
+				
+				<!-- 
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
@@ -292,6 +294,7 @@ table#grid-data {
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 		</div>
 	</div>

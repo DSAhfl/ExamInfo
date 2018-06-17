@@ -78,6 +78,7 @@ public class ExamJDBCTemplate implements ExamDao {
 		if (res > 0) {
 			for (ExamDetail detail : addDetails) {
 				SQL = "INSERT exam_detail VALUES(?,?,?,?,?)";
+//				System.out.println(exam.getExamId());
 				jdbcTemplateObject.update(SQL, null, detail.getExamId(),
 						detail.getClassId(), detail.getTeacherId(),
 						detail.getRoomId());

@@ -168,9 +168,7 @@
 									out.print("未安排");
 								} %></p>
 								<ul class="page_item_information">
-									<li>任课教师：<%
-											out.print(stuExam.getLessonTeacher());
-										%></li>
+									
 									<li>考试地点：<%
 									if(stuExam.getRoomName()!=null){
 										out.print(stuExam.getRoomName());

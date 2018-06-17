@@ -199,7 +199,7 @@ table#grid-data {
 					
 				</div>
 			</div>
-			<div class="body-bottom body-content">
+			<div class="body-bottom body-content" style="background:#FFF;">
 				<table id="grid-data" class="table bootgrid-table JColResizer"
 					aria-busy="false">
 					<thead>
@@ -257,19 +257,15 @@ table#grid-data {
 								out.println( "<td class='text-left' style='width: 80px;'><a href='#'"
 										+"class='glyphicon glyphicon-edit updateStudentBtn'"
 										+"data-toggle='tooltip' data-placement='top' data-container='body'"
-										+"data-original-title='编辑'></a>"
-										+ "<a href='/ExamInfo/admin/deleteStudent?studentId="
-										+ student.getStuId()
-										+ "' "
-										+ "class='glyphicon glyphicon-trash dropout'"
-										+ "data-toggle='tooltip' data-placement='top' data-container='body'"
-										+ " data-original-title='删除'></a></td>");
+										+"data-original-title='编辑'></a></td>");
 								out.println("</tr>");
 							}
 						%>
 						
 					</tbody>
 				</table>
+				
+				<!-- 
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
@@ -296,6 +292,7 @@ table#grid-data {
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 		</div>
 	</div>
@@ -415,7 +412,7 @@ table#grid-data {
 							</div>
 							<div class="item item-input-group">
 								<div class="item-label">班级：</div>
-								<input class="item-input" name="stuClass" id="updateStudentClass" type="text" placeholder="请输入学生班级">
+								<input class="item-input" name="stuClass" id="updateStudentClass" type="text" placeholder="请输入学生班级" readonly="readonly">
 								<i class="icon item-icon icon-m_exam_error"></i>
 							</div>
 							<div class="item item-input-group">

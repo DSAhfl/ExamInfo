@@ -130,12 +130,14 @@ public class AdminHandler {
 					}
 				}
 			}
-			if (!add) {
+			if (!add & examDate!=null) {
 				stuExamViews.add(new StuExamView(lessonName, lessonTeacher,
 						examDate, examTime, roomName, examTeacher, score,
 						clazzName));
 			}
 		}
+//		System.out.println(exams);
+//		System.out.println(stuExamViews);
 		session.setAttribute("stuExamViews", stuExamViews);
 		session.setAttribute("lessons", lessons);
 		session.setAttribute("clazzs", clazzs);
@@ -261,19 +263,23 @@ public class AdminHandler {
 		HttpSession session = request.getSession(true);
 		request.setCharacterEncoding("UTF-8");
 
+		//获取表单的值
 		String examName = request.getParameter("createExamName");
 		String dateStr = request.getParameter("createExamDate");
 		String editExamTime = request.getParameter("createExamTime");
 
+		//将字符串转为Date类型
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date date = format.parse(dateStr);
 		Date examDate = new Date(date.getTime());
 
+		//考试日期必须在明天或者更久以后，否则提示错误
 		if (examDate.compareTo(new java.util.Date()) <= 0) {
 			session.setAttribute("msg", "日期有误,创建失败!");
 			return "admin_exam";
 		}
 
+		//取得数据库中各类信息
 		List<Lesson> lessons = (List<Lesson>) session.getAttribute("lessons");
 		List<Teacher> teachers = (List<Teacher>) session
 				.getAttribute("teachers");
@@ -284,6 +290,7 @@ public class AdminHandler {
 
 		int lessonId = 0, teacherId = 0, examId = 0, examTime = 0, roomId = 0;
 
+		//取得当前考试课程的Id
 		for (Lesson lesson : lessons) {
 			if (lesson.getLessonName().equals(examName)) {
 				lessonId = lesson.getLessonId();
@@ -310,6 +317,7 @@ public class AdminHandler {
 			}
 		}
 
+		//检测该课程考试是否已经安排
 		for (Exam exam : exams) {
 			if (exam.getLessonId() == lessonId) {
 				session.setAttribute("msg", "该考试已存在,创建失败!");
@@ -317,6 +325,7 @@ public class AdminHandler {
 			}
 			if (exam.getExamDate().compareTo(examDate) == 0
 					&& exam.getExamTime() == examTime) {
+				//检测该时间是否有部分班级以及安排了考试
 				for (ExamDetail detail : examDetails) {
 					if (examClassIds.contains(new Integer(detail.getClassId()))) {
 						session.setAttribute("msg", "该时间和部分班级的其他考试有冲突,创建失败!");
@@ -325,6 +334,9 @@ public class AdminHandler {
 				}
 			}
 			examId = examId > exam.getExamId() ? examId : exam.getExamId() + 1;
+		}
+		if(examId==0){
+			examId = 1;
 		}
 
 		Exam exam = new Exam(examId, lessonId, examDate, examTime);
@@ -339,14 +351,14 @@ public class AdminHandler {
 		for (Room room : rooms) {
 			roomMap.put(room.getRoomId(), 0);
 		}
-		// 设定已经在考试中出现的监考老师和教室的次数
+		// 初始化已经在考试中出现的监考老师和教室的次数
 		for (ExamDetail detail : examDetails) {
 			teaMap.replace(detail.getTeacherId(),
 					teaMap.get(detail.getTeacherId()) + 1);
 			roomMap.replace(detail.getRoomId(),
 					roomMap.get(detail.getRoomId()) + 1);
 		}
-		// 进行排序
+		//对教师和教室进行排序
 		List<Map.Entry<Integer, Integer>> teaList = new ArrayList<Map.Entry<Integer, Integer>>(
 				teaMap.entrySet());
 		Collections.sort(teaList,
@@ -374,6 +386,7 @@ public class AdminHandler {
 		// 分配考场，分配监考老师
 		int teaIndex = 0, roomIndex = 0, classCnt = 0;
 		List<ExamDetail> addDetails = new ArrayList<ExamDetail>();
+		//检测每个班级，如果需要考试，则为其分配考场和监考老师
 		for (Integer examClassId : examClassIds) {
 			ExamDetail detail = new ExamDetail();
 			detail.setClassId(examClassId.intValue());
@@ -393,6 +406,7 @@ public class AdminHandler {
 							if (exam2.getExamId() == detail2.getExamId()
 									&& exam2.getExamDate().compareTo(examDate) == 0
 									&& exam2.getExamTime() == examTime) {
+								//如果在该时间该老师已经被安排了监考，则检测下一个老师
 								free = false;
 								break;
 							}
@@ -403,6 +417,7 @@ public class AdminHandler {
 					}
 				}
 				if (free) {
+					//如果有空，则在考试细节表设置监考教师Id
 					detail.setTeacherId(teaList.get(teaIndex).getKey());
 				} else {
 					++teaIndex;
@@ -422,6 +437,7 @@ public class AdminHandler {
 							if (exam2.getExamId() == detail2.getExamId()
 									&& exam2.getExamDate().compareTo(examDate) == 0
 									&& exam2.getExamTime() == examTime) {
+								//如果该时段教室被占用，则检测下一个
 								free = false;
 								break;
 							}

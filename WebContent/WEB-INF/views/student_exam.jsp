@@ -146,7 +146,7 @@ table#grid-data {
 				<!-- body-section-add keep static -->
 
 			</div>
-			<div class="body-bottom body-content">
+			<div class="body-bottom body-content" style="background:#FFF;">
 				<table id="grid-data" class="table bootgrid-table JColResizer"
 					aria-busy="false">
 					<thead>
@@ -224,7 +224,7 @@ table#grid-data {
 					out.print(stuExam.getExamTeacher());
 				}
 				out.println("</td><td class='text-left' style='width: 80px;'>");
-				if (stuExam.getScore() == 0) {
+				if (stuExam.getScore() == -1) {
 					out.print("未批改");
 				} else {
 					out.print(stuExam.getScore());
@@ -235,6 +235,8 @@ table#grid-data {
 			%>
 					</tbody>
 				</table>
+				
+				<!-- 
 				<div id="grid-data-footer" class="bootgrid-footer container-fluid">
 					<div class="row">
 						<div class="col-sm-6 infoBar">
@@ -265,6 +267,7 @@ table#grid-data {
 						</div>
 					</div>
 				</div>
+				-->
 			</div>
 		</div>
 	</div>

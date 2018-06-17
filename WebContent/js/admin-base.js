@@ -240,7 +240,8 @@ $(function() {
 		
 		$("#errorUpdateLesson").text("").addClass("hidden");
 		$("#updateLessonName").val($(this).parent().parent().children().eq(1).text());
-		$("#updateTeacherName").val($(this).parent().parent().children().eq(2).text());
+		$("#dropdownText5").text($(this).parent().parent().children().eq(2).text());
+		$("#updateLessonTeacher").val($(this).parent().parent().children().eq(2).text());
 		
 		$("#updateLessonModal").modal();
 	});
